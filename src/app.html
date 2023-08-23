@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/img/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<!-- Mont font -->
+		<link href="/Mont/stylesheet.css" rel="stylesheet">
+		
+		<!-- Gilroy font -->
+		<link href="/Gilroy/stylesheet.css" rel="stylesheet">
+		
+		<!-- Global styles -->
+		<link rel="stylesheet" href="/css/defaults.css">
+		<link rel="stylesheet" href="/css/global.css">
+
+		<!-- Smooth scrolling (native and polyfill support) -->
+	    <script id="smooth-scroll" src="/js/smoothScroll.js"></script>
+		<script id="smooth-scroll-polyfill" defer src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+
+		<meta property="og:title" content="SkyHack – Хакатон Сбера и УрФУ в Neboplaza" />
+		<meta property="og:description" content="15-16 апреля 2023, Екатеринбург, Neboplaza" />
+		<meta property="og:image" content="/img/snippet.jpg" />
+		<meta property="vk:image" content="/img/snippet.jpg" />
+
+		<script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src='https://vk.com/js/api/openapi.js?169',t.onload=function(){VK.Retargeting.Init("VK-RTRG-1713337-8ivIp"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-1713337-8ivIp" style="position:fixed; left:-999px;" alt=""/></noscript>
+
+		<!-- Yandex.Metrika counter -->
+		<script type="text/javascript" >
+		(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+			m[i].l=1*new Date();
+			for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+			k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+			(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+		ym(92980512, "init", {
+			clickmap:true,
+			trackLinks:true,
+			accurateTrackBounce:true,
+			webvisor:true
+		});
+		</script>
+		<noscript><div><img src="https://mc.yandex.ru/watch/92980512" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+		<!-- /Yandex.Metrika counter -->
+
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

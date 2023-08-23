@@ -1,0 +1,98 @@
+:root {
+    --black: #000000;
+    --white: #ffffff;
+    --purple: #4C40DC;
+    --green: #C0EF5D;
+    --darker-green: #AAD451;
+    --darker-purple: #3F34C1;
+    --grey: #E6E9F0;
+    --dark: #262626;
+    --black40: rgba(0, 0, 0, 0.4);
+    --primary: var(--purple);
+
+    --content-fixed-width: 1416px;
+    --content-width: min(var(--content-fixed-width), 90vw);
+    --content-mobile-width: min(var(--content-fixed-width), 84vw);
+    --content-padding-x: max(calc(50vw - 760px), calc(5vw - 7px));
+    --content-padding: 0 var(--content-padding-x);
+
+    --text-size: 20px;
+    --header-1: calc(var(--text-size) * 4);			/* 80 */
+    --header-2: calc(var(--text-size) * 3.2);		/* 64 */
+    --header-3: calc(var(--text-size) * 2.8);		/* 56 */
+    --header-4: calc(var(--text-size) * 2.4);       /* 48 */
+    
+    --xxx-large: calc(var(--text-size) * 5.5);		/* 110 */
+    --xx-large: calc(var(--text-size) * 4);		    /* 80 */
+    --x-large: calc(var(--text-size) * 3.2);        /* 64 */
+    --large: calc(var(--text-size) * 2.8);          /* 56 */
+    --m-large: calc(var(--text-size) * 2.4);		/* 48 */
+    --medium: calc(var(--text-size) * 1.8);         /* 36 */
+	--button-text: calc(var(--text-size) * 1.2);	/* 24 */
+    --descriptor: calc(var(--text-size) * 1.2);     /* 24 */
+    --subtitle: calc(var(--text-size) * 0.8);       /* 16 */
+    --tiny: calc(var(--text-size) * 0.6);           /* 12 */
+
+    --radius: 40px;
+}
+
+@media screen and (max-width: 1500px) {
+	:root {
+		--xxx-large: calc(var(--text-size) * 5);
+		--header-1: calc(var(--text-size) * 5);
+	}
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --xxx-large: calc(var(--text-size) * 2.5);		/* 40 */
+        --header-2: calc(var(--text-size) * 2.5);		/* 40 */
+        --xx-large: calc(var(--text-size) * 2);			/* 32 */
+		--x-large: calc(var(--text-size) * 1.875);		/* 30 */
+		--large: calc(var(--text-size) * 1.5);			/* 24 */
+		--m-large: calc(var(--text-size) * 1.35);		/* 22 */
+        --medium: calc(var(--text-size) * 1.25);		/* 20 */
+        --header-3: calc(var(--text-size) * 1.125);		/* 18 */
+        --header-4: calc(var(--text-size) * 0.875);		/* 14 */
+        --button-text: calc(var(--text-size) * 0.875);	/* 14 */
+		--subtitle: calc(var(--text-size) * 0.75);		/* 12 */
+		--tiny: calc(var(--text-size) * 0.625);			/* 10 */
+    }
+}
+
+.button-text {
+	font-size: var(--button-text);
+}
+
+h1.heading.large {
+    font-size: var(--xxx-large);
+    font-weight: 700;
+    color: white;
+}
+
+body {
+    font-family: 'Gilroy';
+    background-color: #F4F6FB;
+    color: var(--black);
+    font-size: var(--text-size);
+}
+
+section.intro {
+    display: block;
+    position: relative;
+    min-height: 100vh;
+    padding: 1em 0;
+    background-image: url("/img/intro-back.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+section.intro > div.content {
+    display: block;
+    position: relative;
+    background-color: var(--primary);
+    width: var(--content-width);
+    margin: 0 auto;
+    border-radius: var(--radius);
+    padding: 4em 6em;
+}
