@@ -82,6 +82,7 @@ section.intro {
     position: relative;
     min-height: 100vh;
     padding: 1em 0;
+    padding-top: 0em;
     background-image: url("/img/intro-back.svg");
     background-position: center;
     background-repeat: no-repeat;
@@ -90,9 +91,20 @@ section.intro {
 section.intro > div.content {
     display: block;
     position: relative;
+    color: white;
     background-color: var(--primary);
     width: var(--content-width);
     margin: 0 auto;
     border-radius: var(--radius);
     padding: 4em 6em;
+    box-shadow: 5px 5px 15px #4C40DC16,
+        -5px -5px 15px #4C40DC16;
+}
+
+p.intro-content {
+    max-width: 60%;
+}
+
+.marathon-text {
+    margin-bottom: -2em;
 }

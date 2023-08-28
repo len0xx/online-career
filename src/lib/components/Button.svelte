@@ -26,8 +26,8 @@
         border: none;
         cursor: pointer;
         transition: 0.1s ease-in-out;
+        font-size: var(--text-size);
         font-family: 'Gilroy', sans-serif;
-        font-size: var(--button-text);
     }
 
     button:hover {
