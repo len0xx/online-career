@@ -33,6 +33,7 @@
         font-size: var(--text-size);
         font-family: 'Gilroy', sans-serif;
         transition: 0.1s ease-in-out;
+        font-weight: 500;
     }
     button > .text-wrapper {
         position: relative;

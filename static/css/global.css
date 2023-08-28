@@ -64,6 +64,14 @@
 	font-size: var(--button-text);
 }
 
+.no-margin {
+    margin: 0;
+}
+
+.no-top-margin {
+    margin-top: 0;
+}
+
 h1.heading.large {
     font-size: var(--xxx-large);
     font-weight: 700;
@@ -75,6 +83,13 @@ body {
     background-color: #F4F6FB;
     color: var(--black);
     font-size: var(--text-size);
+}
+
+main > section > div.content {
+    display: block;
+    position: relative;
+    margin: 0 auto;
+    width: var(--content-width);
 }
 
 section.intro {
@@ -93,8 +108,6 @@ section.intro > div.content {
     position: relative;
     color: white;
     background-color: var(--primary);
-    width: var(--content-width);
-    margin: 0 auto;
     border-radius: var(--radius);
     padding: 4em 6em;
     box-shadow: 5px 5px 15px #4C40DC16,
@@ -107,4 +120,36 @@ p.intro-content {
 
 .marathon-text {
     margin-bottom: -2em;
+}
+
+.grid-1-1-2 {
+    display: grid;
+    position: relative;
+    grid-gap: 1em;
+    grid-template-columns: 1fr 1fr 2fr;
+}
+
+div.card.black-card-1:not(.sfa),
+div.card.black-card-2:not(.sfa),
+div.card.black-card-3:not(.sfa) {
+    min-height: 336px;
+    display: grid;
+    grid-gap: 0;
+    align-content: end;
+    background-repeat: no-repeat;
+    background-position: 100px -100px;
+    background-size: 100%;
+}
+
+div.card.black-card-1:not(.sfa) {
+    background-image: url("/img/texture-1.svg");
+}
+
+div.card.black-card-2:not(.sfa) {
+    background-image: url("/img/texture-2.svg");
+}
+
+div.card.black-card-3:not(.sfa) {
+    background-image: url("/img/texture-3.svg");
+    background-position: 200px -100px;
 }

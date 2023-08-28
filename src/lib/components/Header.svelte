@@ -17,6 +17,10 @@
         padding: 1.5em 0;
     }
 
+    :global(header nav > a) {
+        font-weight: 500;
+    }
+
     :global(header nav > a:not(:last-child)) {
         margin-right: 1.5em;
     }
