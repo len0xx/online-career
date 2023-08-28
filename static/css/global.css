@@ -34,6 +34,8 @@
     --tiny: calc(var(--text-size) * 0.6);           /* 12 */
 
     --radius: 40px;
+    --default-shadow: 5px 5px 15px #4C40DC16,
+        -5px -5px 15px #4C40DC16;
 }
 
 @media screen and (max-width: 1500px) {
@@ -110,8 +112,7 @@ section.intro > div.content {
     background-color: var(--primary);
     border-radius: var(--radius);
     padding: 4em 6em;
-    box-shadow: 5px 5px 15px #4C40DC16,
-        -5px -5px 15px #4C40DC16;
+    box-shadow: var(--default-shadow);
 }
 
 p.intro-content {

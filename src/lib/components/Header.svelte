@@ -8,7 +8,7 @@
         <nav>
             <slot />
         </nav>
-        <Button>Регистрация</Button>
+        <Button shadow>Регистрация</Button>
     </div>
 </header>
 

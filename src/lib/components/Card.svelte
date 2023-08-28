@@ -18,8 +18,7 @@
         color: black;
         border-radius: 40px;
         padding: 1.6em;
-        box-shadow: 5px 5px 15px #4C40DC16,
-            -5px -5px 15px #4C40DC16;
+        box-shadow: var(--default-shadow);
     }
 
     :global(div.card.color-white) {

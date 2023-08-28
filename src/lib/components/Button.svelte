@@ -3,8 +3,10 @@
 
     export let variant: Variant = 'standard'
     export let className = ''
+    export let shadow = false
 
-    const variantClass = `${ variant }-variant`
+    $: variantClass = `${ variant }-variant`
+    $: shadowClass = shadow ? 'with-shadow' : ''
 </script>
 
 <button 
@@ -12,7 +14,7 @@
     on:mouseover
     on:focus
     on:blur
-    class={ [ className, variantClass ].filter((c) => !!c.length).join(' ') }
+    class={ [ className, variantClass, shadowClass ].filter((c) => !!c.length).join(' ') }
 >
     <span class="text-wrapper">
         <slot />
@@ -38,6 +40,9 @@
     button > .text-wrapper {
         position: relative;
         z-index: 10;
+    }
+    button.with-shadow {
+        box-shadow: var(--default-shadow);
     }
 
     button:hover {
