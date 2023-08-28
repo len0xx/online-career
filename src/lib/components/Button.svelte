@@ -1,11 +1,14 @@
 <script lang="ts">
     type Variant = 'standard' | 'arrow'
+    type Color = 'transparent' | 'green' | 'purple'
 
     export let variant: Variant = 'standard'
+    export let color: Color = 'green'
     export let className = ''
     export let shadow = false
 
     $: variantClass = `${ variant }-variant`
+    $: colorClass = `${ color }-btn`
     $: shadowClass = shadow ? 'with-shadow' : ''
 </script>
 
@@ -14,7 +17,7 @@
     on:mouseover
     on:focus
     on:blur
-    class={ [ className, variantClass, shadowClass ].filter((c) => !!c.length).join(' ') }
+    class={ [ className, colorClass, variantClass, shadowClass ].filter((c) => !!c.length).join(' ') }
 >
     <span class="text-wrapper">
         <slot />
@@ -49,12 +52,31 @@
         background-color: var(--darker-green);
     }
 
+    button.green-btn {
+        background-color: var(--green);
+    }
+
+    button.green-btn:hover {
+        background-color: var(--darker-green);
+    }
+
     button.purple-btn {
         background-color: var(--purple);
     }
 
     button.purple-btn:hover {
         background-color: var(--darker-purple);
+    }
+
+    button.transparent-btn {
+        border: 2px solid var(--dark);
+        background-color: transparent;
+        color: black;
+    }
+
+    button.purple-btn:hover {
+        color: white;
+        background-color: var(--dark);
     }
     button.arrow-variant {
         padding: 1.5em 6em;
