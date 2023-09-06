@@ -130,6 +130,81 @@ p.intro-content {
     grid-template-columns: 1fr 1fr 2fr;
 }
 
+.grid-gallery {
+    display: grid;
+    position: relative;
+    grid-gap: 1em;
+    grid-template-areas: 
+        "purple purple one two"
+        "purple purple three four"
+        "purple purple five five";
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-gallery  > .card.gallery-purple {
+    grid-area: purple;
+    background-image: url("/img/success-background.svg");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    background-size: 100%;
+}
+
+.grid-gallery  > .card.gallery-purple::after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 642px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background-image: url("/img/success-girl.png");
+    background-repeat: no-repeat;
+    background-position: center 100%;
+    background-size: 90%;
+}
+
+h1.success-title::before {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 135px;
+    width: 242px;
+    top: 84px;
+    left: 266px;
+    z-index: 0;
+    background-image: url("/img/success.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+.grid-gallery  > .card.gallery-one {
+    display: grid;
+    position: relative;
+    grid-template-rows: 1fr auto;
+    min-height: 336px;
+    grid-area: one;
+}
+
+.grid-gallery  > .card.gallery-two {
+    min-height: 336px;
+    grid-area: two;
+}
+
+.grid-gallery  > .card.gallery-three {
+    min-height: 336px;
+    grid-area: three;
+}
+
+.grid-gallery  > .card.gallery-four {
+    min-height: 336px;
+    grid-area: four;
+}
+
+.grid-gallery  > .card.gallery-five {
+    grid-area: five;
+}
+
 div.card.black-card-1:not(.sfa),
 div.card.black-card-2:not(.sfa),
 div.card.black-card-3:not(.sfa) {
@@ -153,4 +228,16 @@ div.card.black-card-2:not(.sfa) {
 div.card.black-card-3:not(.sfa) {
     background-image: url("/img/texture-3.svg");
     background-position: 200px -100px;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
 }

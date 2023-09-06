@@ -3,6 +3,7 @@
 	import Card from "$lib/components/Card.svelte"
 	import Header from "$lib/components/Header.svelte"
     import Heading from "$lib/components/Heading.svelte"
+	import Number from "$lib/components/Number.svelte"
 </script>
 
 <svelte:head>
@@ -32,8 +33,20 @@
     <section class="program">
         <div class="content">
             <Heading level={ 1 }>В программе онлайн-марафона</Heading>
+            <p class="button-text align-center">
+                Трудоустройство и исполнение всех<br />
+                желаний не обещаем, но поможем прокачать резюме<br />
+                и подготовиться к собеседованию
+            </p>
+            <p class="align-center">
+                <Button shadow>Бесплатно, но с регистрацией</Button>
+            </p>
         </div>
     </section>
+    <br />
+    <br />
+    <br />
+    <br />
     <section class="info">
         <div class="content">
             <div class="grid-1-1-2">
@@ -50,6 +63,54 @@
                     <p class="button-text no-margin">лайфхаков для твоей карьеры</p>
                 </Card>
             </div>
+            <br />
+            <br />
+            <br />
+            <div class="grid-gallery">
+                <Card className="gallery-purple" color="purple">
+                    <Heading level={ 1 } margin={{ y: 0, top: 0.4 }} className="success-title">
+                        <span style="position: relative; z-index: 1;">Путь к <span style="opacity: 0">успеху</span> начинается здесь</span>
+                    </Heading>
+                </Card>
+                <Card className="gallery-one" color="white">
+                    <div>
+                        <Number>1</Number><br />
+                        <p class="button-text">Заполни форму</p>
+                    </div>
+                    <Button shadow>Регистрация</Button>
+                </Card>
+                <Card className="gallery-two" color="white">
+                    <Number>2</Number><br />
+                    <p class="button-text">
+                        Смотри все<br />
+                        онлайн-лекции<br />
+                        и допматериалы
+                    </p>
+                </Card>
+                <Card className="gallery-three" color="white">
+                    <Number>3</Number><br />
+                    <p class="button-text">
+                        Выполняй домашние<br />
+                        и практические задания
+                    </p>
+                </Card>
+                <Card className="gallery-four" color="white">
+                    <Number>4</Number><br />
+                    <p class="button-text">
+                        Помимо знаний<br />
+                        и новых скиллов получай призы
+                    </p>
+                </Card>
+                <Card className="gallery-five" color="white">
+                    <Number>5</Number><br />
+                    <p class="button-text">
+                        Поздравляем, ты готов<br />
+                        к работе мечты!
+                    </p>
+                </Card>
+            </div>
         </div>
     </section>
+    <br />
+    <br />
 </main>
