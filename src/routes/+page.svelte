@@ -113,6 +113,7 @@
             </div>
             <br />
             <br />
+            <br />
             <Card color="green" className="black-text giveaway">
                 <Grid m={1}>
                     <Grid m={2}>
@@ -129,7 +130,7 @@
                         <Item image="/img/gifts/iphone.png" bubble="x1">iPhone 14</Item>
                     </Grid>
                     <br />
-                    <p class="button-text align-center">
+                    <p class="button-text align-center giveaway-signup">
                         Вот форма, которую нужно заполнить, чтобы стать участником<br />
                         розыгрыша подарков и получить полезные материалы.
                     </p>

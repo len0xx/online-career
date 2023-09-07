@@ -257,3 +257,22 @@ div.card.black-card-3:not(.sfa) {
     background-position: 100% 0%;
     background-size: 50%;
 }
+
+.giveaway-signup {
+    display: block;
+    position: relative;
+}
+
+.giveaway-signup::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 129px;
+    height: 149px;
+    top: -80%;
+    left: 13%;
+    background-image: url("/img/signup-arrow.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
