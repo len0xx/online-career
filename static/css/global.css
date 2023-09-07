@@ -30,8 +30,8 @@
     --medium: calc(var(--text-size) * 1.8);         /* 36 */
 	--button-text: calc(var(--text-size) * 1.2);	/* 24 */
     --descriptor: calc(var(--text-size) * 1.2);     /* 24 */
-    --subtitle: calc(var(--text-size) * 0.8);       /* 16 */
-    --tiny: calc(var(--text-size) * 0.6);           /* 12 */
+    --subtitle: calc(var(--text-size) * 0.9);       /* 18 */
+    --tiny: calc(var(--text-size) * 0.7);           /* 14 */
 
     --radius: 40px;
     --default-shadow: 5px 5px 15px #4C40DC16,
@@ -85,6 +85,7 @@ body {
     background-color: #F4F6FB;
     color: var(--black);
     font-size: var(--text-size);
+    line-height: 1.2;
 }
 
 main > section > div.content {
@@ -240,4 +241,19 @@ div.card.black-card-3:not(.sfa) {
 
 .align-right {
     text-align: right;
+}
+
+.black-text {
+    color: black !important;
+}
+
+.white-text {
+    color: white !important;
+}
+
+.giveaway {
+    background-image: url("/img/purple-net.svg");
+    background-repeat: no-repeat;
+    background-position: 100% 0%;
+    background-size: 50%;
 }

@@ -8,6 +8,7 @@
 
     export let level: HeadingLevel
     export let className = ''
+    export let lineHeight = 1.2
     export let margin: Padding = defaultMargin
 
     $: tag = `h${ level }`
@@ -18,6 +19,7 @@
     on:mouseover
     on:focus
     on:blur
+    style:line-height={ lineHeight }
     style:margin={ computePadding({ ...defaultMargin, ...margin }) }
     this={ tag }
     class={ [ className, 'heading' ].filter((c) => !!c.length).join(' ') }
@@ -28,7 +30,6 @@
 <style>
     :global(h1, h2, h3, h4) {
         font-weight: 600;
-        line-height: 1;
     }
 
     :global(h1) {

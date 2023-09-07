@@ -74,10 +74,6 @@
         color: black;
     }
 
-    button.purple-btn:hover {
-        color: white;
-        background-color: var(--dark);
-    }
     button.arrow-variant {
         padding: 1.5em 6em;
     }

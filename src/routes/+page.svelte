@@ -1,8 +1,10 @@
 <script lang="ts">
     import { Button } from "$lib/components"
 	import Card from "$lib/components/Card.svelte"
+	import Grid from "$lib/components/Grid.svelte";
 	import Header from "$lib/components/Header.svelte"
     import Heading from "$lib/components/Heading.svelte"
+	import Item from "$lib/components/Item.svelte";
 	import Number from "$lib/components/Number.svelte"
 </script>
 
@@ -68,7 +70,7 @@
             <br />
             <div class="grid-gallery">
                 <Card className="gallery-purple" color="purple">
-                    <Heading level={ 1 } margin={{ y: 0, top: 0.4 }} className="success-title">
+                    <Heading level={ 1 } margin={{ y: 0, top: 0.4 }} lineHeight={ 1 } className="success-title">
                         <span style="position: relative; z-index: 1;">Путь к <span style="opacity: 0">успеху</span> начинается здесь</span>
                     </Heading>
                 </Card>
@@ -109,6 +111,32 @@
                     </p>
                 </Card>
             </div>
+            <br />
+            <br />
+            <Card color="green" className="black-text giveaway">
+                <Grid m={1}>
+                    <Grid m={2}>
+                        <Heading level={ 4 } margin={{ top: 0.5 }}>
+                            В отличие от других<br />
+                            онлайн-марафонов, воздух продавать не будем,<br />
+                            но подарки подготовили:
+                        </Heading>
+                    </Grid>
+                    <Grid m={4}>
+                        <Item image="/img/gifts/sweatshirt.png" bubble="x10">Фирменный мерч</Item>
+                        <Item image="/img/gifts/speaker.png" bubble="x5">Яндекс-станция мини</Item>
+                        <Item image="/img/gifts/airpods.png" bubble="x3">Наушники Airpods</Item>
+                        <Item image="/img/gifts/iphone.png" bubble="x1">iPhone 14</Item>
+                    </Grid>
+                    <br />
+                    <p class="button-text align-center">
+                        Вот форма, которую нужно заполнить, чтобы стать участником<br />
+                        розыгрыша подарков и получить полезные материалы.
+                    </p>
+                    <br />
+                    <Button color="purple" className="white-text">Регистрация</Button>
+                </Grid>
+            </Card>
         </div>
     </section>
     <br />
