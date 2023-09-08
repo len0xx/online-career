@@ -6,10 +6,12 @@
     export let color: Color = 'green'
     export let className = ''
     export let shadow = false
+    export let wide = false
 
     $: variantClass = `${ variant }-variant`
     $: colorClass = `${ color }-btn`
     $: shadowClass = shadow ? 'with-shadow' : ''
+    $: wideClass = wide ? 'full-width' : ''
 </script>
 
 <button 
@@ -17,7 +19,7 @@
     on:mouseover
     on:focus
     on:blur
-    class={ [ className, colorClass, variantClass, shadowClass ].filter((c) => !!c.length).join(' ') }
+    class={ [ className, colorClass, variantClass, shadowClass, wideClass ].filter((c) => !!c.length).join(' ') }
 >
     <span class="text-wrapper">
         <slot />
@@ -40,6 +42,11 @@
         transition: 0.1s ease-in-out;
         font-weight: 500;
     }
+
+    button.full-width {
+        width: 100%;
+    }
+
     button > .text-wrapper {
         position: relative;
         z-index: 10;

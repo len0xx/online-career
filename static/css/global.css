@@ -170,8 +170,8 @@ h1.success-title::before {
     position: absolute;
     height: 135px;
     width: 242px;
-    top: 84px;
-    left: 266px;
+    top: 20px;
+    left: 235px;
     z-index: 0;
     background-image: url("/img/success.svg");
     background-repeat: no-repeat;
@@ -275,4 +275,18 @@ div.card.black-card-3:not(.sfa) {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
+}
+
+h2.audience-title::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 197px;
+    height: 78px;
+    bottom: -17px;
+    left: 15px;
+    background-image: url("/img/for-those.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }

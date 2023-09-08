@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button } from "$lib/components"
 	import Card from "$lib/components/Card.svelte"
+	import Emote from "$lib/components/Emote.svelte";
 	import Grid from "$lib/components/Grid.svelte";
 	import Header from "$lib/components/Header.svelte"
     import Heading from "$lib/components/Heading.svelte"
@@ -138,6 +139,39 @@
                     <Button color="purple" className="white-text">Регистрация</Button>
                 </Grid>
             </Card>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <section class="audience">
+        <div class="content">
+            <Grid m={2}>
+                <div>
+                    <Heading level={ 2 } margin={{ top: 0, bottom: 0.7 }} className="audience-title">
+                        Онлайн-марафон<br />
+                        <span style="opacity: 0;">для тех</span>, кто
+                    </Heading>
+                    <img src="/img/man.png" alt="Иллюстрация" height="600" />
+                </div>
+                <div>
+                    <Grid m={3} placeItems="start">
+                        <Emote image="/img/emotes/emote-1.png">Учится на старших курсах</Emote>
+                        <Emote image="/img/emotes/emote-2.png">Учится на младших курсах</Emote>
+                        <Emote image="/img/emotes/emote-3.png">Не учится, но числится</Emote>
+                        <Emote image="/img/emotes/emote-4.png">Мечтатели</Emote>
+                        <Emote image="/img/emotes/emote-5.png">Реалисты</Emote>
+                        <Emote image="/img/emotes/emote-6.png">В поисках работы</Emote>
+                        <Emote image="/img/emotes/emote-7.png">Думает<br /> о предстоящем<br /> поиске работы</Emote>
+                        <Emote image="/img/emotes/emote-8.png">Думает о том,<br /> как его достал<br /> начальник</Emote>
+                        <Emote image="/img/emotes/emote-9.png">Читает этот текст</Emote>
+                    </Grid>
+                    <br />
+                    <br />
+                    <Button shadow wide variant="arrow">Успешный успех по ссылке</Button>
+                </div>
+            </Grid>
         </div>
     </section>
     <br />

@@ -1,5 +1,5 @@
 <script lang="ts">
-    type CardColor = 'black' | 'white' | 'purple' | 'green'
+    type CardColor = 'black' | 'white' | 'purple' | 'green' | 'grey'
 
     export let color: CardColor = 'white'
     export let className = ''
@@ -27,6 +27,11 @@
 
     :global(div.card.color-black) {
         background-color: var(--dark);
+        color: white;
+    }
+
+    :global(div.card.color-grey) {
+        background-color: var(--grey);
         color: white;
     }
 
