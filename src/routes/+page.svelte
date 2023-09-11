@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button } from "$lib/components"
 	import Card from "$lib/components/Card.svelte"
+	import Checkbox from "$lib/components/Checkbox.svelte";
 	import Emote from "$lib/components/Emote.svelte";
 	import Grid from "$lib/components/Grid.svelte";
 	import Header from "$lib/components/Header.svelte"
@@ -172,6 +173,36 @@
                     <Button shadow wide variant="arrow">Успешный успех по ссылке</Button>
                 </div>
             </Grid>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <section class="checkboxes">
+        <div class="content">
+            <Card color="purple" className="checkboxes">
+                <Heading level={ 2 } margin={{ top: 0.25 }}>
+                    Отметь то, что<br />
+                    тебе подходит
+                </Heading>
+                <div class="checkboxes-wrapper">
+                    <Checkbox name="1">Скоро диплом – а потом что?</Checkbox>
+                    <Checkbox name="2">А разве «работа с высокой зп и классным боссом» это не миф?</Checkbox>
+                    <Checkbox name="3">Как в 2023 вообще найти работу?</Checkbox>
+                    <Checkbox name="4">Кажется, я потерял себя</Checkbox>
+                    <Checkbox name="5">Везде требуют опыт, а если опыта нет?</Checkbox>
+                    <Checkbox name="6">А есть вакансии не в колл-центре?</Checkbox>
+                    <Checkbox name="7">Кажется, светит только «свободная касса»</Checkbox>
+                    <Checkbox name="8">В резюме всего одна строчка, при условии, что получу диплом</Checkbox>
+                    <Checkbox name="9">Сплошные отказы, как быть?</Checkbox>
+                    <Checkbox name="10">Где эта ваша «работа мечты»?</Checkbox>
+                    <Checkbox name="11">Хочу быть фрилансером, но не знаю с чего начать</Checkbox>
+                    <Checkbox name="12">Как хобби превратить в работу?</Checkbox>
+                    <Checkbox name="13">Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж</Checkbox>
+                </div>
+            </Card>
         </div>
     </section>
     <br />

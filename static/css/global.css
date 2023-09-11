@@ -290,3 +290,14 @@ h2.audience-title::before {
     background-position: center;
     background-size: contain;
 }
+
+.checkboxes-wrapper {
+    max-width: 75%;
+}
+
+.card.checkboxes {
+    background-image: url("/img/checkbox-bg.svg");
+    background-repeat: no-repeat;
+    background-size: 50%;
+    background-position: 100% 0%;
+}
