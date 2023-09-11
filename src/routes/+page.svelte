@@ -205,6 +205,4 @@
             </Card>
         </div>
     </section>
-    <br />
-    <br />
 </main>

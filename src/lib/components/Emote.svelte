@@ -14,6 +14,7 @@
         display: grid;
         position: relative;
         place-items: center;
+        width: 100%;
     }
 
     :global(.emote > .card) {
