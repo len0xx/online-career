@@ -18,11 +18,38 @@
     }
 
     :global(header nav > a) {
+        position: relative;
+        color: var(--dark);
+        transition: 0.1s ease-in-out;
         font-weight: 500;
     }
 
     :global(header nav > a:not(:last-child)) {
         margin-right: 1.5em;
+    }
+
+    :global(header nav > a::after) {
+        content: "";
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 9px;
+        top: 110%;
+        left: 0;
+        transition: 0.1s ease-in-out;
+        opacity: 0;
+        background-image: url("/img/icons/underline.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
+    :global(header nav > a:hover) {
+        color: var(--purple);
+    }
+
+    :global(header nav > a:hover::after) {
+        opacity: 1;
     }
 
     header > .header-content {
