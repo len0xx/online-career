@@ -252,6 +252,11 @@
                     Направления для быстрого старта IT-специалиста
                 </Speech>
             </Grid>
+            <br />
+            <br />
+            <div class="align-center">
+                <Button color="transparent">Показать все</Button>
+            </div>
         </div>
     </section>
 </main>

@@ -73,6 +73,10 @@
         color: var(--dark);
     }
 
+    button.white-btn.link-variant:hover {
+        background-color: var(--green);
+    }
+
     button.purple-btn {
         background-color: var(--purple);
     }
@@ -82,9 +86,17 @@
     }
 
     button.transparent-btn {
+        padding: 1.5em 5em;
+        border-radius: 100px;
         border: 2px solid var(--dark);
         background-color: transparent;
         color: var(--dark);
+    }
+
+    button.transparent-btn:hover {
+        border: 2px solid var(--dark);
+        background-color: var(--dark);
+        color: white;
     }
 
     button.link-variant {
