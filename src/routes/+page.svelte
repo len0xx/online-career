@@ -18,9 +18,9 @@
 <main>
     <section class="intro">
         <Header>
-            <a href="/">О марафоне</a>
-            <a href="/">Для кого</a>
-            <a href="/">Программа</a>
+            <a href="#about">О марафоне</a>
+            <a href="#audience">Для кого</a>
+            <a href="#program">Программа</a>
         </Header>
         <div class="content">
             <img src="/img/marathon.svg" alt="online-marathon" class="marathon-text" />
@@ -52,7 +52,7 @@
     <br />
     <br />
     <br />
-    <section class="info">
+    <section class="info" id="about">
         <div class="content">
             <div class="grid-1-1-2">
                 <Card color="black" className="black-card-1">
@@ -147,7 +147,7 @@
     <br />
     <br />
     <br />
-    <section class="audience">
+    <section class="audience" id="audience">
         <div class="content">
             <Grid m={2}>
                 <div>
@@ -211,7 +211,7 @@
     <br />
     <br />
     <br />
-    <section class="program">
+    <section class="program" id="program">
         <div class="content">
             <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
             <Grid m={ 1 } gap={ 2 }>
