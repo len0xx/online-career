@@ -8,6 +8,7 @@
     import Heading from "$lib/components/Heading.svelte"
 	import Item from "$lib/components/Item.svelte";
 	import Number from "$lib/components/Number.svelte"
+	import Speech from "$lib/components/Speech.svelte";
 </script>
 
 <svelte:head>
@@ -203,6 +204,54 @@
                     <Checkbox name="13">Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж</Checkbox>
                 </div>
             </Card>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <section class="program">
+        <div class="content">
+            <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
+            <Grid m={ 1 } gap={ 2 }>
+                <Speech
+                    date='1 ноября'
+                    time={ [ '16:00', '17:00' ] }
+                    weekday='Ср'
+                    speakers={ [{ name: 'Иван Иванов', duty: 'Главный HR-специалист', photo: '/img/speaker-1.jpg' }] }
+                    company='Сбербанк'
+                    companyLogo='/img/sber.png'
+                    link='/'
+                >
+                    Как очаровывать работодателя с первой фразы?
+                </Speech>
+                <Speech
+                    date='9 ноября'
+                    time={ [ '17:00', '16:00' ] }
+                    weekday='Чт'
+                    speakers={ [{ name: 'Анна Петрова', duty: 'Старший инженер в департаменте платежных систем', photo: '/img/speaker-3.jpg' }] }
+                    company='Тинькоф'
+                    companyLogo='/img/kontur.png'
+                    link='/'
+                >
+                    Разбираться в черновиках никто не будет: почему чистый код — одно из главных требований к разработчику
+                </Speech>
+                <Speech
+                    date='14 ноября'
+                    time={ [ '18:00', '19:00' ] }
+                    weekday='Вт'
+                    speakers={ [
+                        { name: 'Петр Петров', duty: 'Руководитель группы машинного обучения и анализа данных (Data Science)', photo: '/img/speaker-4.jpg' },
+                        { name: 'Ирина Петрова', duty: 'Начальник отдела кибербезопасности и анализа данных', photo: '/img/speaker-5.jpg' }
+                    ] }
+                    company='Синара Банк'
+                    companyLogo='/img/sinara.png'
+                    link='/'
+                >
+                    Направления для быстрого старта IT-специалиста
+                </Speech>
+            </Grid>
         </div>
     </section>
 </main>

@@ -1,6 +1,6 @@
 <script lang="ts">
-    type Variant = 'standard' | 'arrow'
-    type Color = 'transparent' | 'green' | 'purple'
+    type Variant = 'standard' | 'arrow' | 'link'
+    type Color = 'transparent' | 'green' | 'purple' | 'white'
 
     export let variant: Variant = 'standard'
     export let color: Color = 'green'
@@ -41,6 +41,7 @@
         font-family: 'Gilroy', sans-serif;
         transition: 0.1s ease-in-out;
         font-weight: 500;
+        box-sizing: border-box;
     }
 
     button.full-width {
@@ -67,6 +68,11 @@
         background-color: var(--darker-green);
     }
 
+    button.white-btn {
+        background-color: white;
+        color: var(--dark);
+    }
+
     button.purple-btn {
         background-color: var(--purple);
     }
@@ -78,12 +84,18 @@
     button.transparent-btn {
         border: 2px solid var(--dark);
         background-color: transparent;
-        color: black;
+        color: var(--dark);
+    }
+
+    button.link-variant {
+        padding: 1em 5em;
     }
 
     button.arrow-variant {
         padding: 1.5em 6em;
     }
+
+    button.link-variant::before,
     button.arrow-variant::before {
         content: '';
         display: block;
@@ -92,14 +104,23 @@
         left: 0.4em;
         height: calc(100% - 0.8em);
         border-radius: 100em;
-        width: 3.4em;
-        padding: 1em 1.7em;
         background-color: var(--dark);
         box-sizing: border-box;
         transition: 0.2s ease-in-out;
         z-index: 9;
     }
-    button.arrow-variant::after {
+
+    button.link-variant::before {
+        width: 2.4em;
+        padding: 1em 1.2em;
+    }
+
+    button.arrow-variant::before {
+        width: 3.4em;
+        padding: 1em 1.7em;
+    }
+    button.arrow-variant::after,
+    button.link-variant::after {
         content: '';
         display: block;
         position: absolute;
@@ -107,18 +128,34 @@
         left: 0.4em;
         height: calc(100% - 0.8em);
         border-radius: 100em;
-        padding: 1em 1.7em;
         box-sizing: border-box;
-        background-image: url("/img/icons/arrow.svg");
         background-repeat: no-repeat;
-        background-size: 36%;
         background-position: center;
+        transform: rotateX(0deg);
+        transition: 0.2s ease-in-out;
         z-index: 11;
     }
+    button.arrow-variant::after {
+        padding: 1em 1.7em;
+        background-size: 36%;
+        background-image: url("/img/icons/arrow.svg");
+    }
+    button.link-variant::after {
+        padding: 1em 1.2em;
+        background-size: 50%;
+        background-image: url("/img/icons/link.svg");
+    }
+    button.link-variant:hover,
     button.arrow-variant:hover {
         color: white;
     }
+
+    button.link-variant:hover::before,
     button.arrow-variant:hover::before {
         width: calc(100% - 0.8em);
+    }
+
+    button.link-variant:hover::after {
+        transform: rotateX(180deg);
     }
 </style>
