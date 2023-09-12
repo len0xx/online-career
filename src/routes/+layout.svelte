@@ -8,14 +8,14 @@
 <Footer>
 	<Grid m={ 2 }>
 		<div class="contacts">
-			<a href="https://vk.com"><img src="/img/logo/vk.svg" alt="VK link" /></a>
-			<a href="https://t.me"><img src="/img/logo/tg.svg" alt="Telegram link" /></a>
-			<a href="mailto:friend@urfu.ru" class="email">friend@urfu.ru</a>
+			<a href="https://vk.com" target="_blank"><img src="/img/logo/vk.svg" alt="VK link" /></a>
+			<a href="https://t.me" target="_blank"><img src="/img/logo/tg.svg" alt="Telegram link" /></a>
+			<a href="mailto:friend@urfu.ru" target="_top" class="email">friend@urfu.ru</a>
 		</div>
 		<div class="partners">
-			<Partner src="/img/logo/careertime-black.svg" />
-			<Partner src="/img/logo/urfu-black.svg" />
-			<Partner src="/img/logo/rosmol-black.svg" />
+			<a href="https://времякарьеры.рф" target="_blank"><Partner src="/img/logo/careertime-black.svg" /></a>
+			<a href="https://urfu.ru" target="_blank"><Partner src="/img/logo/urfu-black.svg" /></a>
+			<a href="https://myrosmol.ru" target="_blank"><Partner src="/img/logo/rosmol-black.svg" /></a>
 		</div>
 	</Grid>
 </Footer>
@@ -36,5 +36,9 @@
 
 	a.email {
 		font-size: var(--medium);
+	}
+
+	div.partners > a:not(:last-child) {
+        margin-right: 0.5em;
 	}
 </style>

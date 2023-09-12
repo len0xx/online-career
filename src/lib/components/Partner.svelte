@@ -15,8 +15,4 @@
         padding: 0.8em 1.5em 0.7em 1.5em;
         border-radius: calc(var(--radius) / 2);
     }
-
-    .partner-logo:not(:last-child) {
-        margin-right: 0.5em;
-    }
 </style>
