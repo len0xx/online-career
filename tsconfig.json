@@ -11,7 +11,8 @@
 		"forceConsistentCasingInFileNames": true,
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
-		"sourceMap": true
+		"sourceMap": true,
+		"verbatimModuleSyntax": false
 	},
 	"exclude": [ "./types" ]
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

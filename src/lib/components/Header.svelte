@@ -4,11 +4,15 @@
 
 <header>
     <div class="header-content">
-        <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
+        <div>
+            <slot name="left" />
+        </div>
         <nav>
             <slot />
         </nav>
-        <Button shadow>Регистрация</Button>
+        <div>
+            <slot name="right" />
+        </div>
     </div>
 </header>
 

@@ -1,27 +1,72 @@
 <script lang="ts">
     import { Button } from "$lib/components"
 	import Card from "$lib/components/Card.svelte"
-	import Checkbox from "$lib/components/Checkbox.svelte";
-	import Emote from "$lib/components/Emote.svelte";
-	import Grid from "$lib/components/Grid.svelte";
+	import Checkbox from "$lib/components/Checkbox.svelte"
+	import Emote from "$lib/components/Emote.svelte"
+	import Grid from "$lib/components/Grid.svelte"
 	import Header from "$lib/components/Header.svelte"
     import Heading from "$lib/components/Heading.svelte"
-	import Input from "$lib/components/Input.svelte";
-	import Item from "$lib/components/Item.svelte";
+	import Input from "$lib/components/Input.svelte"
+	import Item from "$lib/components/Item.svelte"
 	import Number from "$lib/components/Number.svelte"
-	import Speech from "$lib/components/Speech.svelte";
+	import Speech from "$lib/components/Speech.svelte"
+	import Modal from "$lib/components/Modal.svelte"
+
+    type ModalWindow = {
+        open: () => void
+        close: () => void
+        toggle: () => void
+    }
+
+    let modal: ModalWindow
 </script>
 
 <svelte:head>
 	<title>Время Карьеры – Онлайн марафон</title>
 </svelte:head>
 
+<Modal align="center" bind:this={ modal }>
+    <Grid m={ 1 }>
+        <Heading level={ 4 } margin={{ y: 0 }}>Регистрация</Heading>
+        <p class="button-text no-margin">
+            Найти работу мечты можно по-разному: отправить запрос в космос, нарисовать карту желаний, попробовать свои силы на стажировках или просто заполнить эту форму.
+        </p>
+        <p class="no-margin">
+            <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/">Войти</a>
+        </p>
+        <form method="POST" action="/api/signup">
+            <Grid m={ 1 }>
+                <Input name="lastName" placeholder="Фамилия" />
+                <Input name="firstName" placeholder="Имя" />
+                <Input name="patronimyc" placeholder="Отечество" />
+                <Input name="region" placeholder="Регион" />
+                <Input name="status" placeholder="Статус" />
+                <Input name="phone" placeholder="Номер телефона" />
+                <Input name="email" placeholder="E-mail" />
+                <small>
+                    Нажимая на кнопку «Регистрация» Вы даете свое согласие
+                    на обработку Ваших персональных данных, в соответствии
+                    с №152-ФЗ «О персональных данных» от 27.07.2006 года
+                </small>
+                <Button>Регистрация</Button>
+            </Grid>
+        </form>
+    </Grid>
+</Modal>
 <main>
     <section class="intro">
         <Header>
-            <a href="#about">О марафоне</a>
-            <a href="#audience">Для кого</a>
-            <a href="#program">Программа</a>
+            <svelte:fragment slot="left">
+                <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
+            </svelte:fragment>
+            <svelte:fragment>
+                <a href="#about">О марафоне</a>
+                <a href="#audience">Для кого</a>
+                <a href="#program">Программа</a>
+            </svelte:fragment>
+            <svelte:fragment slot="right">
+                <Button shadow on:click={ modal.open }>Регистрация</Button>
+            </svelte:fragment>
         </Header>
         <div class="content">
             <img src="/img/marathon.svg" alt="online-marathon" class="marathon-text" />
@@ -33,7 +78,7 @@
                 и как влюбить в себя HR на собеседовании.
             </p>
             <br />
-            <Button variant="arrow">Регистрация</Button>
+            <Button variant="arrow" on:click={ modal.open }>Регистрация</Button>
         </div>
     </section>
     <section class="program">
@@ -45,7 +90,7 @@
                 и подготовиться к собеседованию
             </p>
             <p class="align-center">
-                <Button shadow>Бесплатно, но с регистрацией</Button>
+                <Button shadow on:click={ modal.open }>Бесплатно, но с регистрацией</Button>
             </p>
         </div>
     </section>
@@ -83,7 +128,7 @@
                         <Number>1</Number><br />
                         <p class="button-text">Заполни форму</p>
                     </div>
-                    <Button shadow>Регистрация</Button>
+                    <Button shadow on:click={ modal.open }>Регистрация</Button>
                 </Card>
                 <Card className="gallery-two" color="white">
                     <Number>2</Number><br />
@@ -139,7 +184,7 @@
                         розыгрыша подарков и получить полезные материалы.
                     </p>
                     <br />
-                    <Button color="purple" className="white-text">Регистрация</Button>
+                    <Button color="purple" className="white-text" on:click={ modal.open }>Регистрация</Button>
                 </Grid>
             </Card>
         </div>
@@ -172,7 +217,7 @@
                     </Grid>
                     <br />
                     <br />
-                    <Button shadow wide variant="arrow">Успешный успех по ссылке</Button>
+                    <Button shadow wide variant="arrow" on:click={ modal.open }>Успешный успех по ссылке</Button>
                 </div>
             </Grid>
         </div>
@@ -277,7 +322,7 @@
                                 Найти работу мечты можно по-разному: отправить запрос в космос, нарисовать карту желаний, попробовать свои силы на стажировках или просто заполнить эту форму.
                             </p>
                             <p>
-                                <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/login">Войти</a>
+                                <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/">Войти</a>
                             </p>
                         </div>
                         <small>
