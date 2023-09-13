@@ -1,13 +1,27 @@
 <script lang="ts">
+	import { computePadding } from "$lib/utilities";
+	import type { Padding } from "../../types"
+
     type CardColor = 'black' | 'white' | 'purple' | 'green' | 'grey'
 
+    const defaultPadding: Padding = { y: 1.6, x: 1.6 }
+
     export let color: CardColor = 'white'
+    export let padding: Padding = defaultPadding
     export let className = ''
 
     $: colorClass = `color-${ color }`
 </script>
 
-<div class={ [ 'card', colorClass, className ].filter((c) => !!c).join(' ') } on:click on:focus on:mouseover on:blur on:keyup>
+<div
+    class={ [ 'card', colorClass, className ].filter((c) => !!c).join(' ') }
+    style:padding={ computePadding({ ...defaultPadding, ...padding }) }
+    on:click
+    on:focus
+    on:mouseover
+    on:blur
+    on:keyup
+>
     <slot />
 </div>
 
@@ -17,7 +31,6 @@
         position: relative;
         color: black;
         border-radius: 40px;
-        padding: 1.6em;
         box-shadow: var(--default-shadow);
     }
 

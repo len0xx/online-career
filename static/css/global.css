@@ -31,7 +31,7 @@
 	--button-text: calc(var(--text-size) * 1.2);	/* 24 */
     --descriptor: calc(var(--text-size) * 1.2);     /* 24 */
     --subtitle: calc(var(--text-size) * 0.9);       /* 18 */
-    --tiny: calc(var(--text-size) * 0.7);           /* 14 */
+    --tiny: calc(var(--text-size) * 0.8);           /* 14 */
 
     --radius: 40px;
     --default-shadow: 5px 5px 15px #4C40DC16,
@@ -86,6 +86,11 @@ body {
     color: var(--black);
     font-size: var(--text-size);
     line-height: 1.2;
+}
+
+small {
+    font-weight: 400;
+    font-size: var(--tiny);
 }
 
 main > section > div.content {
@@ -300,4 +305,11 @@ h2.audience-title::before {
     background-repeat: no-repeat;
     background-size: 50%;
     background-position: 100% 0%;
+}
+
+.card.signup-block {
+    background-image: url("/img/signup-vector.svg");
+    background-repeat: no-repeat;
+    background-size: 60%;
+    background-position: 100% 0;
 }

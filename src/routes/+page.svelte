@@ -6,6 +6,7 @@
 	import Grid from "$lib/components/Grid.svelte";
 	import Header from "$lib/components/Header.svelte"
     import Heading from "$lib/components/Heading.svelte"
+	import Input from "$lib/components/Input.svelte";
 	import Item from "$lib/components/Item.svelte";
 	import Number from "$lib/components/Number.svelte"
 	import Speech from "$lib/components/Speech.svelte";
@@ -257,6 +258,50 @@
             <div class="align-center">
                 <Button color="transparent">Показать все</Button>
             </div>
+        </div>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <section class="signup">
+        <div class="content">
+            <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
+                <Grid m={ 2 } gap={ 12 }>
+                    <Grid m={ 1 } alignContent="space-between">
+                        <div>
+                            <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading>
+                            <p class="button-text">
+                                Найти работу мечты можно по-разному: отправить запрос в космос, нарисовать карту желаний, попробовать свои силы на стажировках или просто заполнить эту форму.
+                            </p>
+                            <p>
+                                <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/login">Войти</a>
+                            </p>
+                        </div>
+                        <small>
+                            Нажимая на кнопку «Регистрация» Вы даете свое согласие
+                            на обработку Ваших персональных данных, в соответствии
+                            с №152-ФЗ «О персональных данных» от 27.07.2006 года
+                        </small>
+                    </Grid>
+                    <div>
+                        <form method="POST" action="/api/signup">
+                            <Grid m={ 1 }>
+                                <Input name="lastName" placeholder="Фамилия" />
+                                <Input name="firstName" placeholder="Имя" />
+                                <Input name="patronimyc" placeholder="Отечество" />
+                                <Input name="region" placeholder="Регион" />
+                                <Input name="status" placeholder="Статус" />
+                                <Input name="phone" placeholder="Номер телефона" />
+                                <Input name="email" placeholder="E-mail" />
+                                <Button>Регистрация</Button>
+                            </Grid>
+                        </form>
+                    </div>
+                </Grid>
+            </Card>
         </div>
     </section>
 </main>
