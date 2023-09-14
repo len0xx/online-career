@@ -11,6 +11,8 @@
 	import Number from "$lib/components/Number.svelte"
 	import Speech from "$lib/components/Speech.svelte"
 	import Modal from "$lib/components/Modal.svelte"
+	import Partner from "$lib/components/Partner.svelte"
+	import { onMount } from "svelte";
 
     type ModalWindow = {
         open: () => void
@@ -19,7 +21,22 @@
     }
 
     let modal: ModalWindow
+    let scroll = 0
+    let cursor = { x: 0, y: 0 }
+
+    $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(scroll) * 0.92471 }px)`
+    $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(scroll) * 0.88121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
+    $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(scroll) * 0.69481 }px) translateY(${ Math.sqrt(scroll) * 0.91382 }px)`
+    $: parallax4 = `translateX(${ Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
+
+    const windowScroll = () => scroll = window.scrollY
+
+    const mouseMove = (e: MouseEvent) => cursor = { x: e.pageX, y: e.pageY }
+
+    onMount(windowScroll)
 </script>
+
+<svelte:window on:scroll={ windowScroll } on:mousemove={ mouseMove }></svelte:window>
 
 <svelte:head>
 	<title>Время Карьеры – Онлайн марафон</title>
@@ -79,6 +96,15 @@
             </p>
             <br />
             <Button variant="arrow" on:click={ modal.open }>Регистрация</Button>
+            <br />
+            <br />
+            <br />
+            <Partner background={ false } src="/img/logo/urfu.svg" />
+            <Partner background={ false } src="/img/logo/rosmol.svg" />
+            <div class="parallax-image" id="prlx-1" style:transform={ parallax1 }></div>
+            <div class="parallax-image" id="prlx-2" style:transform={ parallax2 }></div>
+            <div class="parallax-image" id="prlx-3" style:transform={ parallax3 }></div>
+            <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
         </div>
     </section>
     <section class="program">

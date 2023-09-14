@@ -313,3 +313,52 @@ h2.audience-title::before {
     background-size: 60%;
     background-position: 100% 0;
 }
+
+section.intro > .content {
+    overflow: hidden;
+}
+
+section.intro > .content > *:not(.parallax-image) {
+    position: relative;
+    z-index: 20;
+}
+
+.parallax-image {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.parallax-image#prlx-1 {
+    background-image: url("/img/parallax/mesh.svg");
+    z-index: 10;
+    width: 600px;
+    height: 600px;
+}
+
+.parallax-image#prlx-2 {
+    background-image: url("/img/parallax/woman.png");
+    z-index: 11;
+    right: 50px;
+    width: 470px;
+    height: 643px;
+}
+
+.parallax-image#prlx-3 {
+    background-image: url("/img/parallax/zigzag.svg");
+    z-index: 12;
+    right: 60px;
+    width: 728px;
+    height: 315px;
+}
+
+.parallax-image#prlx-4 {
+    background-image: url("/img/parallax/line.svg");
+    z-index: 13;
+    width: 360px;
+    height: 238px;
+}
