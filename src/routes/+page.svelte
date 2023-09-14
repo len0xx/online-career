@@ -146,7 +146,7 @@
             <div class="grid-gallery">
                 <Card className="gallery-purple" color="purple">
                     <Heading level={ 1 } margin={{ y: 0, top: 0.4 }} lineHeight={ 1 } className="success-title">
-                        <span style="position: relative; z-index: 1;">Путь к <span style="opacity: 0">успеху</span> начинается здесь</span>
+                        <span style="position: relative; z-index: 1;">Путь к<br /> начинается здесь</span>
                     </Heading>
                 </Card>
                 <Card className="gallery-one" color="white">

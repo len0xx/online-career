@@ -38,13 +38,6 @@
         -5px -5px 15px #4C40DC16;
 }
 
-@media screen and (max-width: 1500px) {
-	:root {
-		--xxx-large: calc(var(--text-size) * 5);
-		--header-1: calc(var(--text-size) * 5);
-	}
-}
-
 @media screen and (max-width: 768px) {
     :root {
         --xxx-large: calc(var(--text-size) * 2.5);		/* 40 */
@@ -328,6 +321,7 @@ section.intro > .content > *:not(.parallax-image) {
     position: absolute;
     bottom: 0;
     right: 0;
+    transition: 0.1s linear;
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center;
