@@ -25,9 +25,9 @@
     let cursor = { x: 0, y: 0 }
 
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(scroll) * 0.92471 }px)`
-    $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(scroll) * 0.88121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
+    $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(scroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
     $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(scroll) * 0.69481 }px) translateY(${ Math.sqrt(scroll) * 0.91382 }px)`
-    $: parallax4 = `translateX(${ Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
+    $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
 
     const windowScroll = () => scroll = window.scrollY
 
