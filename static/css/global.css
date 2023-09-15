@@ -387,16 +387,27 @@ section.features > .content {
     top: 3em;
 }
 
-section.features {
-    min-height: 180vh;
-}
-
 section.intro,
 section.features,
 section.info,
 section.audience,
 section.checkboxes,
 section.program,
-section.signup {
+section.signup,
+section.footer {
     scroll-snap-align: start;
+    scroll-snap-stop: normal;
+}
+
+section.footer {
+    padding: 0;
+}
+
+footer {
+    scroll-snap-align: end;
+}
+
+section.features {
+    scroll-snap-stop: always;
+    min-height: 180vh;
 }

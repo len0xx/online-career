@@ -478,4 +478,5 @@
             </Card>
         </div>
     </section>
+    <section class="footer"></section>
 </main>
