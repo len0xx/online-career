@@ -21,10 +21,9 @@
         width: 1176px;
         min-height: 480px;
         background-image: url("/img/ticket-bg.svg");
-        background-size: 41%;
+        background-size: contain;
         background-repeat: no-repeat;
         background-position: 100% 0;
-        transition: 0.35s ease-in-out;
     }
 
     .ticket-content {

@@ -1,19 +1,19 @@
 <script lang="ts">
-    import { Button } from "$lib/components"
-	import Card from "$lib/components/Card.svelte"
-	import Checkbox from "$lib/components/Checkbox.svelte"
-	import Emote from "$lib/components/Emote.svelte"
-	import Grid from "$lib/components/Grid.svelte"
-	import Header from "$lib/components/Header.svelte"
-    import Heading from "$lib/components/Heading.svelte"
-	import Input from "$lib/components/Input.svelte"
-	import Item from "$lib/components/Item.svelte"
-	import Number from "$lib/components/Number.svelte"
-	import Speech from "$lib/components/Speech.svelte"
-	import Modal from "$lib/components/Modal.svelte"
-	import Partner from "$lib/components/Partner.svelte"
-    import Ticket from "$lib/components/Ticket.svelte"
-	import { onMount } from "svelte"
+	import Button from '$lib/components/Button.svelte'
+	import Card from '$lib/components/Card.svelte'
+	import Checkbox from '$lib/components/Checkbox.svelte'
+	import Emote from '$lib/components/Emote.svelte'
+	import Grid from '$lib/components/Grid.svelte'
+	import Header from '$lib/components/Header.svelte'
+    import Heading from '$lib/components/Heading.svelte'
+	import Input from '$lib/components/Input.svelte'
+	import Item from '$lib/components/Item.svelte'
+	import Number from '$lib/components/Number.svelte'
+	import Speech from '$lib/components/Speech.svelte'
+	import Modal from '$lib/components/Modal.svelte'
+	import Partner from '$lib/components/Partner.svelte'
+    import Ticket from '$lib/components/Ticket.svelte'
+	import { onMount } from 'svelte'
 
     type ModalWindow = {
         open: () => void
@@ -21,100 +21,115 @@
         toggle: () => void
     }
 
-    let programHeading: HTMLElement | null = null
+    let featuresElement: HTMLElement | null = null
     let modal: ModalWindow
     let scroll = 0
-    let accumulator = 0
     let cursor = { x: 0, y: 0 }
-    let lockScrollPos = 1000
-
-
-    const HIDE_TICKET_DELAY = 500
-    const TICKET_STEP = 150
-    const TICKET_STEPS = [
-        TICKET_STEP * 1,
-        TICKET_STEP * 2,
-        TICKET_STEP * 3,
-        TICKET_STEP * 4
-    ]
-
-    const tickets = [
-        { opacity: 1, shown: true, zIndex: 5, transform: 'translateY(0) scale(1)' },
-        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' },
-        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' },
-        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' },
-        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' }
-    ]
-
-    const displayTicket = (index: number) => {
-        tickets[index].shown = true
-        tickets[index].opacity = 1
-        tickets[index].transform = 'translateY(0) scale(1)'
-    }
-
-    const hideTicket = (index: number) => {
-        tickets[index].zIndex = tickets.length - index - 1
-        tickets[index].transform = `translateY(${ (index + 1) * -52 }px) scale(${ 1 - (index + 1) * 0.1 })`
-    }
+    let featuresElementStart = 1000
+    let featuresElementEnd = 3000
 
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(scroll) * 0.92471 }px)`
     $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(scroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
     $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(scroll) * 0.69481 }px) translateY(${ Math.sqrt(scroll) * 0.91382 }px)`
     $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
 
-    const windowScroll = (e: Event) => {
-        const newScroll = window.scrollY
-        const diff = newScroll - scroll
+    const MAX_TRANSLATE = 900
+    const SCALE_RANGE = 100
+    const OPACITY_RANGE = 100
+    const TICKET_STEP_LENGTH = 600
+    const RANGE = TICKET_STEP_LENGTH - SCALE_RANGE
+    const MAX_TRANSLATE_DECREASE_STEP = 50
+    const MAX_SCALE_DECREASE_STEP = 0.1
 
-        if (scroll >= lockScrollPos) {
-            if (diff > 0) {
-                accumulator += diff
-            }
-            if (accumulator < TICKET_STEPS[3] + 50) {
-                // console.log('scroll', scroll)
-                // console.log('newScroll', newScroll)
-                // console.log('diff', diff)
-                // console.log('accumulator', accumulator)
-                // e.preventDefault()
-                // window.scrollTo(0, 1080)
-            }
-            
-            if (accumulator > TICKET_STEPS[0] && !tickets[1].shown) {
-                displayTicket(1)
-                setTimeout(() => hideTicket(0), HIDE_TICKET_DELAY)
-            }
-            if (accumulator > TICKET_STEPS[1] && !tickets[2].shown) {
-                displayTicket(2)
-                setTimeout(() => hideTicket(1), HIDE_TICKET_DELAY)
-            }
-            if (accumulator > TICKET_STEPS[2] && !tickets[3].shown) {
-                displayTicket(3)
-                setTimeout(() => hideTicket(2), HIDE_TICKET_DELAY)
-            }
-            if (accumulator > TICKET_STEPS[3] && !tickets[4].shown) {
-                displayTicket(4)
-                setTimeout(() => hideTicket(3), HIDE_TICKET_DELAY)
+    const tickets = [
+        { opacity: 1, shown: true, zIndex: 1, transform: 'translateY(0) scale(1)', translate: 0, scale: 1 },
+        { opacity: 0, shown: false, zIndex: 2, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 },
+        { opacity: 0, shown: false, zIndex: 3, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 },
+        { opacity: 0, shown: false, zIndex: 4, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 },
+        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 }
+    ]
+
+    const setTicketOpacity = (index: number, opacity: number) => tickets[index].opacity = opacity
+
+    const applyTicketTransform = (index: number) => tickets[index].transform = `translateY(${ tickets[index].translate }px) scale(${ tickets[index].scale })`
+
+    const setTicketTransform = (index: number, translate: number, scale: number) => {
+        tickets[index].translate = translate
+        tickets[index].scale = scale
+        applyTicketTransform(index)
+    }
+
+    const applyAnimationOnTicket = (index: number, currentScroll: number) => {
+        const TICKET_STOPS = [
+            featuresElementStart,
+            featuresElementStart + TICKET_STEP_LENGTH * 1,
+            featuresElementStart + TICKET_STEP_LENGTH * 2,
+            featuresElementStart + TICKET_STEP_LENGTH * 3,
+            featuresElementStart + TICKET_STEP_LENGTH * 4,
+        ]
+        const passedPoints = [
+            currentScroll > TICKET_STOPS[0],
+            currentScroll > TICKET_STOPS[1],
+            currentScroll > TICKET_STOPS[2],
+            currentScroll > TICKET_STOPS[3],
+            currentScroll > TICKET_STOPS[4]
+        ]
+        const lastPoint = passedPoints.reduce((acc, cur) => cur ? acc + 1 : acc, 0)
+        const pointsLeft = passedPoints.length - lastPoint
+
+        if (index > 0 && currentScroll < TICKET_STOPS[index - 1]) {
+            // The ticket is not shown up yet
+
+            setTicketOpacity(index, 0)
+            setTicketTransform(index, 900, 1)
+        }
+        else if (index > 0 && currentScroll > TICKET_STOPS[index - 1] && currentScroll < TICKET_STOPS[index]) {
+            // The ticket is in progress of animation
+
+            const generalPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - scroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - scroll)) / RANGE : 1
+            const opacityPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - scroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - scroll)) / RANGE : 1
+            const translateValue = generalPercentage < 0.99 ? MAX_TRANSLATE - MAX_TRANSLATE * generalPercentage : 0
+
+            setTicketOpacity(index, opacityPercentage)
+            setTicketTransform(index, translateValue, 1)
+        }
+        else if ((index < (tickets.length - 1)) && currentScroll > (TICKET_STOPS[index + 1] - SCALE_RANGE) && currentScroll < TICKET_STOPS[index + 1]) {
+            // The ticket is being scaled down
+
+            const generalPercentage = (SCALE_RANGE - (TICKET_STOPS[index + 1] - currentScroll)) / SCALE_RANGE < 1 ? (SCALE_RANGE - (TICKET_STOPS[index + 1] - currentScroll)) / SCALE_RANGE : 1
+            setTicketTransform(index, MAX_TRANSLATE_DECREASE_STEP * generalPercentage * -1, 1 - MAX_SCALE_DECREASE_STEP * generalPercentage)
+        }
+        else if ((index < (tickets.length - 1)) && currentScroll > TICKET_STOPS[index] && currentScroll < (TICKET_STOPS[index + 1] - SCALE_RANGE)) {
+            // The ticket is static
+
+            setTicketOpacity(index, 1)
+            setTicketTransform(index, 0, 1)
+        }
+        else if (index < (tickets.length - 1) && lastPoint > 0) {
+            // The ticket is already scaled down and hidden in a stack behind
+            const translate = MAX_TRANSLATE_DECREASE_STEP * (tickets.length - (index + 1) - (pointsLeft)) * -1
+            const scale = 1 - MAX_SCALE_DECREASE_STEP * (tickets.length - (index + 1) - (pointsLeft))
+            setTicketTransform(index, translate, scale)
+        }
+    }
+
+    const windowScroll = () => {
+        const newScroll = window.scrollY
+
+        if (newScroll >= featuresElementStart && newScroll < (featuresElementEnd + 100)) {
+            for (let i = 0; i <= 4; i++) {
+                applyAnimationOnTicket(i, newScroll)
             }
         }
         scroll = newScroll
     }
 
     const initialScroll = () => {
-        scroll = window.scrollY
-        if (programHeading) lockScrollPos = scroll + programHeading.getClientRects()[0].top - 100
-        
-
-        // let supportsPassive = false
-        // let wheelOpt = supportsPassive ? { passive: false } : false
-        // try {
-        //     window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-        //         get: function () { supportsPassive = true } 
-        //     }))
-        // }
-        // catch(e) { }
-        
-        // const wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel'
-        // window.addEventListener(wheelEvent, windowScroll, { passive: false })
+        if (featuresElement) {
+            featuresElementStart = window.scrollY + featuresElement.getClientRects()[0].top
+            featuresElementEnd = featuresElementStart + featuresElement.getClientRects()[0].height
+        }
+        windowScroll()
     }
 
     const mouseMove = (e: MouseEvent) => cursor = { x: e.pageX, y: e.pageY }
@@ -193,42 +208,41 @@
             <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
         </div>
     </section>
-    <section class="features">
+    <section class="features" bind:this={ featuresElement }>
         <div class="content align-center">
             <Heading level={ 1 } margin={{ top: 0 }}>В программе онлайн-марафона</Heading>
             <div class="tickets-wrapper">
                 <Ticket opacity={ tickets[0].opacity } zIndex={ tickets[0].zIndex } transform={ tickets[0].transform } image="/img/tickets/ticket-1.jpg">
                     <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Лекции от топовых работодателей</Heading>
-                    <p>
+                    <p class="no-margin">
                         Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие специалисты нужны рынку труда, какие навыки будут востребованы у работодателей и что делать сейчас, чтобы стать первоклассным специалистом и найти работу мечты.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[1].opacity } zIndex={ tickets[1].zIndex } transform={ tickets[1].transform } image="/img/tickets/ticket-2.jpg">
                     <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Начни свое дело</Heading>
-                    <p>
+                    <p class="no-margin">
                         Успешные предприниматели поделятся своим опытом, а также расскажут, как монетизировать хобби и почему переехать на Бали и работать 3 часа в день  — плохая карьерная стратегия.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[2].opacity } zIndex={ tickets[2].zIndex } transform={ tickets[2].transform } image="/img/tickets/ticket-3.jpg">
                     <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Упакуем твой опыт</Heading>
-                    <p>
+                    <p class="no-margin">
                         Эксперты расскажут, почему организация школьного балла и статус "старосты" уже классный опыт для начала работы. И где еще можно найти тот самый опыт работы, без которого не берут на работу.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[3].opacity } zIndex={ tickets[3].zIndex } transform={ tickets[3].transform } image="/img/tickets/ticket-4.jpg">
                     <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Шаблон идеального резюме</Heading>
-                    <p>
+                    <p class="no-margin">
                         На марафоне ты научишься составлять продающее резюме, которое поможет выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях, даже если ты студент первого курса.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[4].opacity } zIndex={ tickets[4].zIndex } transform={ tickets[4].transform } image="/img/tickets/ticket-5.jpg">
                     <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Гайды и чек-листы</Heading>
-                    <p>
+                    <p class="no-margin">
                         Где искать работу? Как определить хорошего работодателя по вакансии? Как составить резюме? Где и как развивать свои софт-скилс? С чего начать свое дело? – ответы на эти и многие другие вопросы ты найдешь в наших дополнительных материалах, которые ты сможешь использовать и после окончания марафона.
                     </p>
                 </Ticket>
             </div>
-            <br />
             <p class="button-text align-center">
                 Трудоустройство и исполнение всех<br />
                 желаний не обещаем, но поможем прокачать резюме<br />
@@ -480,3 +494,11 @@
     </section>
     <section class="footer"></section>
 </main>
+
+<style>
+    :global(html) {
+        scroll-snap-type: y proximity;
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+</style>

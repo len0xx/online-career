@@ -377,16 +377,6 @@ section.intro > .content > *:not(.parallax-image) {
     grid-column: 1;
 }
 
-html {
-    scroll-snap-type: y proximity;
-    overflow: scroll;
-}
-
-section.features > .content {
-    position: sticky;
-    top: 3em;
-}
-
 section.intro,
 section.features,
 section.info,
@@ -408,6 +398,20 @@ footer {
 }
 
 section.features {
+    --section-padding: min(max(calc(2vh + 8px), 1em), 3em);
+
     scroll-snap-stop: always;
-    min-height: 180vh;
+    padding: var(--section-padding);
+    min-height: 150vh;
+    height: calc(100vh + calc(600px * 4) + 300px);
+}
+
+section.features > .content {
+    position: sticky;
+    top: var(--section-padding);
+}
+
+section.features > .content p.button-text {
+    margin-top: max(1em, 4vh);
+    margin-bottom: max(0.5em, 2vh);
 }
