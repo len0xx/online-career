@@ -55,6 +55,10 @@
     }
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 .button-text {
 	font-size: var(--button-text);
 }
@@ -91,6 +95,10 @@ main > section > div.content {
     position: relative;
     margin: 0 auto;
     width: var(--content-width);
+}
+
+section {
+    padding: 3em 0;
 }
 
 section.intro {
@@ -355,4 +363,40 @@ section.intro > .content > *:not(.parallax-image) {
     z-index: 13;
     width: 360px;
     height: 238px;
+}
+
+.tickets-wrapper {
+    display: grid;
+    position: relative;
+    place-content: center;
+    padding-top: 2em;
+}
+
+.tickets-wrapper > * {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+html {
+    scroll-snap-type: y proximity;
+    overflow: scroll;
+}
+
+section.features > .content {
+    position: sticky;
+    top: 3em;
+}
+
+section.features {
+    min-height: 180vh;
+}
+
+section.intro,
+section.features,
+section.info,
+section.audience,
+section.checkboxes,
+section.program,
+section.signup {
+    scroll-snap-align: start;
 }

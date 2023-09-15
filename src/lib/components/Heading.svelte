@@ -10,6 +10,7 @@
     export let className = ''
     export let lineHeight = 1.2
     export let margin: Padding = defaultMargin
+    export let node: HTMLElement | null = null
 
     $: tag = `h${ level }`
 </script>
@@ -19,6 +20,7 @@
     on:mouseover
     on:focus
     on:blur
+    bind:this={ node }
     style:line-height={ lineHeight }
     style:margin={ computePadding({ ...defaultMargin, ...margin }) }
     this={ tag }

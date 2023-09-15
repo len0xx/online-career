@@ -12,7 +12,8 @@
 	import Speech from "$lib/components/Speech.svelte"
 	import Modal from "$lib/components/Modal.svelte"
 	import Partner from "$lib/components/Partner.svelte"
-	import { onMount } from "svelte";
+    import Ticket from "$lib/components/Ticket.svelte"
+	import { onMount } from "svelte"
 
     type ModalWindow = {
         open: () => void
@@ -20,20 +21,105 @@
         toggle: () => void
     }
 
+    let programHeading: HTMLElement | null = null
     let modal: ModalWindow
     let scroll = 0
+    let accumulator = 0
     let cursor = { x: 0, y: 0 }
+    let lockScrollPos = 1000
+
+
+    const HIDE_TICKET_DELAY = 500
+    const TICKET_STEP = 150
+    const TICKET_STEPS = [
+        TICKET_STEP * 1,
+        TICKET_STEP * 2,
+        TICKET_STEP * 3,
+        TICKET_STEP * 4
+    ]
+
+    const tickets = [
+        { opacity: 1, shown: true, zIndex: 5, transform: 'translateY(0) scale(1)' },
+        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' },
+        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' },
+        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' },
+        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(1400px) scale(1)' }
+    ]
+
+    const displayTicket = (index: number) => {
+        tickets[index].shown = true
+        tickets[index].opacity = 1
+        tickets[index].transform = 'translateY(0) scale(1)'
+    }
+
+    const hideTicket = (index: number) => {
+        tickets[index].zIndex = tickets.length - index - 1
+        tickets[index].transform = `translateY(${ (index + 1) * -52 }px) scale(${ 1 - (index + 1) * 0.1 })`
+    }
 
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(scroll) * 0.92471 }px)`
     $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(scroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
     $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(scroll) * 0.69481 }px) translateY(${ Math.sqrt(scroll) * 0.91382 }px)`
     $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
 
-    const windowScroll = () => scroll = window.scrollY
+    const windowScroll = (e: Event) => {
+        const newScroll = window.scrollY
+        const diff = newScroll - scroll
+
+        if (scroll >= lockScrollPos) {
+            if (diff > 0) {
+                accumulator += diff
+            }
+            if (accumulator < TICKET_STEPS[3] + 50) {
+                // console.log('scroll', scroll)
+                // console.log('newScroll', newScroll)
+                // console.log('diff', diff)
+                // console.log('accumulator', accumulator)
+                // e.preventDefault()
+                // window.scrollTo(0, 1080)
+            }
+            
+            if (accumulator > TICKET_STEPS[0] && !tickets[1].shown) {
+                displayTicket(1)
+                setTimeout(() => hideTicket(0), HIDE_TICKET_DELAY)
+            }
+            if (accumulator > TICKET_STEPS[1] && !tickets[2].shown) {
+                displayTicket(2)
+                setTimeout(() => hideTicket(1), HIDE_TICKET_DELAY)
+            }
+            if (accumulator > TICKET_STEPS[2] && !tickets[3].shown) {
+                displayTicket(3)
+                setTimeout(() => hideTicket(2), HIDE_TICKET_DELAY)
+            }
+            if (accumulator > TICKET_STEPS[3] && !tickets[4].shown) {
+                displayTicket(4)
+                setTimeout(() => hideTicket(3), HIDE_TICKET_DELAY)
+            }
+        }
+        scroll = newScroll
+    }
+
+    const initialScroll = () => {
+        scroll = window.scrollY
+        if (programHeading) lockScrollPos = scroll + programHeading.getClientRects()[0].top - 100
+        
+
+        // let supportsPassive = false
+        // let wheelOpt = supportsPassive ? { passive: false } : false
+        // try {
+        //     window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
+        //         get: function () { supportsPassive = true } 
+        //     }))
+        // }
+        // catch(e) { }
+        
+        // const wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel'
+        // window.addEventListener(wheelEvent, windowScroll, { passive: false })
+    }
 
     const mouseMove = (e: MouseEvent) => cursor = { x: e.pageX, y: e.pageY }
 
-    onMount(windowScroll)
+    onMount(initialScroll)
 </script>
 
 <svelte:window on:scroll={ windowScroll } on:mousemove={ mouseMove }></svelte:window>
@@ -107,9 +193,42 @@
             <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
         </div>
     </section>
-    <section class="program">
-        <div class="content">
-            <Heading level={ 1 }>В программе онлайн-марафона</Heading>
+    <section class="features">
+        <div class="content align-center">
+            <Heading level={ 1 } margin={{ top: 0 }}>В программе онлайн-марафона</Heading>
+            <div class="tickets-wrapper">
+                <Ticket opacity={ tickets[0].opacity } zIndex={ tickets[0].zIndex } transform={ tickets[0].transform } image="/img/tickets/ticket-1.jpg">
+                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Лекции от топовых работодателей</Heading>
+                    <p>
+                        Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие специалисты нужны рынку труда, какие навыки будут востребованы у работодателей и что делать сейчас, чтобы стать первоклассным специалистом и найти работу мечты.
+                    </p>
+                </Ticket>
+                <Ticket opacity={ tickets[1].opacity } zIndex={ tickets[1].zIndex } transform={ tickets[1].transform } image="/img/tickets/ticket-2.jpg">
+                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Начни свое дело</Heading>
+                    <p>
+                        Успешные предприниматели поделятся своим опытом, а также расскажут, как монетизировать хобби и почему переехать на Бали и работать 3 часа в день  — плохая карьерная стратегия.
+                    </p>
+                </Ticket>
+                <Ticket opacity={ tickets[2].opacity } zIndex={ tickets[2].zIndex } transform={ tickets[2].transform } image="/img/tickets/ticket-3.jpg">
+                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Упакуем твой опыт</Heading>
+                    <p>
+                        Эксперты расскажут, почему организация школьного балла и статус "старосты" уже классный опыт для начала работы. И где еще можно найти тот самый опыт работы, без которого не берут на работу.
+                    </p>
+                </Ticket>
+                <Ticket opacity={ tickets[3].opacity } zIndex={ tickets[3].zIndex } transform={ tickets[3].transform } image="/img/tickets/ticket-4.jpg">
+                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Шаблон идеального резюме</Heading>
+                    <p>
+                        На марафоне ты научишься составлять продающее резюме, которое поможет выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях, даже если ты студент первого курса.
+                    </p>
+                </Ticket>
+                <Ticket opacity={ tickets[4].opacity } zIndex={ tickets[4].zIndex } transform={ tickets[4].transform } image="/img/tickets/ticket-5.jpg">
+                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Гайды и чек-листы</Heading>
+                    <p>
+                        Где искать работу? Как определить хорошего работодателя по вакансии? Как составить резюме? Где и как развивать свои софт-скилс? С чего начать свое дело? – ответы на эти и многие другие вопросы ты найдешь в наших дополнительных материалах, которые ты сможешь использовать и после окончания марафона.
+                    </p>
+                </Ticket>
+            </div>
+            <br />
             <p class="button-text align-center">
                 Трудоустройство и исполнение всех<br />
                 желаний не обещаем, но поможем прокачать резюме<br />
@@ -120,10 +239,6 @@
             </p>
         </div>
     </section>
-    <br />
-    <br />
-    <br />
-    <br />
     <section class="info" id="about">
         <div class="content">
             <div class="grid-1-1-2">
@@ -216,9 +331,6 @@
         </div>
     </section>
     <br />
-    <br />
-    <br />
-    <br />
     <section class="audience" id="audience">
         <div class="content">
             <Grid m={2}>
@@ -250,9 +362,6 @@
     </section>
     <br />
     <br />
-    <br />
-    <br />
-    <br />
     <section class="checkboxes">
         <div class="content">
             <Card color="purple" className="checkboxes">
@@ -278,9 +387,6 @@
             </Card>
         </div>
     </section>
-    <br />
-    <br />
-    <br />
     <br />
     <br />
     <section class="program" id="program">
@@ -331,9 +437,6 @@
             </div>
         </div>
     </section>
-    <br />
-    <br />
-    <br />
     <br />
     <br />
     <br />

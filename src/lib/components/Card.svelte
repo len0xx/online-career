@@ -9,6 +9,9 @@
     export let color: CardColor = 'white'
     export let padding: Padding = defaultPadding
     export let className = ''
+    export let opacity: number | null = null
+    export let transform: string | null = null
+    export let zIndex: number | null = null
 
     $: colorClass = `color-${ color }`
 </script>
@@ -16,6 +19,9 @@
 <div
     class={ [ 'card', colorClass, className ].filter((c) => !!c).join(' ') }
     style:padding={ computePadding({ ...defaultPadding, ...padding }) }
+    style:opacity
+    style:transform
+    style:z-index={ zIndex }
     on:click
     on:focus
     on:mouseover

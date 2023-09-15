@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Footer from "$lib/components/Footer.svelte"
 	import Grid from "$lib/components/Grid.svelte";
-	import Partner from "$lib/components/Partner.svelte";
+	import Partner from "$lib/components/Partner.svelte"
 </script>
 
 <slot />
