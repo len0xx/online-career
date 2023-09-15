@@ -60,6 +60,8 @@
     }
 
     const applyAnimationOnTicket = (index: number, currentScroll: number) => {
+        console.log('Applying animations for index ' + index + ' at scroll ' + currentScroll)
+
         const TICKET_STOPS = [
             featuresElementStart,
             featuresElementStart + TICKET_STEP_LENGTH * 1,
@@ -86,10 +88,11 @@
         else if (index > 0 && currentScroll > TICKET_STOPS[index - 1] && currentScroll < TICKET_STOPS[index]) {
             // The ticket is in progress of animation
 
-            const generalPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - scroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - scroll)) / RANGE : 1
-            const opacityPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - scroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - scroll)) / RANGE : 1
+            const generalPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE : 1
+            const opacityPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE : 1
             const translateValue = generalPercentage < 0.99 ? MAX_TRANSLATE - MAX_TRANSLATE * generalPercentage : 0
 
+            console.log('opacity', opacityPercentage)
             setTicketOpacity(index, opacityPercentage)
             setTicketTransform(index, translateValue, 1)
         }
@@ -107,9 +110,10 @@
         }
         else if (index < (tickets.length - 1) && lastPoint > 0) {
             // The ticket is already scaled down and hidden in a stack behind
-            const translate = MAX_TRANSLATE_DECREASE_STEP * (tickets.length - (index + 1) - (pointsLeft)) * -1
-            const scale = 1 - MAX_SCALE_DECREASE_STEP * (tickets.length - (index + 1) - (pointsLeft))
+            const translate = MAX_TRANSLATE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft) * -1
+            const scale = 1 - MAX_SCALE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft)
             setTicketTransform(index, translate, scale)
+            setTicketOpacity(index, 1)
         }
     }
 
@@ -129,6 +133,7 @@
             featuresElementStart = window.scrollY + featuresElement.getClientRects()[0].top
             featuresElementEnd = featuresElementStart + featuresElement.getClientRects()[0].height
         }
+        console.log('scroll', window.scrollY)
         windowScroll()
     }
 
