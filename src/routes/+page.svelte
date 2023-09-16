@@ -33,12 +33,12 @@
     $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(scroll) * 0.69481 }px) translateY(${ Math.sqrt(scroll) * 0.91382 }px)`
     $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
 
-    const MAX_TRANSLATE = 900
+    const MAX_TRANSLATE = 800
     const SCALE_RANGE = 100
     const OPACITY_RANGE = 100
     const TICKET_STEP_LENGTH = 600
     const RANGE = TICKET_STEP_LENGTH - SCALE_RANGE
-    const MAX_TRANSLATE_DECREASE_STEP = 50
+    const MAX_TRANSLATE_DECREASE_STEP = 40
     const MAX_SCALE_DECREASE_STEP = 0.1
 
     const tickets = [
@@ -104,7 +104,7 @@
             else if (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3]) currentRange = 3
             else if (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4]) currentRange = 4
 
-            const generalPercentage = (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE < 1 ? (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE : 1
+            const generalPercentage = Math.min(Math.max(0, (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE), 1)
 
             const x = (tickets.length - index - pointsLeft - 1)
             const scale = 1 - (MAX_SCALE_DECREASE_STEP * generalPercentage + (MAX_SCALE_DECREASE_STEP * x))
@@ -121,8 +121,9 @@
         else if (index < (tickets.length - 1) && lastPoint > 0) {
             // The ticket is already scaled down and hidden in a stack behind
 
-            const translate = (MAX_TRANSLATE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft)) * -1
-            const scale = 1 - MAX_SCALE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft)
+            const x = (tickets.length - index - pointsLeft - 1)
+            const translate = (MAX_TRANSLATE_DECREASE_STEP * x) * -1
+            const scale = 1 - (MAX_SCALE_DECREASE_STEP * x)
             setTicketTransform(index, translate, scale)
             if (tickets[index].opacity !== 1) setTicketOpacity(index, 1)
         }
