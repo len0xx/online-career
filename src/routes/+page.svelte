@@ -68,11 +68,11 @@
             featuresElementStart + TICKET_STEP_LENGTH * 4,
         ]
         const passedPoints = [
-            currentScroll > TICKET_STOPS[0],
-            currentScroll > TICKET_STOPS[1],
-            currentScroll > TICKET_STOPS[2],
-            currentScroll > TICKET_STOPS[3],
-            currentScroll > TICKET_STOPS[4]
+            currentScroll >= TICKET_STOPS[0],
+            currentScroll >= TICKET_STOPS[1],
+            currentScroll >= TICKET_STOPS[2],
+            currentScroll >= TICKET_STOPS[3],
+            currentScroll >= TICKET_STOPS[4]
         ]
         const lastPoint = passedPoints.reduce((acc, cur) => cur ? acc + 1 : acc, 0)
         const pointsLeft = passedPoints.length - lastPoint
