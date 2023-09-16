@@ -23,14 +23,14 @@
 
     let featuresElement: HTMLElement | null = null
     let modal: ModalWindow
-    let scroll = 0
+    let verticalScroll = 0
     let cursor = { x: 0, y: 0 }
     let featuresElementStart = 1000
     let featuresElementEnd = 3000
 
-    $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(scroll) * 0.92471 }px)`
-    $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(scroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
-    $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(scroll) * 0.69481 }px) translateY(${ Math.sqrt(scroll) * 0.91382 }px)`
+    $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(verticalScroll) * 0.92471 }px)`
+    $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(verticalScroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
+    $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(verticalScroll) * 0.69481 }px) translateY(${ Math.sqrt(verticalScroll) * 0.91382 }px)`
     $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
 
     const MAX_TRANSLATE = 800
@@ -130,21 +130,22 @@
     }
 
     const windowScroll = () => {
-        const newScroll = window.scrollY
-
-        if (newScroll >= featuresElementStart && newScroll < (featuresElementEnd + 100)) {
+        if (verticalScroll >= featuresElementStart && verticalScroll < (featuresElementEnd + 100)) {
             for (let i = 0; i <= 4; i++) {
-                applyAnimationOnTicket(i, newScroll)
+                applyAnimationOnTicket(i, verticalScroll)
             }
         }
-        scroll = newScroll
+    }
+
+    const defineFeaturesBorders = (scroll: number) => {
+        if (featuresElement) {
+            featuresElementStart = scroll + featuresElement.getClientRects()[0].top
+            featuresElementEnd = featuresElementStart + featuresElement.getClientRects()[0].height
+        }
     }
 
     const initialScroll = () => {
-        if (featuresElement) {
-            featuresElementStart = window.scrollY + featuresElement.getClientRects()[0].top
-            featuresElementEnd = featuresElementStart + featuresElement.getClientRects()[0].height
-        }
+        defineFeaturesBorders(verticalScroll)
         windowScroll()
     }
 
@@ -153,7 +154,7 @@
     onMount(initialScroll)
 </script>
 
-<svelte:window on:scroll={ windowScroll } on:mousemove={ mouseMove }></svelte:window>
+<svelte:window on:scroll={ windowScroll } on:resize={ () => defineFeaturesBorders(verticalScroll) } on:mousemove={ mouseMove } bind:scrollY={ verticalScroll }></svelte:window>
 
 <svelte:head>
 	<title>Время Карьеры – Онлайн марафон</title>
