@@ -88,8 +88,8 @@
         else if (index > 0 && currentScroll > TICKET_STOPS[index - 1] && currentScroll < TICKET_STOPS[index]) {
             // The ticket is in progress of animation
 
-            const generalPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE : 1
-            const opacityPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE : 1
+            const generalPercentage = Math.min(Math.max(0, ((RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE)), 1)
+            const opacityPercentage = Math.min(Math.max(0, ((RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE)), 1)
             const translateValue = generalPercentage < 0.99 ? MAX_TRANSLATE - MAX_TRANSLATE * generalPercentage : 0
 
             setTicketOpacity(index, opacityPercentage)
@@ -122,8 +122,8 @@
             // The ticket is already scaled down and hidden in a stack behind
 
             const x = (tickets.length - index - pointsLeft - 1)
-            const translate = (MAX_TRANSLATE_DECREASE_STEP * x) * -1
-            const scale = 1 - (MAX_SCALE_DECREASE_STEP * x)
+            const translate = MAX_TRANSLATE_DECREASE_STEP * -x
+            const scale = 1 - MAX_SCALE_DECREASE_STEP * x
             setTicketTransform(index, translate, scale)
             if (tickets[index].opacity !== 1) setTicketOpacity(index, 1)
         }
