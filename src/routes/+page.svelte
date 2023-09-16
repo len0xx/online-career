@@ -510,11 +510,3 @@
     </section>
     <section class="footer"></section>
 </main>
-
-<style>
-    :global(html) {
-        scroll-snap-type: y proximity;
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-</style>
