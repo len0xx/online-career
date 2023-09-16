@@ -68,7 +68,7 @@
             featuresElementStart + TICKET_STEP_LENGTH * 4,
         ]
         const passedPoints = [
-            currentScroll >= TICKET_STOPS[0],
+            currentScroll > TICKET_STOPS[0],
             currentScroll >= TICKET_STOPS[1],
             currentScroll >= TICKET_STOPS[2],
             currentScroll >= TICKET_STOPS[3],
