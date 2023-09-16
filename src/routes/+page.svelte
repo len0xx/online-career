@@ -14,6 +14,7 @@
 	import Partner from '$lib/components/Partner.svelte'
     import Ticket from '$lib/components/Ticket.svelte'
 	import { onMount } from 'svelte'
+	import { fade } from 'svelte/transition';
 
     type ModalWindow = {
         open: () => void
@@ -27,6 +28,7 @@
     let cursor = { x: 0, y: 0 }
     let featuresElementStart = 1000
     let featuresElementEnd = 3000
+    let showTicketsSignup = false
 
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(verticalScroll) * 0.92471 }px)`
     $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(verticalScroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
@@ -78,6 +80,8 @@
         const pointsLeft = passedPoints.length - lastPoint
 
         const getScaleRange = (index: number) => TICKET_STOPS[index] - SCALE_RANGE
+
+        showTicketsSignup = (currentScroll > (TICKET_STOPS[4] + 100))
 
         if (index > 0 && currentScroll < TICKET_STOPS[index - 1]) {
             // The ticket is not shown up yet
@@ -260,14 +264,18 @@
                     </p>
                 </Ticket>
             </div>
-            <p class="button-text align-center">
-                Трудоустройство и исполнение всех<br />
-                желаний не обещаем, но поможем прокачать резюме<br />
-                и подготовиться к собеседованию
-            </p>
-            <p class="align-center">
-                <Button shadow on:click={ modal.open }>Бесплатно, но с регистрацией</Button>
-            </p>
+            { #if showTicketsSignup }
+                <div transition:fade={{ duration: 200 }}>
+                    <p class="button-text align-center">
+                        Трудоустройство и исполнение всех<br />
+                        желаний не обещаем, но поможем прокачать резюме<br />
+                        и подготовиться к собеседованию
+                    </p>
+                    <p class="align-center">
+                        <Button shadow on:click={ modal.open }>Бесплатно, но с регистрацией</Button>
+                    </p>
+                </div>
+            { /if }
         </div>
     </section>
     <section class="info" id="about">
