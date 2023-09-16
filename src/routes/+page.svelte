@@ -42,11 +42,11 @@
     const MAX_SCALE_DECREASE_STEP = 0.1
 
     const tickets = [
-        { opacity: 1, shown: true, zIndex: 1, transform: 'translateY(0) scale(1)', translate: 0, scale: 1 },
-        { opacity: 0, shown: false, zIndex: 2, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 },
-        { opacity: 0, shown: false, zIndex: 3, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 },
-        { opacity: 0, shown: false, zIndex: 4, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 },
-        { opacity: 0, shown: false, zIndex: 5, transform: 'translateY(900px) scale(1)', translate: 900, scale: 1 }
+        { opacity: 1, zIndex: 1, transform: 'translateY(0) scale(1)', translate: 0, scale: 1 },
+        { opacity: 0, zIndex: 2, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 },
+        { opacity: 0, zIndex: 3, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 },
+        { opacity: 0, zIndex: 4, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 },
+        { opacity: 0, zIndex: 5, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 }
     ]
 
     const setTicketOpacity = (index: number, opacity: number) => tickets[index].opacity = opacity
@@ -60,8 +60,6 @@
     }
 
     const applyAnimationOnTicket = (index: number, currentScroll: number) => {
-        console.log('Applying animations for index ' + index + ' at scroll ' + currentScroll)
-
         const TICKET_STOPS = [
             featuresElementStart,
             featuresElementStart + TICKET_STEP_LENGTH * 1,
@@ -79,11 +77,13 @@
         const lastPoint = passedPoints.reduce((acc, cur) => cur ? acc + 1 : acc, 0)
         const pointsLeft = passedPoints.length - lastPoint
 
+        const getScaleRange = (index: number) => TICKET_STOPS[index] - SCALE_RANGE
+
         if (index > 0 && currentScroll < TICKET_STOPS[index - 1]) {
             // The ticket is not shown up yet
 
-            setTicketOpacity(index, 0)
-            setTicketTransform(index, 900, 1)
+            if (tickets[index].opacity !== 0) setTicketOpacity(index, 0)
+            if (tickets[index].translate !== MAX_TRANSLATE || tickets[index].scale !== 1) setTicketTransform(index, MAX_TRANSLATE, 1)
         }
         else if (index > 0 && currentScroll > TICKET_STOPS[index - 1] && currentScroll < TICKET_STOPS[index]) {
             // The ticket is in progress of animation
@@ -92,15 +92,25 @@
             const opacityPercentage = (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE < 1 ? (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE : 1
             const translateValue = generalPercentage < 0.99 ? MAX_TRANSLATE - MAX_TRANSLATE * generalPercentage : 0
 
-            console.log('opacity', opacityPercentage)
             setTicketOpacity(index, opacityPercentage)
             setTicketTransform(index, translateValue, 1)
         }
-        else if ((index < (tickets.length - 1)) && currentScroll > (TICKET_STOPS[index + 1] - SCALE_RANGE) && currentScroll < TICKET_STOPS[index + 1]) {
+        else if ((index < (tickets.length - 1)) && (currentScroll > getScaleRange(1) && currentScroll < TICKET_STOPS[1]) || (currentScroll > getScaleRange(2) && currentScroll < TICKET_STOPS[2]) || (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3]) || (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4])) {
             // The ticket is being scaled down
 
-            const generalPercentage = (SCALE_RANGE - (TICKET_STOPS[index + 1] - currentScroll)) / SCALE_RANGE < 1 ? (SCALE_RANGE - (TICKET_STOPS[index + 1] - currentScroll)) / SCALE_RANGE : 1
-            setTicketTransform(index, MAX_TRANSLATE_DECREASE_STEP * generalPercentage * -1, 1 - MAX_SCALE_DECREASE_STEP * generalPercentage)
+            let currentRange = index + 1
+            if (currentScroll > getScaleRange(1) && currentScroll < TICKET_STOPS[1]) currentRange = 1
+            else if (currentScroll > getScaleRange(2) && currentScroll < TICKET_STOPS[2]) currentRange = 2
+            else if (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3]) currentRange = 3
+            else if (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4]) currentRange = 4
+
+            const generalPercentage = (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE < 1 ? (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE : 1
+
+            const x = (tickets.length - index - pointsLeft - 1)
+            const scale = 1 - (MAX_SCALE_DECREASE_STEP * generalPercentage + (MAX_SCALE_DECREASE_STEP * x))
+            const translate = (MAX_TRANSLATE_DECREASE_STEP * generalPercentage + (MAX_TRANSLATE_DECREASE_STEP * x)) * -1
+
+            setTicketTransform(index, translate, scale)
         }
         else if ((index < (tickets.length - 1)) && currentScroll > TICKET_STOPS[index] && currentScroll < (TICKET_STOPS[index + 1] - SCALE_RANGE)) {
             // The ticket is static
@@ -110,10 +120,11 @@
         }
         else if (index < (tickets.length - 1) && lastPoint > 0) {
             // The ticket is already scaled down and hidden in a stack behind
-            const translate = MAX_TRANSLATE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft) * -1
+
+            const translate = (MAX_TRANSLATE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft)) * -1
             const scale = 1 - MAX_SCALE_DECREASE_STEP * (tickets.length - (index + 1) - pointsLeft)
             setTicketTransform(index, translate, scale)
-            setTicketOpacity(index, 1)
+            if (tickets[index].opacity !== 1) setTicketOpacity(index, 1)
         }
     }
 
@@ -133,7 +144,6 @@
             featuresElementStart = window.scrollY + featuresElement.getClientRects()[0].top
             featuresElementEnd = featuresElementStart + featuresElement.getClientRects()[0].height
         }
-        console.log('scroll', window.scrollY)
         windowScroll()
     }
 
