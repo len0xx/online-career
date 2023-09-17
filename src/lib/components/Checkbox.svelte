@@ -121,14 +121,19 @@
     }
 
     label > input[type="checkbox"] + .wrapper > span::before {
-        width: 32px;
-        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
         background-image: url('/img/icons/unchecked.svg');
     }
 
+    @media screen and (max-width: 768px) {
+        label > input[type="checkbox"] + .wrapper > span::before {
+            min-width: 20px;
+            min-height: 20px;
+        }
+    }
+
     label > input[type="checkbox"]:checked + .wrapper > span::before {
-        width: 32px;
-        height: 32px;
         background-image: url('/img/icons/checked.svg');
     }
 </style>

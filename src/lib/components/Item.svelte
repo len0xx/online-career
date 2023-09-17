@@ -60,4 +60,18 @@
     :global(.card.item-card:hover > img) {
         transform: scale(1.075);
     }
+
+    @media screen and (max-width: 768px) {
+        .bubble-row {
+            margin-bottom: -1.6em;
+        }
+
+        .bubble-row > .bubble {
+            font-size: var(--medium);
+        }
+
+        :global(.card.item-card) {
+            min-height: 320px;
+        }
+    }
 </style>

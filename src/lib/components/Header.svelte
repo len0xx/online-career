@@ -1,8 +1,8 @@
 <script>
-	import { Button } from "."
+	export let className = ''
 </script>
 
-<header>
+<header class={ className }>
     <div class="header-content">
         <div>
             <slot name="left" />

@@ -18,4 +18,10 @@
         line-height: 1;
         text-align: center;
     }
+
+    @media screen and (max-width: 768px) {
+        .number {
+            min-width: 36px;
+        }
+    }
 </style>

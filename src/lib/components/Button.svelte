@@ -32,7 +32,7 @@
         position: relative;
         background-color: var(--green);
         color: black;
-        border-radius: var(--radius);
+        border-radius: calc(var(--radius) + 10px);
         padding: 1em 2em;
         border: none;
         cursor: pointer;
@@ -42,6 +42,13 @@
         transition: 0.1s ease-in-out;
         font-weight: 500;
         box-sizing: border-box;
+    }
+
+    @media screen and (max-width: 768px) {
+        button {
+            display: inline-block;
+            border-radius: calc(var(--radius) + 20px);
+        }
     }
 
     button.full-width {

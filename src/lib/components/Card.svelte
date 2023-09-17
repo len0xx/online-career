@@ -38,12 +38,9 @@
         display: block;
         position: relative;
         color: black;
-        border-radius: 40px;
+        border-radius: var(--radius);
     }
 
-    div.card.has-shadow {
-        box-shadow: var(--default-shadow);
-    }
 
     :global(div.card.color-white) {
         background-color: white;

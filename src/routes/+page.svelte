@@ -25,6 +25,7 @@
     let featuresElement: HTMLElement | null = null
     let modal: ModalWindow
     let verticalScroll = 0
+    let windowWidth = 0
     let cursor = { x: 0, y: 0 }
     let featuresElementStart = 1000
     let featuresElementEnd = 3000
@@ -38,6 +39,7 @@
     $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(verticalScroll) * 0.69481 }px) translateY(${ Math.sqrt(verticalScroll) * 0.91382 }px)`
     $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
 
+    const MIN_DESKTOP_WIDTH = 768
     const MAX_TRANSLATE = 800
     const SCALE_RANGE = 100
     const OPACITY_RANGE = 100
@@ -138,7 +140,7 @@
     }
 
     const windowScroll = () => {
-        if (verticalScroll >= featuresElementStart && verticalScroll < (featuresElementEnd + 100)) {
+        if (windowWidth > MIN_DESKTOP_WIDTH && verticalScroll >= featuresElementStart && verticalScroll < (featuresElementEnd + 100)) {
             for (let i = 0; i <= 4; i++) {
                 applyAnimationOnTicket(i, verticalScroll)
             }
@@ -146,7 +148,7 @@
     }
 
     const defineFeaturesBorders = (scroll: number) => {
-        if (featuresElement) {
+        if (featuresElement && featuresElement.getClientRects().length) {
             featuresElementStart = scroll + featuresElement.getClientRects()[0].top
             featuresElementEnd = featuresElementStart + featuresElement.getClientRects()[0].height
         }
@@ -162,14 +164,20 @@
     onMount(initialScroll)
 </script>
 
-<svelte:window on:scroll={ windowScroll } on:resize={ () => defineFeaturesBorders(verticalScroll) } on:mousemove={ mouseMove } bind:scrollY={ verticalScroll }></svelte:window>
+<svelte:window
+    bind:scrollY={ verticalScroll }
+    bind:outerWidth={ windowWidth }
+    on:scroll={ windowScroll }
+    on:mousemove={ mouseMove }
+    on:resize={ () => defineFeaturesBorders(verticalScroll) }
+/>
 
 <svelte:head>
 	<title>Время Карьеры – Онлайн марафон</title>
 </svelte:head>
 
 { #if showStickyBtn }
-    <div class="sticky-btn" transition:fly={{ duration: 200, y: -200 }}>
+    <div class="sticky-btn mobile-hide" transition:fly={{ duration: 200, y: -200 }}>
         <Button on:click={ modal.open }>Регистрация</Button>
     </div>
 { /if }
@@ -203,7 +211,7 @@
 </Modal>
 <main>
     <section class="intro">
-        <Header>
+        <Header className="mobile-hide">
             <svelte:fragment slot="left">
                 <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
             </svelte:fragment>
@@ -211,6 +219,14 @@
                 <a href="#about">О марафоне</a>
                 <a href="#audience">Для кого</a>
                 <a href="#program">Программа</a>
+            </svelte:fragment>
+            <svelte:fragment slot="right">
+                <Button shadow on:click={ modal.open }>Регистрация</Button>
+            </svelte:fragment>
+        </Header>
+        <Header className="pc-hide">
+            <svelte:fragment slot="left">
+                <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
             </svelte:fragment>
             <svelte:fragment slot="right">
                 <Button shadow on:click={ modal.open }>Регистрация</Button>
@@ -238,7 +254,7 @@
             <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
         </div>
     </section>
-    <section class="features" bind:this={ featuresElement }>
+    <section class="features mobile-hide" bind:this={ featuresElement }>
         <div class="content align-center">
             <Heading level={ 1 } margin={{ top: 0 }}>В программе онлайн-марафона</Heading>
             <div class="tickets-wrapper">
@@ -310,19 +326,20 @@
             <div class="grid-gallery">
                 <Card className="gallery-purple" color="purple">
                     <Heading level={ 1 } margin={{ y: 0, top: 0.4 }} lineHeight={ 1 } className="success-title">
-                        <span style="position: relative; z-index: 1;">Путь к<br /> начинается здесь</span>
+                        <span class="mobile-hide" style="position: relative; z-index: 1;">Путь к<br /> начинается здесь</span>
+                        <span class="pc-hide">Путь к успеху начинается здесь</span>
                     </Heading>
                 </Card>
                 <Card className="gallery-one" color="white">
                     <div>
                         <Number>1</Number><br />
-                        <p class="button-text">Заполни форму</p>
+                        <p>Заполни форму</p>
                     </div>
                     <Button shadow on:click={ modal.open }>Регистрация</Button>
                 </Card>
                 <Card className="gallery-two" color="white">
                     <Number>2</Number><br />
-                    <p class="button-text">
+                    <p>
                         Смотри все<br />
                         онлайн-лекции<br />
                         и допматериалы
@@ -330,21 +347,21 @@
                 </Card>
                 <Card className="gallery-three" color="white">
                     <Number>3</Number><br />
-                    <p class="button-text">
+                    <p>
                         Выполняй домашние<br />
                         и практические задания
                     </p>
                 </Card>
                 <Card className="gallery-four" color="white">
                     <Number>4</Number><br />
-                    <p class="button-text">
+                    <p>
                         Помимо знаний<br />
                         и новых скиллов получай призы
                     </p>
                 </Card>
                 <Card className="gallery-five" color="white">
                     <Number>5</Number><br />
-                    <p class="button-text">
+                    <p class="no-bottom-margin">
                         Поздравляем, ты готов<br />
                         к работе мечты!
                     </p>
@@ -356,14 +373,14 @@
         <div class="content">
             <Card color="green" className="black-text giveaway">
                 <Grid m={1}>
-                    <Grid m={2}>
+                    <Grid m={2} s={1}>
                         <Heading level={ 4 } margin={{ top: 0.5 }}>
                             В отличие от других<br />
                             онлайн-марафонов, воздух продавать не будем,<br />
                             но подарки подготовили:
                         </Heading>
                     </Grid>
-                    <Grid m={4}>
+                    <Grid m={4} s={1}>
                         <Item image="/img/gifts/sweatshirt.png" bubble="x10">Фирменный мерч</Item>
                         <Item image="/img/gifts/speaker.png" bubble="x5">Яндекс-станция мини</Item>
                         <Item image="/img/gifts/airpods.png" bubble="x3">Наушники Airpods</Item>
@@ -383,16 +400,16 @@
     <br />
     <section class="audience" id="audience">
         <div class="content">
-            <Grid m={2}>
+            <Grid m={2} s={1}>
                 <div>
                     <Heading level={ 2 } margin={{ top: 0, bottom: 0.7 }} className="audience-title">
                         Онлайн-марафон<br />
                         <span style="opacity: 0;">для тех</span>, кто
                     </Heading>
-                    <img src="/img/man.png" alt="Иллюстрация" height="600" />
+                    <img src="/img/man.jpg" alt="Иллюстрация" height="600" class="mobile-hide has-shadow has-radius" />
                 </div>
                 <div>
-                    <Grid m={3} placeItems="start">
+                    <Grid m={3} s={2} placeItems="start">
                         <Emote image="/img/emotes/emote-1.png">Учится на старших курсах</Emote>
                         <Emote image="/img/emotes/emote-2.png">Учится на младших курсах</Emote>
                         <Emote image="/img/emotes/emote-3.png">Не учится, но числится</Emote>
@@ -405,7 +422,12 @@
                     </Grid>
                     <br />
                     <br />
-                    <Button shadow wide variant="arrow" on:click={ modal.open }>Успешный успех по ссылке</Button>
+                    <Button shadow wide variant="arrow" className="pc-hide" on:click={ modal.open }>Регистрация</Button>
+                    <Button shadow wide variant="arrow" className="mobile-hide" on:click={ modal.open }>Успешный успех по ссылке</Button>
+                    <br />
+                    <br />
+                    <br />
+                    <img src="/img/man.jpg" alt="Иллюстрация" width="100%" class="pc-hide has-shadow has-radius" />
                 </div>
             </Grid>
         </div>
@@ -415,7 +437,11 @@
     <section class="checkboxes">
         <div class="content">
             <Card color="purple" className="checkboxes">
-                <Heading level={ 2 } margin={{ top: 0.25 }}>
+                <Heading level={ 2 } margin={{ top: 0.25 }} className="pc-hide align-center">
+                    Отметь то, что<br />
+                    тебе подходит
+                </Heading>
+                <Heading level={ 2 } margin={{ top: 0.25 }} className="mobile-hide">
                     Отметь то, что<br />
                     тебе подходит
                 </Heading>
@@ -439,8 +465,8 @@
                         <br />
                         <br />
                         <Card color="white" shadow={ false } className="align-center">
-                            <p class="medium-text">
-                                Ответы на эти и другие вопросы<br />
+                            <p class="medium-text weight-500">
+                                Ответы на эти и другие вопросы<br class="mobile-hide" />
                                 ты найдешь на онлайн-марафоне<br />
                                 Время карьеры
                             </p>
@@ -457,7 +483,7 @@
     </section>
     <br />
     <br />
-    <section class="program" id="program">
+    <section class="program mobile-hide" id="program">
         <div class="content">
             <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
             <Grid m={ 1 } gap={ 2 }>
@@ -528,7 +554,7 @@
     <section class="signup">
         <div class="content">
             <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
-                <Grid m={ 2 } gap={ 12 }>
+                <Grid m={ 2 } gap={ 12 } s={ 1 }>
                     <Grid m={ 1 } alignContent="space-between">
                         <div>
                             <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading>
