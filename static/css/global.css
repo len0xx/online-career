@@ -264,7 +264,7 @@ div.card.black-card-3:not(.sfa) {
     color: white !important;
 }
 
-.giveaway {
+.card.giveaway {
     background-image: url("/img/purple-net.svg");
     background-repeat: no-repeat;
     background-position: 100% 0%;
@@ -387,6 +387,7 @@ section.intro > .content > *:not(.parallax-image) {
 section.intro,
 section.features,
 section.info,
+section.giveaway,
 section.audience,
 section.checkboxes,
 section.program,

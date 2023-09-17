@@ -29,6 +29,7 @@
     let featuresElementStart = 1000
     let featuresElementEnd = 3000
     let showTicketsSignup = false
+    let showProgram = false
     let checkboxes: string[] = []
 
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(verticalScroll) * 0.92471 }px)`
@@ -341,9 +342,10 @@
                     </p>
                 </Card>
             </div>
-            <br />
-            <br />
-            <br />
+        </div>
+    </section>
+    <section class="giveaway">
+        <div class="content">
             <Card color="green" className="black-text giveaway">
                 <Grid m={1}>
                     <Grid m={2}>
@@ -487,12 +489,29 @@
                 >
                     Направления для быстрого старта IT-специалиста
                 </Speech>
+                { #if showProgram }
+                    <div transition:slide={{ duration: 200, axis: 'y' }}>
+                        <Speech
+                            date='9 ноября'
+                            time={ [ '17:00', '16:00' ] }
+                            weekday='Чт'
+                            speakers={ [{ name: 'Анна Петрова', duty: 'Старший инженер в департаменте платежных систем', photo: '/img/speaker-3.jpg' }] }
+                            company='Тинькоф'
+                            companyLogo='/img/kontur.png'
+                            link='/'
+                        >
+                            Разбираться в черновиках никто не будет: почему чистый код — одно из главных требований к разработчику
+                        </Speech>
+                    </div>
+                { /if }
             </Grid>
             <br />
             <br />
-            <div class="align-center">
-                <Button color="transparent">Показать все</Button>
-            </div>
+            { #if !showProgram }
+                <div class="align-center" transition:slide={{ duration: 200, axis: 'y' }}>
+                    <Button color="transparent" on:click={ () => showProgram = true }>Показать все</Button>
+                </div>
+            { /if }
         </div>
     </section>
     <br />
