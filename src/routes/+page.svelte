@@ -14,7 +14,7 @@
 	import Partner from '$lib/components/Partner.svelte'
     import Ticket from '$lib/components/Ticket.svelte'
 	import { onMount } from 'svelte'
-	import { fade, slide } from 'svelte/transition';
+	import { fade, fly, slide } from 'svelte/transition';
 
     type ModalWindow = {
         open: () => void
@@ -32,6 +32,7 @@
     let showProgram = false
     let checkboxes: string[] = []
 
+    $: showStickyBtn = verticalScroll > Math.max(featuresElementEnd, 4000)
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(verticalScroll) * 0.92471 }px)`
     $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(verticalScroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
     $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(verticalScroll) * 0.69481 }px) translateY(${ Math.sqrt(verticalScroll) * 0.91382 }px)`
@@ -166,6 +167,11 @@
 	<title>Время Карьеры – Онлайн марафон</title>
 </svelte:head>
 
+{ #if showStickyBtn }
+    <div class="sticky-btn" transition:fly={{ duration: 200, y: -200 }}>
+        <Button on:click={ modal.open }>Регистрация</Button>
+    </div>
+{ /if }
 <Modal align="center" bind:this={ modal }>
     <Grid m={ 1 }>
         <Heading level={ 4 } margin={{ y: 0 }}>Регистрация</Heading>

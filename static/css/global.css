@@ -13,7 +13,7 @@
     --content-fixed-width: 1416px;
     --content-width: min(var(--content-fixed-width), 90vw);
     --content-mobile-width: min(var(--content-fixed-width), 84vw);
-    --content-padding-x: max(calc(50vw - 760px), calc(5vw - 7px));
+    --content-padding-x: max(calc(50vw - calc(var(--content-fixed-width) / 2)), 5vw);
     --content-padding: 0 var(--content-padding-x);
 
     --text-size: 20px;
@@ -422,4 +422,16 @@ section.features > .content {
 section.features > .content p.button-text {
     margin-top: max(1em, 4vh);
     margin-bottom: max(0.5em, 2vh);
+}
+
+.sticky-btn {
+    display: inline-block;
+    position: fixed;
+    top: 0;
+    right: var(--content-padding-x);
+    background-color: white;
+    border-radius: 0 0 var(--radius) var(--radius);
+    padding: 1.2em;
+    z-index: 20;
+    box-shadow: var(--default-shadow);
 }
