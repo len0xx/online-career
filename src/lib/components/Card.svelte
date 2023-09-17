@@ -9,15 +9,17 @@
     export let color: CardColor = 'white'
     export let padding: Padding = defaultPadding
     export let className = ''
+    export let shadow = true
     export let opacity: number | null = null
     export let transform: string | null = null
     export let zIndex: number | null = null
 
+    $: shadowClass = shadow ? `has-shadow` : ''
     $: colorClass = `color-${ color }`
 </script>
 
 <div
-    class={ [ 'card', colorClass, className ].filter((c) => !!c).join(' ') }
+    class={ [ 'card', colorClass, shadowClass, className ].filter((c) => !!c).join(' ') }
     style:padding={ computePadding({ ...defaultPadding, ...padding }) }
     style:opacity
     style:transform
@@ -37,6 +39,9 @@
         position: relative;
         color: black;
         border-radius: 40px;
+    }
+
+    div.card.has-shadow {
         box-shadow: var(--default-shadow);
     }
 

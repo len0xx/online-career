@@ -14,7 +14,7 @@
 	import Partner from '$lib/components/Partner.svelte'
     import Ticket from '$lib/components/Ticket.svelte'
 	import { onMount } from 'svelte'
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 
     type ModalWindow = {
         open: () => void
@@ -29,6 +29,7 @@
     let featuresElementStart = 1000
     let featuresElementEnd = 3000
     let showTicketsSignup = false
+    let checkboxes: string[] = []
 
     $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(verticalScroll) * 0.92471 }px)`
     $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(verticalScroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
@@ -409,20 +410,38 @@
                     тебе подходит
                 </Heading>
                 <div class="checkboxes-wrapper">
-                    <Checkbox name="1">Скоро диплом – а потом что?</Checkbox>
-                    <Checkbox name="2">А разве «работа с высокой зп и классным боссом» это не миф?</Checkbox>
-                    <Checkbox name="3">Как в 2023 вообще найти работу?</Checkbox>
-                    <Checkbox name="4">Кажется, я потерял себя</Checkbox>
-                    <Checkbox name="5">Везде требуют опыт, а если опыта нет?</Checkbox>
-                    <Checkbox name="6">А есть вакансии не в колл-центре?</Checkbox>
-                    <Checkbox name="7">Кажется, светит только «свободная касса»</Checkbox>
-                    <Checkbox name="8">В резюме всего одна строчка, при условии, что получу диплом</Checkbox>
-                    <Checkbox name="9">Сплошные отказы, как быть?</Checkbox>
-                    <Checkbox name="10">Где эта ваша «работа мечты»?</Checkbox>
-                    <Checkbox name="11">Хочу быть фрилансером, но не знаю с чего начать</Checkbox>
-                    <Checkbox name="12">Как хобби превратить в работу?</Checkbox>
-                    <Checkbox name="13">Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="1" name="1">Скоро диплом – а потом что?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="2" name="2">А разве «работа с высокой зп и классным боссом» это не миф?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="3" name="3">Как в 2023 вообще найти работу?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="4" name="4">Кажется, я потерял себя</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="5" name="5">Везде требуют опыт, а если опыта нет?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="6" name="6">А есть вакансии не в колл-центре?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="7" name="7">Кажется, светит только «свободная касса»</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="8" name="8">В резюме всего одна строчка, при условии, что получу диплом</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="9" name="9">Сплошные отказы, как быть?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="10" name="10">Где эта ваша «работа мечты»?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="11" name="11">Хочу быть фрилансером, но не знаю с чего начать</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="12" name="12">Как хобби превратить в работу?</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="13" name="13">Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж</Checkbox>
                 </div>
+                { #if checkboxes.length }
+                    <div transition:slide={{ duration: 200, axis: 'y' }}>
+                        <br />
+                        <br />
+                        <Card color="white" shadow={ false } className="align-center">
+                            <p class="medium-text">
+                                Ответы на эти и другие вопросы<br />
+                                ты найдешь на онлайн-марафоне<br />
+                                Время карьеры
+                            </p>
+                            <p>
+                                Осталось только зарегистрироваться
+                            </p>
+                            <br />
+                            <Button on:click={ modal.open }>Регистрация</Button>
+                        </Card>
+                    </div>
+                { /if }
             </Card>
         </div>
     </section>

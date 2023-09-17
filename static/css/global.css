@@ -74,6 +74,10 @@ html {
     margin-top: 0;
 }
 
+.medium-text {
+    font-size: var(--medium);
+}
+
 h1.heading.large {
     font-size: var(--xxx-large);
     font-weight: 700;
