@@ -9,7 +9,7 @@
 
 <Card color="grey" className="ticket" padding={{ x: 4, y: 4, right: 6 }} { opacity } { transform } { zIndex }>
     <div class="ticket-content align-left">
-        <div>
+        <div class="text-content">
             <slot />
         </div>
         <img class="ticket-cover" src={ image } alt="Ticket cover" width="336" height="336">
@@ -33,7 +33,16 @@
         color: var(--dark);
     }
 
-    :global(.ticket-content > div > p) {
+    .ticket-content > .text-content {
+        display: grid;
+        position: relative;
+        gap: 1em;
+        align-content: space-between;
+    }
+
+    :global(.ticket-content > div > p.ticket-caption) {
+        color: #717278;
+        font-weight: 500;
         line-height: 1.6;
     }
 

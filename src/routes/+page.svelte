@@ -131,6 +131,7 @@
             const x = (tickets.length - index - pointsLeft - 1)
             const translate = MAX_TRANSLATE_DECREASE_STEP * -x
             const scale = 1 - MAX_SCALE_DECREASE_STEP * x
+
             setTicketTransform(index, translate, scale)
             if (tickets[index].opacity !== 1) setTicketOpacity(index, 1)
         }
@@ -242,32 +243,33 @@
             <Heading level={ 1 } margin={{ top: 0 }}>В программе онлайн-марафона</Heading>
             <div class="tickets-wrapper">
                 <Ticket opacity={ tickets[0].opacity } zIndex={ tickets[0].zIndex } transform={ tickets[0].transform } image="/img/tickets/ticket-1.jpg">
-                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Лекции от топовых работодателей</Heading>
-                    <p class="no-margin">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
+                    <p class="no-margin ticket-caption">
                         Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие специалисты нужны рынку труда, какие навыки будут востребованы у работодателей и что делать сейчас, чтобы стать первоклассным специалистом и найти работу мечты.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[1].opacity } zIndex={ tickets[1].zIndex } transform={ tickets[1].transform } image="/img/tickets/ticket-2.jpg">
-                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Начни свое дело</Heading>
-                    <p class="no-margin">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Начни свое дело</Heading>
+                    <p class="no-margin ticket-caption">
                         Успешные предприниматели поделятся своим опытом, а также расскажут, как монетизировать хобби и почему переехать на Бали и работать 3 часа в день  — плохая карьерная стратегия.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[2].opacity } zIndex={ tickets[2].zIndex } transform={ tickets[2].transform } image="/img/tickets/ticket-3.jpg">
-                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Упакуем твой опыт</Heading>
-                    <p class="no-margin">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Упакуем твой опыт</Heading>
+                    <p class="no-margin ticket-caption">
                         Эксперты расскажут, почему организация школьного балла и статус "старосты" уже классный опыт для начала работы. И где еще можно найти тот самый опыт работы, без которого не берут на работу.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[3].opacity } zIndex={ tickets[3].zIndex } transform={ tickets[3].transform } image="/img/tickets/ticket-4.jpg">
-                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Шаблон идеального резюме</Heading>
-                    <p class="no-margin">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Шаблон идеального резюме</Heading>
+                    <p class="no-margin ticket-caption">
                         На марафоне ты научишься составлять продающее резюме, которое поможет выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях, даже если ты студент первого курса.
                     </p>
                 </Ticket>
                 <Ticket opacity={ tickets[4].opacity } zIndex={ tickets[4].zIndex } transform={ tickets[4].transform } image="/img/tickets/ticket-5.jpg">
-                    <Heading level={ 4 } margin={{ top: 0, bottom: 1 }}>Гайды и чек-листы</Heading>
-                    <p class="no-margin">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Гайды и чек-листы</Heading>
+                    <p class="no-margin button-text weight-500">куда же без них</p>
+                    <p class="no-margin ticket-caption">
                         Где искать работу? Как определить хорошего работодателя по вакансии? Как составить резюме? Где и как развивать свои софт-скилс? С чего начать свое дело? – ответы на эти и многие другие вопросы ты найдешь в наших дополнительных материалах, которые ты сможешь использовать и после окончания марафона.
                     </p>
                 </Ticket>
