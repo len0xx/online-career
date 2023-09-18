@@ -159,7 +159,11 @@
         windowScroll()
     }
 
-    const mouseMove = (e: MouseEvent) => cursor = { x: e.pageX, y: e.pageY }
+    const mouseMove = (e: MouseEvent) => {
+        if (windowWidth > MIN_DESKTOP_WIDTH) {
+            cursor = { x: e.pageX, y: e.pageY }
+        }
+    }
 
     onMount(initialScroll)
 </script>
@@ -210,6 +214,14 @@
     </Grid>
 </Modal>
 <main>
+    <Header className="pc-hide">
+        <svelte:fragment slot="left">
+            <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
+        </svelte:fragment>
+        <svelte:fragment slot="right">
+            <Button shadow on:click={ modal.open }>Регистрация</Button>
+        </svelte:fragment>
+    </Header>
     <section class="intro">
         <Header className="mobile-hide">
             <svelte:fragment slot="left">
@@ -219,14 +231,6 @@
                 <a href="#about">О марафоне</a>
                 <a href="#audience">Для кого</a>
                 <a href="#program">Программа</a>
-            </svelte:fragment>
-            <svelte:fragment slot="right">
-                <Button shadow on:click={ modal.open }>Регистрация</Button>
-            </svelte:fragment>
-        </Header>
-        <Header className="pc-hide">
-            <svelte:fragment slot="left">
-                <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
             </svelte:fragment>
             <svelte:fragment slot="right">
                 <Button shadow on:click={ modal.open }>Регистрация</Button>
@@ -242,7 +246,8 @@
                 и как влюбить в себя HR на собеседовании.
             </p>
             <br />
-            <Button variant="arrow" on:click={ modal.open }>Регистрация</Button>
+            <Button variant="arrow" on:click={ modal.open } className="mobile-hide">Регистрация</Button>
+            <Button variant="arrow" on:click={ modal.open } wide className="pc-hide">Регистрация</Button>
             <br />
             <br />
             <br />
@@ -309,15 +314,18 @@
             <div class="grid-1-1-2">
                 <Card color="black" className="black-card-1">
                     <Heading margin={{ y: 0 }} level={ 3 }>10</Heading>
-                    <p class="button-text no-margin">онлайн-лекций</p>
+                    <p class="button-text no-margin mobile-hide">онлайн-лекций</p>
+                    <p class="no-margin pc-hide">онлайн-лекций</p>
                 </Card>
                 <Card color="black" className="black-card-2">
                     <Heading margin={{ y: 0 }} level={ 3 }>10</Heading>
-                    <p class="button-text no-margin">топовых спикеров</p>
+                    <p class="button-text no-margin mobile-hide">топовых спикеров</p>
+                    <p class="no-margin pc-hide">топовых спикеров</p>
                 </Card>
                 <Card color="black" className="black-card-3">
                     <Heading margin={{ y: 0 }} level={ 2 }>∞</Heading>
-                    <p class="button-text no-margin">лайфхаков для твоей карьеры</p>
+                    <p class="button-text no-margin mobile-hide">лайфхаков для твоей карьеры</p>
+                    <p class="no-margin pc-hide">лайфхаков для твоей карьеры</p>
                 </Card>
             </div>
             <br />
@@ -446,19 +454,45 @@
                     тебе подходит
                 </Heading>
                 <div class="checkboxes-wrapper">
-                    <Checkbox bind:group={ checkboxes } value="1" name="1">Скоро диплом – а потом что?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="2" name="2">А разве «работа с высокой зп и классным боссом» это не миф?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="3" name="3">Как в 2023 вообще найти работу?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="4" name="4">Кажется, я потерял себя</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="5" name="5">Везде требуют опыт, а если опыта нет?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="6" name="6">А есть вакансии не в колл-центре?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="7" name="7">Кажется, светит только «свободная касса»</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="8" name="8">В резюме всего одна строчка, при условии, что получу диплом</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="9" name="9">Сплошные отказы, как быть?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="10" name="10">Где эта ваша «работа мечты»?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="11" name="11">Хочу быть фрилансером, но не знаю с чего начать</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="12" name="12">Как хобби превратить в работу?</Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="13" name="13">Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж</Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="1" name="1">
+                        Скоро диплом – а потом что?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="2" name="2">
+                        А разве «работа с высокой зп и классным боссом» это не миф?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="3" name="3">
+                        Как в 2023 вообще найти работу?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="4" name="4">
+                        Кажется, я потерял себя
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="5" name="5">
+                        Везде требуют опыт, а если опыта нет?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="6" name="6">
+                        А есть вакансии не в колл-центре?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="7" name="7">
+                        Кажется, светит только «свободная касса»
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="8" name="8">
+                        В резюме всего одна строчка, при условии, что получу диплом
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="9" name="9">
+                        Сплошные отказы, как быть?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="10" name="10">
+                        Где эта ваша «работа мечты»?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="11" name="11">
+                        Хочу быть фрилансером, но не знаю с чего начать
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="12" name="12">
+                        Как хобби превратить в работу?
+                    </Checkbox>
+                    <Checkbox bind:group={ checkboxes } value="13" name="13">
+                        Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж
+                </Checkbox>
                 </div>
                 { #if checkboxes.length }
                     <div transition:slide={{ duration: 200, axis: 'y' }}>

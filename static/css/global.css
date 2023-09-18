@@ -147,10 +147,6 @@ section.intro > div.content {
     box-shadow: var(--default-shadow);
 }
 
-p.intro-content {
-    max-width: 60%;
-}
-
 .marathon-text {
     margin-bottom: -2em;
 }
@@ -252,11 +248,39 @@ p.intro-content {
     grid-area: five;
 }
 
+div.card.black-card-1:not(.sfa),
+div.card.black-card-2:not(.sfa),
+div.card.black-card-3:not(.sfa) {
+    display: grid;
+    grid-gap: 0;
+    align-content: end;
+    background-repeat: no-repeat;
+    background-position: 100px -100px;
+    background-size: 100%;
+}
+
+div.card.black-card-1:not(.sfa) {
+    background-image: url("/img/texture-1.svg");
+}
+
+div.card.black-card-2:not(.sfa) {
+    background-image: url("/img/texture-2.svg");
+}
+
+div.card.black-card-3:not(.sfa) {
+    background-image: url("/img/texture-3.svg");
+    background-position: 200px -100px;
+}
+
 @media screen and (min-width: 769px) {
     div.card.black-card-1:not(.sfa),
     div.card.black-card-2:not(.sfa),
     div.card.black-card-3:not(.sfa) {
         min-height: 336px;
+    }
+
+    p.intro-content {
+        max-width: 60%;
     }
 
     h1.success-title::before {
@@ -280,6 +304,9 @@ p.intro-content {
     div.card.black-card-2:not(.sfa),
     div.card.black-card-3:not(.sfa) {
         min-height: 148px;
+        padding: 1em !important;
+        background-position: 100% 0;
+        background-size: 60%;
     }
 
     .grid-gallery  > .card.gallery-one,
@@ -311,30 +338,6 @@ p.intro-content {
             "five five";
         grid-template-columns: repeat(2, 1fr);
     }
-}
-
-div.card.black-card-1:not(.sfa),
-div.card.black-card-2:not(.sfa),
-div.card.black-card-3:not(.sfa) {
-    display: grid;
-    grid-gap: 0;
-    align-content: end;
-    background-repeat: no-repeat;
-    background-position: 100px -100px;
-    background-size: 100%;
-}
-
-div.card.black-card-1:not(.sfa) {
-    background-image: url("/img/texture-1.svg");
-}
-
-div.card.black-card-2:not(.sfa) {
-    background-image: url("/img/texture-2.svg");
-}
-
-div.card.black-card-3:not(.sfa) {
-    background-image: url("/img/texture-3.svg");
-    background-position: 200px -100px;
 }
 
 .align-left {
@@ -407,12 +410,6 @@ h2.audience-title::before {
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .card.giveaway {
-        text-align: center;
     }
 }
 
@@ -559,4 +556,60 @@ section.features > .content p.button-text {
 
 .weight-800 {
     font-weight: 800;
+}
+
+@media screen and (max-width: 768px) {
+    .card.giveaway {
+        text-align: center;
+    }
+
+    h2.audience-title::before {
+        width: 108px;
+        height: 43px;
+        bottom: -12px;
+        left: 0;
+    }
+
+    section.intro > div.content {
+        padding: 1.2em;
+        text-align: center;
+    }
+
+    header {
+        position: sticky;
+        background-color: #F4F6FB;
+        border-radius: 0 0 var(--radius) var(--radius);
+        top: 0;
+        z-index: 30;
+    }
+
+    .parallax-image {
+        transform: none !important;
+    }
+
+    .parallax-image#prlx-1 {
+        background-size: contain;
+        width: 86%;
+        height: 282px;
+    }
+    
+    .parallax-image#prlx-2 {
+        background-size: contain;
+        width: 100%;
+        height: 250px;
+        left: 0;
+    }
+    
+    .parallax-image#prlx-3 {
+        background-size: contain;
+        left: 0;
+        width: 79%;
+        height: 134px;
+    }
+    
+    .parallax-image#prlx-4 {
+        background-size: contain;
+        width: 50%;
+        height: 110px;
+    }
 }
