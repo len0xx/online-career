@@ -259,10 +259,10 @@
             <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
         </div>
     </section>
-    <section class="features mobile-hide" bind:this={ featuresElement }>
+    <section class="features" bind:this={ featuresElement }>
         <div class="content align-center">
             <Heading level={ 1 } margin={{ top: 0 }}>В программе онлайн-марафона</Heading>
-            <div class="tickets-wrapper">
+            <div class="tickets-wrapper mobile-hide">
                 <Ticket opacity={ tickets[0].opacity } zIndex={ tickets[0].zIndex } transform={ tickets[0].transform } image="/img/tickets/ticket-1.jpg">
                     <Heading level={ 4 } margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
                     <p class="no-margin ticket-caption">
@@ -296,7 +296,7 @@
                 </Ticket>
             </div>
             { #if showTicketsSignup }
-                <div transition:fade={{ duration: 200 }}>
+                <div transition:fade={{ duration: 200 }} class="mobile-hide">
                     <p class="button-text align-center">
                         Трудоустройство и исполнение всех<br />
                         желаний не обещаем, но поможем прокачать резюме<br />
@@ -307,6 +307,59 @@
                     </p>
                 </div>
             { /if }
+            <div class="tickets-wrapper pc-hide">
+                <Ticket image="/img/tickets/ticket-1.jpg">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
+                    <p class="no-margin ticket-caption">
+                        Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие специалисты нужны рынку труда, какие навыки будут востребованы у работодателей и что делать сейчас, чтобы стать первоклассным специалистом и найти работу мечты.
+                    </p>
+                </Ticket>
+                <br />
+                <br />
+                <Ticket image="/img/tickets/ticket-2.jpg">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Начни свое дело</Heading>
+                    <p class="no-margin ticket-caption">
+                        Успешные предприниматели поделятся своим опытом, а также расскажут, как монетизировать хобби и почему переехать на Бали и работать 3 часа в день  — плохая карьерная стратегия.
+                    </p>
+                </Ticket>
+                <br />
+                <br />
+                <Ticket image="/img/tickets/ticket-3.jpg">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Упакуем твой опыт</Heading>
+                    <p class="no-margin ticket-caption">
+                        Эксперты расскажут, почему организация школьного балла и статус "старосты" уже классный опыт для начала работы. И где еще можно найти тот самый опыт работы, без которого не берут на работу.
+                    </p>
+                </Ticket>
+                <br />
+                <br />
+                <Ticket image="/img/tickets/ticket-4.jpg">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Шаблон идеального резюме</Heading>
+                    <p class="no-margin ticket-caption">
+                        На марафоне ты научишься составлять продающее резюме, которое поможет выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях, даже если ты студент первого курса.
+                    </p>
+                </Ticket>
+                <br />
+                <br />
+                <Ticket image="/img/tickets/ticket-5.jpg">
+                    <Heading level={ 4 } margin={{ y: 0 }}>Гайды и чек-листы</Heading>
+                    <p class="no-margin button-text weight-500">куда же без них</p>
+                    <p class="no-margin ticket-caption">
+                        Где искать работу? Как определить хорошего работодателя по вакансии? Как составить резюме? Где и как развивать свои софт-скилс? С чего начать свое дело? – ответы на эти и многие другие вопросы ты найдешь в наших дополнительных материалах, которые ты сможешь использовать и после окончания марафона.
+                    </p>
+                </Ticket>
+                <br />
+                <br />
+                <div class="pc-hide">
+                    <p class="button-text align-center">
+                        Трудоустройство и исполнение всех<br />
+                        желаний не обещаем, но поможем прокачать резюме<br />
+                        и подготовиться к собеседованию
+                    </p>
+                    <p class="align-center">
+                        <Button shadow on:click={ modal.open }>Бесплатно, но с регистрацией</Button>
+                    </p>
+                </div>
+            </div>
         </div>
     </section>
     <section class="info" id="about">

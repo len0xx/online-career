@@ -124,17 +124,12 @@ main > section > div.content {
 
 section {
     padding: 3em 0;
+    position: relative;
 }
 
 section.intro {
-    display: block;
-    position: relative;
-    min-height: 100vh;
     padding: 1em 0;
     padding-top: 0em;
-    background-image: url("/img/intro-back.svg");
-    background-position: center;
-    background-repeat: no-repeat;
 }
 
 section.intro > div.content {
@@ -273,6 +268,13 @@ div.card.black-card-3:not(.sfa) {
 }
 
 @media screen and (min-width: 769px) {
+    section.intro {
+        min-height: 100vh;
+        background-image: url("/img/intro-back.svg");
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
     div.card.black-card-1:not(.sfa),
     div.card.black-card-2:not(.sfa),
     div.card.black-card-3:not(.sfa) {
@@ -380,6 +382,37 @@ h2.audience-title::before {
 }
 
 @media screen and (min-width: 769px) {
+    .tickets-wrapper {
+        display: grid;
+        position: relative;
+        place-content: center;
+        padding-top: 2em;
+    }
+    
+    .tickets-wrapper > * {
+        grid-row: 1;
+        grid-column: 1;
+    }
+
+    section.features {
+        --section-padding: min(max(calc(2vh + 8px), 1em), 3em);
+
+        scroll-snap-stop: always;
+        padding: var(--section-padding);
+        min-height: 150vh;
+        height: calc(100vh + calc(600px * 4) + 300px);
+    }
+
+    section.features > .content {
+        position: sticky;
+        top: var(--section-padding);
+    }
+
+    section.features > .content p.button-text {
+        margin-top: max(1em, 4vh);
+        margin-bottom: max(0.5em, 2vh);
+    }
+
     .checkboxes-wrapper {
         max-width: 75%;
     }
@@ -470,18 +503,6 @@ section.intro > .content > *:not(.parallax-image) {
     height: 238px;
 }
 
-.tickets-wrapper {
-    display: grid;
-    position: relative;
-    place-content: center;
-    padding-top: 2em;
-}
-
-.tickets-wrapper > * {
-    grid-row: 1;
-    grid-column: 1;
-}
-
 section.intro,
 section.features,
 section.info,
@@ -503,24 +524,6 @@ footer {
     scroll-snap-align: end;
 }
 
-section.features {
-    --section-padding: min(max(calc(2vh + 8px), 1em), 3em);
-
-    scroll-snap-stop: always;
-    padding: var(--section-padding);
-    min-height: 150vh;
-    height: calc(100vh + calc(600px * 4) + 300px);
-}
-
-section.features > .content {
-    position: sticky;
-    top: var(--section-padding);
-}
-
-section.features > .content p.button-text {
-    margin-top: max(1em, 4vh);
-    margin-bottom: max(0.5em, 2vh);
-}
 
 .sticky-btn {
     display: inline-block;
