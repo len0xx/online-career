@@ -266,7 +266,7 @@
     </section>
     <section class="features" bind:this={ featuresElement }>
         <div class="content align-center">
-            <Heading level={ 1 } margin={{ top: 0 }}>В программе онлайн-марафона</Heading>
+            <Heading level={ 1 } margin={{ top: 0, bottom: 0.8 }}>В программе онлайн-марафона</Heading>
             <div class="tickets-wrapper mobile-hide">
                 <Ticket opacity={ tickets[0].opacity } zIndex={ tickets[0].zIndex } transform={ tickets[0].transform } image="/img/tickets/ticket-1.jpg">
                     <Heading level={ 4 } margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>

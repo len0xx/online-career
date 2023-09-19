@@ -20,11 +20,11 @@
     }
 
     @media screen and (max-width: 768px) {
-        .partner-logo {
+        .partner-logo:not(.white-bg) {
             padding: 0;
         }
 
-        .partner-logo:not(:last-child) {
+        .partner-logo:not(.white-bg):not(:last-child) {
             margin-right: 2em;
         }
     }
