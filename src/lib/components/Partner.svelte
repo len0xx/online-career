@@ -19,6 +19,16 @@
         border-radius: calc(var(--radius) / 2);
     }
 
+    @media screen and (max-width: 768px) {
+        .partner-logo {
+            padding: 0;
+        }
+
+        .partner-logo:not(:last-child) {
+            margin-right: 2em;
+        }
+    }
+
     .partner-logo.white-bg {
         background-color: white;
     }

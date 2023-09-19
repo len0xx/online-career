@@ -44,6 +44,7 @@
 
         --content-width: calc(100vw - 48px);
 
+        --xxx-large: calc(var(--text-size) * 2.6);		/* 36 */
         --header-1: calc(var(--text-size) * 2.6);	    /* 36 */
         --header-2: calc(var(--text-size) * 2.3);		/* 32 */
         --header-3: calc(var(--text-size) * 1.7);		/* 24 */
@@ -142,9 +143,6 @@ section.intro > div.content {
     box-shadow: var(--default-shadow);
 }
 
-.marathon-text {
-    margin-bottom: -2em;
-}
 
 .grid-1-1-2 {
     display: grid;
@@ -154,6 +152,11 @@ section.intro > div.content {
 }
 
 @media screen and (max-width: 768px) {
+    .marathon-text {
+        width: 60%;
+        margin-bottom: -1em;
+    }
+    
     .grid-1-1-2 {
         grid-template-columns: 1fr 1fr;
         grid-template-areas: "first second"
@@ -268,6 +271,10 @@ div.card.black-card-3:not(.sfa) {
 }
 
 @media screen and (min-width: 769px) {
+    .marathon-text {
+        margin-bottom: -2em;
+    }
+
     section.intro {
         min-height: 100vh;
         background-image: url("/img/intro-back.svg");
@@ -302,6 +309,10 @@ div.card.black-card-3:not(.sfa) {
 }
 
 @media screen and (max-width: 768px) {
+    p.intro-content {
+        line-height: 1.6;
+    }
+
     div.card.black-card-1:not(.sfa),
     div.card.black-card-2:not(.sfa),
     div.card.black-card-3:not(.sfa) {
@@ -574,8 +585,25 @@ footer {
     }
 
     section.intro > div.content {
-        padding: 1.2em;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1em;
+        align-content: space-between;
+        min-height: 620px;
+        padding: 3em 1.2em;
+        padding-bottom: 1em;
         text-align: center;
+    }
+
+    .shadow-over-prlx {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 200px;
+        left: 0;
+        bottom: 0;
+        z-index: 19;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     }
 
     header {
@@ -592,22 +620,23 @@ footer {
 
     .parallax-image#prlx-1 {
         background-size: contain;
-        width: 86%;
-        height: 282px;
+        width: 81%;
+        height: 264px;
+        right: 0;
     }
     
     .parallax-image#prlx-2 {
         background-size: contain;
         width: 100%;
-        height: 250px;
+        height: 300px;
         left: 0;
     }
     
     .parallax-image#prlx-3 {
         background-size: contain;
-        left: 0;
-        width: 79%;
-        height: 134px;
+        left: -11%;
+        width: 82%;
+        height: 144px;
     }
     
     .parallax-image#prlx-4 {

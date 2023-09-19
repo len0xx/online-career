@@ -237,26 +237,31 @@
             </svelte:fragment>
         </Header>
         <div class="content">
-            <img src="/img/marathon.svg" alt="online-marathon" class="marathon-text" />
-            <Heading className="large" margin={{ top: 0, bottom: 0.35 }} level={ 1 }>Время карьеры</Heading>
-            <p class="button-text"><b>НОЯБРЬ 2023</b></p>
-            <p class="button-text intro-content">
-                Карьерные эксперты, руководители и HR-менеджеры крупных компаний расскажут, каких сотрудников хантят
-                в первую очередь, как сделать продающее резюме,
-                и как влюбить в себя HR на собеседовании.
-            </p>
-            <br />
-            <Button variant="arrow" on:click={ modal.open } className="mobile-hide">Регистрация</Button>
-            <Button variant="arrow" on:click={ modal.open } wide className="pc-hide">Регистрация</Button>
-            <br />
-            <br />
-            <br />
-            <Partner background={ false } src="/img/logo/urfu.svg" />
-            <Partner background={ false } src="/img/logo/rosmol.svg" />
+            <div>
+                <img src="/img/marathon.svg" alt="online-marathon" class="marathon-text" />
+                <Heading className="large" margin={{ top: 0, bottom: 0.35 }} level={ 1 }>Время карьеры</Heading>
+                <p class="button-text"><b>НОЯБРЬ 2023</b></p>
+                <p class="button-text intro-content">
+                    Карьерные эксперты, руководители и HR-менеджеры крупных компаний расскажут, каких сотрудников хантят
+                    в первую очередь, как сделать продающее резюме,
+                    и как влюбить в себя HR на собеседовании.
+                </p>
+            </div>
+            <br class="mobile-hide" />
+            <div>
+                <Button variant="arrow" on:click={ modal.open } className="mobile-hide">Регистрация</Button>
+                <Button variant="arrow" on:click={ modal.open } wide className="pc-hide">Регистрация</Button>
+                <br class="mobile-hide" />
+                <br />
+                <br />
+                <Partner background={ false } src="/img/logo/urfu.svg" />
+                <Partner background={ false } src="/img/logo/rosmol.svg" />
+            </div>
             <div class="parallax-image" id="prlx-1" style:transform={ parallax1 }></div>
             <div class="parallax-image" id="prlx-2" style:transform={ parallax2 }></div>
             <div class="parallax-image" id="prlx-3" style:transform={ parallax3 }></div>
             <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
+            <div class="parallax-image shadow-over-prlx"></div>
         </div>
     </section>
     <section class="features" bind:this={ featuresElement }>
