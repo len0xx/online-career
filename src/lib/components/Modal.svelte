@@ -47,37 +47,50 @@
 { #if visible }
     <div class="kit-modal-wrapper" in:fade="{{ duration: TRANSITION_DURATION }}" out:fade="{{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}">
         <div class="shadow"></div>
-        <div
-            {id}
-            bind:this={ node }
-            class="kit-modal {className}"
-            style:--local-align={ align }
-            on:click
-            on:focus
-            on:blur
-            on:mouseleave
-            on:mouseover
-            on:keydown
-            in:blur="{{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}"
-            out:blur="{{ duration: TRANSITION_DURATION }}"
-            use:clickOutside={ close }
-        >
+        <div>
             { #if closable }
-                <div class="close" on:click={ close } on:keydown>
-                    <img src="/img/icons/modal-close.svg" alt="Close modal">
+                <div class="align-center">
+                    <div class="close pc-hide" on:click={ close } on:keydown>
+                        <img src="/img/icons/modal-close.svg" alt="Close modal">
+                    </div>
                 </div>
             { /if }
-            <div class="kit-modal-content">
-                <slot />
-            </div>
-            <div class="footer">
-                <slot name="footer" />
+            <div
+                {id}
+                bind:this={ node }
+                class="kit-modal {className}"
+                style:--local-align={ align }
+                on:click
+                on:focus
+                on:blur
+                on:mouseleave
+                on:mouseover
+                on:keydown
+                in:blur="{{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}"
+                out:blur="{{ duration: TRANSITION_DURATION }}"
+                use:clickOutside={ close }
+            >
+                { #if closable }
+                    <div class="close mobile-hide" on:click={ close } on:keydown>
+                        <img src="/img/icons/modal-close.svg" alt="Close modal">
+                    </div>
+                { /if }
+                <div class="kit-modal-content">
+                    <slot />
+                </div>
+                <div class="footer">
+                    <slot name="footer" />
+                </div>
             </div>
         </div>
     </div>
 { /if }
 
 <style>
+    div {
+        position: relative;
+    }
+
     .kit-modal-wrapper {
         display: grid;
         position: fixed;
@@ -114,30 +127,42 @@
         text-align: var(--local-align);
         border-radius: var(--radius);
         box-shadow: var(--default-shadow);
-        margin: 2em 0;
+        margin: 2em auto;
     }
 
-    :global(.kit-modal-wrapper .kit-modal > .close) {
+    :global(.kit-modal-wrapper .close) {
         display: grid;
         place-content: center;
         place-items: center;
+        cursor: pointer;
+        border-radius: 50%;
+        width: 64px;
+        height: 64px;
+        margin: 1em auto;
+    }
+
+    :global(.kit-modal-wrapper .close.pc-hide) {
+        width: 48px;
+        height: 48px;
+    }
+
+    :global(.kit-modal-wrapper .close.mobile-hide) {
         position: absolute;
         top: 0;
         left: 105%;
-        background: rgba(0, 0, 0, 0.05);
-        cursor: pointer;
-        border-radius: 50%;
-        z-index: 100;
+    }
+
+    :global(.kit-modal-wrapper .close > img) {
         width: 64px;
         height: 64px;
     }
 
-    :global(.kit-modal-wrapper .kit-modal > .close > img) {
-        width: 64px;
-        height: 64px;
+    :global(.kit-modal-wrapper .close.pc-hide > img) {
+        width: 48px;
+        height: 48px;
     }
 
-    :global(.kit-modal-wrapper .kit-modal > .close:hover) {
+    :global(.kit-modal-wrapper .close:hover) {
         background: rgba(0, 0, 0, 0.1);
     }
 

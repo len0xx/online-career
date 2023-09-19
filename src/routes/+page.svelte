@@ -15,6 +15,9 @@
     import Ticket from '$lib/components/Ticket.svelte'
 	import { onMount } from 'svelte'
 	import { fade, fly, slide } from 'svelte/transition';
+	import IconButton from '$lib/components/IconButton.svelte';
+	import MobileMenu from '$lib/components/MobileMenu.svelte';
+	import { mobileMenu } from '$lib/stores';
 
     type ModalWindow = {
         open: () => void
@@ -213,13 +216,26 @@
         </form>
     </Grid>
 </Modal>
+<MobileMenu bind:this={ $mobileMenu }>
+    <div class="mobile-menu-content">
+        <nav>
+            <div><a href="#about">О марафоне</a></div>
+            <div><a href="#audience">Для кого</a></div>
+            <div><a href="#program">Программа</a></div>
+        </nav>
+        <div class="auth-buttons">
+            <Button color="green" shadow on:click={ () => { $mobileMenu.close(); modal.open() } }>Регистрация</Button><br /><br />
+            <a href="/"><Button color="green" shadow on:click={ $mobileMenu.close }>Войти</Button></a>
+        </div>
+    </div>
+</MobileMenu>
 <main>
     <Header className="pc-hide">
         <svelte:fragment slot="left">
-            <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
+            <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" height="36" /></a>
         </svelte:fragment>
         <svelte:fragment slot="right">
-            <Button shadow on:click={ modal.open }>Регистрация</Button>
+            <IconButton src="/img/hamburger.svg" on:click={ $mobileMenu.open } />
         </svelte:fragment>
     </Header>
     <section class="intro">
