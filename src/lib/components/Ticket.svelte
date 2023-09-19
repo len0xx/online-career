@@ -66,10 +66,15 @@
             grid-template-columns: 1fr;
             gap: 1.5em;
         }
+        
+        .ticket-content > .text-content {
+            text-align: center;
+        }
 
         .ticket-cover {
             width: 248px;
             height: 248px;
+            margin: 0 auto;
         }
     }
 </style>
