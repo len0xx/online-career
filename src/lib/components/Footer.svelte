@@ -30,6 +30,7 @@
 
     @media screen and (max-width: 768px) {
         footer {
+            background-image: url("/img/mobile-footer-bg.svg");
             margin-top: 3em;
         }
     }

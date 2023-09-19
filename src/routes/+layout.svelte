@@ -6,15 +6,17 @@
 
 <slot />
 <Footer>
-	<Grid m={ 2 }>
+	<Grid m={ 2 } s={ 1 } gap={ 1 } mobileGap={ 3 }>
 		<div class="contacts">
 			<a href="https://vk.com" target="_blank"><img src="/img/logo/vk.svg" alt="VK link" /></a>
 			<a href="https://t.me" target="_blank"><img src="/img/logo/tg.svg" alt="Telegram link" /></a>
+			<br class="pc-hide" />
+			<br class="pc-hide" />
 			<a href="mailto:friend@urfu.ru" target="_top" class="email">friend@urfu.ru</a>
 		</div>
 		<div class="partners">
-			<a href="https://времякарьеры.рф" target="_blank"><Partner src="/img/logo/careertime-black.svg" /></a>
-			<a href="https://urfu.ru" target="_blank"><Partner src="/img/logo/urfu-black.svg" /></a>
+			<a href="https://времякарьеры.рф" target="_blank"><Partner src="/img/logo/careertime-black.svg" /></a><br class="pc-hide" />
+			<a href="https://urfu.ru" target="_blank"><Partner src="/img/logo/urfu-black.svg" /></a><br class="pc-hide" />
 			<a href="https://myrosmol.ru" target="_blank"><Partner src="/img/logo/rosmol-black.svg" /></a>
 		</div>
 	</Grid>
@@ -40,5 +42,23 @@
 
 	div.partners > a:not(:last-child) {
         margin-right: 0.5em;
+	}
+
+	@media screen and (max-width: 768px) {
+		a.email {
+			font-size: var(--header-3);
+		}
+
+		div.contacts {
+			text-align: center;
+		}
+
+		div.partners {
+			text-align: center;
+		}
+
+		:global(div.partners .partner-logo) {
+			margin-bottom: 1em;
+		}
 	}
 </style>
