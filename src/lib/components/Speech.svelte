@@ -226,6 +226,10 @@
             font-size: 1.1em;
         }
 
+        .side-block.speaker-picture .speaker-miniature {
+            min-height: 60px;
+        }
+
         .speech > .center-block {
             padding: 1em;
             text-align: center;

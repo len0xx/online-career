@@ -83,7 +83,7 @@
     style:--desktop-row-gap={ rowGap + 'em' }
     style:--mobile-row-gap={ mobileRowGap + 'em' }
     style:--custom-grid-layout={ customLayout }
-    class="grid-container xsmall-viewport-{xs} small-viewport-{s} medium-viewport-{m} large-viewport-{l} xlarge-viewport-{xl} {className} {ratioClasses} {customLayoutClass}"
+    class="grid-container xsmall-viewport-{xs} small-viewport-{s} medium-viewport-{m} large-viewport-{l} xlarge-viewport-{xl} { className } { ratioClasses } { customLayoutClass }"
     on:click
     on:keydown
 >
