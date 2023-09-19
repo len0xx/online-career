@@ -581,6 +581,12 @@ footer {
         text-align: center;
     }
 
+    .card.signup-block {
+        text-align: center;
+        background-size: 120%;
+        background-position: center 100%;
+    }
+
     h2.audience-title::before {
         width: 108px;
         height: 43px;

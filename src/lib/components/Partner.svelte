@@ -24,7 +24,7 @@
     }
 
     @media screen and (max-width: 768px) {
-        .partner-logo {
+        .partner-logo.white-bg {
             min-width: 156px;
             padding: 1.2em 2em;
         }
