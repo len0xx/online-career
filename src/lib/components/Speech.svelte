@@ -31,7 +31,7 @@
         <div class="speech-title">
             <slot />
         </div>
-        <div class="speakers">
+        <div class="speakers { `amount-${ speakers.length }` }">
             { #each speakers as speaker }
                 <div class="speaker-details">
                     <div>
@@ -52,7 +52,9 @@
             { /if }
         </div>
         <div>
-            <a target="_blank" href={ link.toString() }><Button variant="link" color="white">Ссылка</Button></a>
+            <a target="_blank" href={ link.toString() }>
+                <Button variant="link" color="white">Ссылка</Button>
+            </a>
         </div>
     </div>
 </div>
@@ -142,8 +144,17 @@
     .speech .speakers {
         display: grid;
         position: relative;
-        grid-template-columns: 1fr 1fr;
         gap: 1em;
+    }
+
+    .speech .speakers.amount-1 {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .speech .speakers.amount-2,
+    .speech .speakers.amount-3,
+    .speech .speakers.amount-4 {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .speakers .speaker-details {
@@ -180,6 +191,56 @@
     .speakers .speaker-details .duty {
         margin-top: 1em;
         opacity: 0.4;
-        font-size: 0.8em ;
+        font-size: 0.8em;
+    }
+
+    @media screen and (max-width: 768px) {
+        .speech {
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 1em;
+            min-height: unset;
+            grid-template-areas: "details picture"
+                                "text text";
+        }
+
+        .speech > .side-block {
+            padding: 1em;
+        }
+
+        .speech .speech-title {
+            font-size: var(--header-3);
+            margin-bottom: 1.2em;
+        }
+
+        .speakers .speaker-details .company,
+        .speakers .speaker-details .name {
+            display: block;
+            position: relative;
+            margin-right: 0;
+            margin-bottom: 0.5em;
+            font-size: 1.2em;
+        }
+
+        .speakers .speaker-details .duty {
+            font-size: 1.1em;
+        }
+
+        .speech > .center-block {
+            padding: 1em;
+            text-align: center;
+        }
+
+        .speech > .side-block.speech-details {
+            grid-area: details
+        }
+
+        .speech > .side-block.speaker-picture {
+            grid-area: picture
+        }
+
+        .speech > .center-block {
+            grid-area: text
+        }
     }
 </style>

@@ -44,13 +44,6 @@
         box-sizing: border-box;
     }
 
-    @media screen and (max-width: 768px) {
-        button {
-            display: inline-block;
-            border-radius: calc(var(--radius) + 20px);
-        }
-    }
-
     button.full-width {
         width: 100%;
     }
@@ -176,5 +169,15 @@
 
     button.link-variant:hover::after {
         transform: rotateX(180deg);
+    }
+
+    @media screen and (max-width: 768px) {
+        button {
+            border-radius: calc(var(--radius) + 20px);
+        }
+
+        button.link-variant {
+            padding: 1em 3em;
+        }
     }
 </style>

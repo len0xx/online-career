@@ -545,7 +545,7 @@
                     </Checkbox>
                     <Checkbox bind:group={ checkboxes } value="13" name="13">
                         Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж
-                </Checkbox>
+                    </Checkbox>
                 </div>
                 { #if checkboxes.length }
                     <div transition:slide={{ duration: 200, axis: 'y' }}>
@@ -570,7 +570,7 @@
     </section>
     <br />
     <br />
-    <section class="program mobile-hide" id="program">
+    <section class="program" id="program">
         <div class="content">
             <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
             <Grid m={ 1 } gap={ 2 }>
