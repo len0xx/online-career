@@ -646,7 +646,7 @@
     <section class="signup">
         <div class="content">
             <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
-                <Grid m={ 2 } gap={ 12 } s={ 1 }>
+                <Grid m={ 2 } s={ 1 } gap={ 12 } mobileGap={ 1 }>
                     <Grid m={ 1 } alignContent="space-between">
                         <div>
                             <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading>

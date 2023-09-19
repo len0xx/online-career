@@ -18,6 +18,8 @@
     export let ratio: TwoColumnsRatio = null
     export let gap = 1
     export let rowGap = gap
+    export let mobileGap = gap
+    export let mobileRowGap = mobileGap
     export let customLayout: string = undefined
     export let alignItems: ItemsAlignment = 'normal'
     export let justifyItems: ItemsAlignment = 'normal'
@@ -69,8 +71,6 @@
 <div
     { id }
     bind:this={ node }
-    style:gap={ gap + 'em' }
-    style:grid-row-gap={ rowGap + 'em' }
     style:margin={ computePadding(margin) }
     style:place-items={ finalPlaceItems }
     style:place-content={ finalPlaceContent }
@@ -78,9 +78,14 @@
     style:justify-content={ finalJustifyContent }
     style:align-items={ finalAlignItems }
     style:justify-items={ finalJustifyItems }
+    style:--desktop-gap={ gap + 'em' }
+    style:--mobile-gap={ mobileGap + 'em' }
+    style:--desktop-row-gap={ rowGap + 'em' }
+    style:--mobile-row-gap={ mobileRowGap + 'em' }
     style:--custom-grid-layout={ customLayout }
     class="grid-container xsmall-viewport-{xs} small-viewport-{s} medium-viewport-{m} large-viewport-{l} xlarge-viewport-{xl} {className} {ratioClasses} {customLayoutClass}"
     on:click
+    on:keydown
 >
     <slot />
 </div>
@@ -89,6 +94,8 @@
     .grid-container {
         display: grid;
         position: relative;
+        gap: var(--desktop-gap);
+        row-gap: var(--desktop-row-gap);
     }
 
     .grid-1-2 {
@@ -265,6 +272,11 @@
     }
 
     @media screen and (min-width: 481px) and (max-width: 768px) {
+        .grid-container {
+            gap: var(--mobile-gap);
+            row-gap: var(--mobile-row-gap);
+        }
+
         .small-viewport-1 {
             grid-template-columns: repeat(1, 1fr);
         }
@@ -304,6 +316,11 @@
     }
 
     @media screen and (min-width: 0px) and (max-width: 480px) {
+        .grid-container {
+            gap: var(--mobile-gap);
+            row-gap: var(--mobile-row-gap);
+        }
+
         .xsmall-viewport-1 {
             grid-template-columns: repeat(1, 1fr);
         }
