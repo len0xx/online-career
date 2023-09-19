@@ -201,7 +201,7 @@
             gap: 1em;
             min-height: unset;
             grid-template-areas: "details picture"
-                                "text text";
+                                 "text text";
         }
 
         .speech > .side-block {

@@ -156,6 +156,10 @@ section.intro > div.content {
         width: 60%;
         margin-bottom: -1em;
     }
+
+    section {
+        padding: 1.5em 0;
+    }
     
     .grid-1-1-2 {
         grid-template-columns: 1fr 1fr;

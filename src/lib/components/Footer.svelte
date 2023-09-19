@@ -27,4 +27,10 @@
         color: white;
         margin: 0 auto;
     }
+
+    @media screen and (max-width: 768px) {
+        footer {
+            margin-top: 3em;
+        }
+    }
 </style>

@@ -575,7 +575,7 @@
     </section>
     <br />
     <br />
-    <section class="program" id="program">
+    <section class="program pc-hide mobile-hide" id="program">
         <div class="content">
             <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
             <Grid m={ 1 } gap={ 2 }>
@@ -640,9 +640,9 @@
             { /if }
         </div>
     </section>
-    <br />
-    <br />
-    <br />
+    <br class="mobile-hide" />
+    <br class="mobile-hide" />
+    <br class="mobile-hide" />
     <section class="signup">
         <div class="content">
             <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
@@ -681,5 +681,5 @@
             </Card>
         </div>
     </section>
-    <section class="footer"></section>
+    <section class="footer mobile-hide"></section>
 </main>
