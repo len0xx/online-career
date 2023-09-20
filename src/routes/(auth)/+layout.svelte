@@ -1,8 +1,5 @@
 <script lang="ts">
-	import Header from "$lib/components/Header.svelte"
-	import Footer from "$lib/components/Footer.svelte"
-	import Grid from "$lib/components/Grid.svelte"
-	import Partner from "$lib/components/Partner.svelte"
+	import { Header, Grid, Footer, Partner } from "$lib/components"
 </script>
 
 <section class="auth">

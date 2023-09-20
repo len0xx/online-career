@@ -1,8 +1,5 @@
 <script lang="ts">
-	import Button from "$lib/components/Button.svelte"
-	import Grid from "$lib/components/Grid.svelte"
-	import Heading from "$lib/components/Heading.svelte"
-	import Input from "$lib/components/Input.svelte"
+	import { Button, Grid, Heading, Input } from "$lib/components"
 </script>
 
 <svelte:head>

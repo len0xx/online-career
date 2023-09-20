@@ -1,6 +1,3 @@
-<script lang="ts">
-</script>
-
 <div class="number">
     <slot />
 </div>

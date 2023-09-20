@@ -1,23 +1,26 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte'
-	import Card from '$lib/components/Card.svelte'
-	import Checkbox from '$lib/components/Checkbox.svelte'
-	import Emote from '$lib/components/Emote.svelte'
-	import Grid from '$lib/components/Grid.svelte'
-	import Header from '$lib/components/Header.svelte'
-    import Heading from '$lib/components/Heading.svelte'
-	import Input from '$lib/components/Input.svelte'
-	import Item from '$lib/components/Item.svelte'
-	import Number from '$lib/components/Number.svelte'
-	import Speech from '$lib/components/Speech.svelte'
-	import Modal from '$lib/components/Modal.svelte'
-	import Partner from '$lib/components/Partner.svelte'
-    import Ticket from '$lib/components/Ticket.svelte'
+	import {
+        Header,
+        Grid,
+        Button,
+        Card,
+        Checkbox,
+        Emote,
+        Heading,
+        Input,
+        Item,
+        Number,
+        Speech,
+        Ticket,
+        Modal,
+        IconButton,
+        MobileMenu,
+        Partner
+    } from "$lib/components"
+    
 	import { onMount } from 'svelte'
-	import { fade, fly, slide } from 'svelte/transition';
-	import IconButton from '$lib/components/IconButton.svelte';
-	import MobileMenu from '$lib/components/MobileMenu.svelte';
-	import { mobileMenu } from '$lib/stores';
+	import { fade, fly, slide } from 'svelte/transition'
+	import { mobileMenu } from '$lib/stores'
 
     type ModalWindow = {
         open: () => void
@@ -262,9 +265,7 @@
                 <Heading className="large" margin={{ top: 0, bottom: 0.35 }} level={ 1 }>Время карьеры</Heading>
                 <p class="button-text"><b>НОЯБРЬ 2023</b></p>
                 <p class="button-text intro-content">
-                    Карьерные эксперты, руководители и HR-менеджеры крупных компаний расскажут, каких сотрудников хантят
-                    в первую очередь, как сделать продающее резюме,
-                    и как влюбить в себя HR на собеседовании.
+                    Карьерные эксперты, руководители и эйчары  компаний расскажут, каких сотрудников хантят в первую очередь, как составить продающее резюме и как влюбить всех в себя на собеседовании
                 </p>
             </div>
             <br class="mobile-hide" />

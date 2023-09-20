@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Button from "./Button.svelte"
+    import { Button } from "$lib/components"
 
     type Weekday = 'Пн' | 'Вт' | 'Ср' | 'Чт' | 'Пт' | 'Сб' | 'Вс'
     type Speaker = {

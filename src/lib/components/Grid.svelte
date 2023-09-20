@@ -1,6 +1,6 @@
 <script lang="ts">
     import { computePadding } from '$lib/utilities'
-    import type { Padding } from '../../types/index.js'
+    import type { Padding } from '../../types'
 
     type ItemsAlignment = 'normal' | 'flex-start' | 'flex-end' | 'center' | 'start' | 'end' | 'self-start' | 'self-end' | 'baseline' | 'stretch' | 'safe' | 'unsafe' | 'inherit' | 'initial' | 'unset' | 'revert' | 'revert-layer'
     type ContentAlignment = ItemsAlignment | 'space-between' | 'space-around' | 'space-evenly'

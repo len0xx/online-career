@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { computePadding } from "$lib/utilities";
+	import { computePadding } from "$lib/utilities"
 	import type { Padding } from "../../types"
 
     type CardColor = 'black' | 'white' | 'purple' | 'green' | 'grey'

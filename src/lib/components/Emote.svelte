@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Card from "./Card.svelte"
+	import { Card } from "$lib/components"
 
     export let image: string
 </script>
