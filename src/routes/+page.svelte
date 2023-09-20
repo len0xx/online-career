@@ -219,9 +219,9 @@
 <MobileMenu bind:this={ $mobileMenu }>
     <div class="mobile-menu-content">
         <nav>
-            <div><a href="#about">О марафоне</a></div>
-            <div><a href="#audience">Для кого</a></div>
-            <div><a href="#program">Программа</a></div>
+            <div><a href="#about" on:click={ $mobileMenu.close }>О марафоне</a></div>
+            <div><a href="#audience" on:click={ $mobileMenu.close }>Для кого</a></div>
+            <div><a href="#program" on:click={ $mobileMenu.close }>Программа</a></div>
         </nav>
         <div class="auth-buttons">
             <Button color="green" shadow on:click={ () => { $mobileMenu.close(); modal.open() } }>Регистрация</Button><br /><br />
@@ -582,7 +582,7 @@
                                 Осталось только зарегистрироваться
                             </p>
                             <br />
-                            <Button on:click={ modal.open }>Регистрация</Button>
+                            <a href="#signup"><Button>Регистрация</Button></a>
                         </Card>
                     </div>
                 { /if }
@@ -659,7 +659,7 @@
     <br class="mobile-hide" />
     <br class="mobile-hide" />
     <br class="mobile-hide" />
-    <section class="signup">
+    <section class="signup" id="signup">
         <div class="content">
             <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
                 <Grid m={ 2 } s={ 1 } gap={ 12 } mobileGap={ 1 }>

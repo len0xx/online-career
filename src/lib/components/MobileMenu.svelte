@@ -47,6 +47,7 @@
         right: 1em;
         width: 36px;
         height: 36px;
+        z-index: 40;
     }
 
     :global(.mobile-menu nav a) {
