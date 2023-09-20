@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card } from "$lib/components"
+    import { Card } from '$lib/components'
 
     export let image: string
     export let opacity: number | null = null
@@ -7,12 +7,12 @@
     export let zIndex: number | null = null
 </script>
 
-<Card color="grey" className="ticket" { opacity } { transform } { zIndex }>
+<Card color="grey" className="ticket" {opacity} {transform} {zIndex}>
     <div class="ticket-content align-left">
         <div class="text-content">
             <slot />
         </div>
-        <img class="ticket-cover" src={ image } alt="Ticket cover">
+        <img class="ticket-cover" src={image} alt="Ticket cover" />
     </div>
 </Card>
 
@@ -21,7 +21,7 @@
         width: 1176px;
         min-height: 480px;
         padding: 4em 6em 4em 4em !important;
-        background-image: url("/img/ticket-bg.svg");
+        background-image: url('/img/ticket-bg.svg');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: 100% 0;
@@ -58,15 +58,15 @@
             padding: 2em !important;
             width: unset;
             min-height: unset;
-            background-image: url("/img/mobile-ticket-bg.svg");
+            background-image: url('/img/mobile-ticket-bg.svg');
             background-position: 0 100%;
         }
-        
+
         .ticket-content {
             grid-template-columns: 1fr;
             gap: 1.5em;
         }
-        
+
         .ticket-content > .text-content {
             text-align: center;
         }

@@ -6,14 +6,14 @@
     $: shadowClass = shadow ? 'with-shadow' : ''
 </script>
 
-<button 
+<button
     on:click
     on:mouseover
     on:focus
     on:blur
-    class={ [ className, shadowClass ].filter((c) => !!c.length).join(' ') }
+    class={[className, shadowClass].filter((c) => !!c.length).join(' ')}
 >
-    <img src={ src } alt="Button icon">
+    <img {src} alt="Button icon" />
 </button>
 
 <style>

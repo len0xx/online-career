@@ -7,9 +7,9 @@ const { NODE_ENV, DB_HOST, DB_NAME, DB_USER, DB_PASSWORD } = process.env
 const dev = NODE_ENV == 'development'
 
 interface ConnectionConfig {
-    database: string,
-    user: string,
-    password: string,
+    database: string
+    user: string
+    password: string
     options: Options
 }
 
@@ -30,12 +30,7 @@ const CONFIG: ConnectionConfig = {
     }
 }
 
-const db = new Sequelize(
-    CONFIG.database,
-    CONFIG.user,
-    CONFIG.password,
-    CONFIG.options
-)
+const db = new Sequelize(CONFIG.database, CONFIG.user, CONFIG.password, CONFIG.options)
 
 export default db
 
@@ -44,11 +39,9 @@ export const connectDB = async () => {
         await db.authenticate()
         db.sync({ alter: dev })
         console.log('DB connected successfully')
-    }
-    catch (e) {
+    } catch (e) {
         console.error('DB connection failed')
         console.error(e)
         process.exit(1)
     }
 }
-

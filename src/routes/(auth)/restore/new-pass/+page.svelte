@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Grid, Heading, Input } from "$lib/components"
+    import { Button, Grid, Heading, Input } from '$lib/components'
 </script>
 
 <svelte:head>
@@ -7,12 +7,17 @@
 </svelte:head>
 
 <div class="align-center">
-    <Heading level={ 2 } margin={{ bottom: 0.4 }}>Придумайте пароль</Heading>
+    <Heading level={2} margin={{ bottom: 0.4 }}>Придумайте пароль</Heading>
     <form action="" class="fix-width">
-        <Grid m={ 1 }>
+        <Grid m={1}>
             <p>Придумайте новый пароль для входа в личный кабинет</p>
             <Input name="password" id="password" placeholder="Пароль" type="password" />
-            <Input name="passwordRepeat" id="passwordRepeat" placeholder="Повторите пароль" type="password" />
+            <Input
+                name="passwordRepeat"
+                id="passwordRepeat"
+                placeholder="Повторите пароль"
+                type="password"
+            />
             <Button wide shadow>Установить пароль</Button>
         </Grid>
     </form>

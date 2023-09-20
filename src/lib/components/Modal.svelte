@@ -2,7 +2,7 @@
     import { onMount, createEventDispatcher } from 'svelte'
     import { fade, blur } from 'svelte/transition'
     import { clickOutside } from '$lib/actions'
-    
+
     type Align = 'unset' | 'inherit' | 'initial' | 'left' | 'center' | 'right'
 
     export let id: string = undefined
@@ -20,7 +20,7 @@
     export const open = () => {
         if (visible) return
         visible = true
-        setTimeout(() => ready = true, (TRANSITION_DELAY + TRANSITION_DURATION))
+        setTimeout(() => (ready = true), TRANSITION_DELAY + TRANSITION_DURATION)
         dispatch('open')
     }
 
@@ -28,12 +28,12 @@
         if (!visible) return
         if (closable && ready) {
             visible = false
-            setTimeout(() => ready = false, (TRANSITION_DELAY + TRANSITION_DURATION))
+            setTimeout(() => (ready = false), TRANSITION_DELAY + TRANSITION_DURATION)
             dispatch('close')
         }
     }
 
-    export const toggle = () => visible ? close() : open()
+    export const toggle = () => (visible ? close() : open())
 
     onMount(() => {
         document.addEventListener('keyup', (event: KeyboardEvent) => {
@@ -44,37 +44,41 @@
     })
 </script>
 
-{ #if visible }
-    <div class="kit-modal-wrapper" in:fade="{{ duration: TRANSITION_DURATION }}" out:fade="{{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}">
-        <div class="shadow"></div>
+{#if visible}
+    <div
+        class="kit-modal-wrapper"
+        in:fade={{ duration: TRANSITION_DURATION }}
+        out:fade={{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}
+    >
+        <div class="shadow" />
         <div>
-            { #if closable }
+            {#if closable}
                 <div class="align-center pc-hide">
-                    <div class="close pc-hide" on:click={ close } on:keydown>
-                        <img src="/img/icons/modal-close.svg" alt="Close modal">
+                    <div class="close pc-hide" on:click={close} on:keydown>
+                        <img src="/img/icons/modal-close.svg" alt="Close modal" />
                     </div>
                 </div>
-            { /if }
+            {/if}
             <div
                 {id}
-                bind:this={ node }
+                bind:this={node}
                 class="kit-modal {className}"
-                style:--local-align={ align }
+                style:--local-align={align}
                 on:click
                 on:focus
                 on:blur
                 on:mouseleave
                 on:mouseover
                 on:keydown
-                in:blur="{{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}"
-                out:blur="{{ duration: TRANSITION_DURATION }}"
-                use:clickOutside={ close }
+                in:blur={{ delay: TRANSITION_DELAY, duration: TRANSITION_DURATION }}
+                out:blur={{ duration: TRANSITION_DURATION }}
+                use:clickOutside={close}
             >
-                { #if closable }
-                    <div class="close mobile-hide" on:click={ close } on:keydown>
-                        <img src="/img/icons/modal-close.svg" alt="Close modal">
+                {#if closable}
+                    <div class="close mobile-hide" on:click={close} on:keydown>
+                        <img src="/img/icons/modal-close.svg" alt="Close modal" />
                     </div>
-                { /if }
+                {/if}
                 <div class="kit-modal-content">
                     <slot />
                 </div>
@@ -84,7 +88,7 @@
             </div>
         </div>
     </div>
-{ /if }
+{/if}
 
 <style>
     div {

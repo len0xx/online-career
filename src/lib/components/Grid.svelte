@@ -2,10 +2,41 @@
     import { computePadding } from '$lib/utilities'
     import type { Padding } from '../../types'
 
-    type ItemsAlignment = 'normal' | 'flex-start' | 'flex-end' | 'center' | 'start' | 'end' | 'self-start' | 'self-end' | 'baseline' | 'stretch' | 'safe' | 'unsafe' | 'inherit' | 'initial' | 'unset' | 'revert' | 'revert-layer'
+    type ItemsAlignment =
+        | 'normal'
+        | 'flex-start'
+        | 'flex-end'
+        | 'center'
+        | 'start'
+        | 'end'
+        | 'self-start'
+        | 'self-end'
+        | 'baseline'
+        | 'stretch'
+        | 'safe'
+        | 'unsafe'
+        | 'inherit'
+        | 'initial'
+        | 'unset'
+        | 'revert'
+        | 'revert-layer'
     type ContentAlignment = ItemsAlignment | 'space-between' | 'space-around' | 'space-evenly'
     type GridSize = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
-    type TwoColumnsRatio = '2:1' | '1:2' | '3:1' | '1:3' | '3:2' | '2:3' | '4:1' | '1:4' | '4:3' | '3:4' | '5:1' | '5:2' | '5:3' | '5:4'
+    type TwoColumnsRatio =
+        | '2:1'
+        | '1:2'
+        | '3:1'
+        | '1:3'
+        | '3:2'
+        | '2:3'
+        | '4:1'
+        | '1:4'
+        | '4:3'
+        | '3:4'
+        | '5:1'
+        | '5:2'
+        | '5:3'
+        | '5:4'
 
     export let id: string = undefined
     export let node: HTMLElement = undefined
@@ -27,7 +58,7 @@
     export let justifyContent: ContentAlignment = 'normal'
     export let placeItems: ItemsAlignment = null
     export let placeContent: ContentAlignment = null
-    export let margin: Padding = { }
+    export let margin: Padding = {}
 
     const defaultSize = 6
     let smallestSize: GridSize = null
@@ -40,7 +71,11 @@
     $: finalJustifyContent = finalPlaceContent || justifyContent
     $: customLayoutClass = customLayout ? 'has-custom-layout' : ''
 
-    const getClosestSize = (arr: GridSize[], ind: 0 | 1 | 2 | 3 | 4, smallest: GridSize): GridSize => {
+    const getClosestSize = (
+        arr: GridSize[],
+        ind: 0 | 1 | 2 | 3 | 4,
+        smallest: GridSize
+    ): GridSize => {
         for (let i = ind; i >= 0; i--) {
             if (arr[i] !== null) return arr[i]
         }
@@ -60,30 +95,29 @@
         if (m === null) m = getClosestSize([xs, s, m, l, xl], 2, smallestSize)
         if (l === null) l = getClosestSize([xs, s, m, l, xl], 3, smallestSize)
         if (xl === null) xl = getClosestSize([xs, s, m, l, xl], 4, smallestSize)
-    
+
         if (ratio !== null) {
             ratioClasses = ['grid-ratio-selected', 'grid-' + ratio.replace(':', '-')].join(' ')
         }
     }
-
 </script>
 
 <div
-    { id }
-    bind:this={ node }
-    style:margin={ computePadding(margin) }
-    style:place-items={ finalPlaceItems }
-    style:place-content={ finalPlaceContent }
-    style:align-content={ finalAlignContent }
-    style:justify-content={ finalJustifyContent }
-    style:align-items={ finalAlignItems }
-    style:justify-items={ finalJustifyItems }
-    style:--desktop-gap={ gap + 'em' }
-    style:--mobile-gap={ mobileGap + 'em' }
-    style:--desktop-row-gap={ rowGap + 'em' }
-    style:--mobile-row-gap={ mobileRowGap + 'em' }
-    style:--custom-grid-layout={ customLayout }
-    class="grid-container xsmall-viewport-{xs} small-viewport-{s} medium-viewport-{m} large-viewport-{l} xlarge-viewport-{xl} { className } { ratioClasses } { customLayoutClass }"
+    {id}
+    bind:this={node}
+    style:margin={computePadding(margin)}
+    style:place-items={finalPlaceItems}
+    style:place-content={finalPlaceContent}
+    style:align-content={finalAlignContent}
+    style:justify-content={finalJustifyContent}
+    style:align-items={finalAlignItems}
+    style:justify-items={finalJustifyItems}
+    style:--desktop-gap={gap + 'em'}
+    style:--mobile-gap={mobileGap + 'em'}
+    style:--desktop-row-gap={rowGap + 'em'}
+    style:--mobile-row-gap={mobileRowGap + 'em'}
+    style:--custom-grid-layout={customLayout}
+    class="grid-container xsmall-viewport-{xs} small-viewport-{s} medium-viewport-{m} large-viewport-{l} xlarge-viewport-{xl} {className} {ratioClasses} {customLayoutClass}"
     on:click
     on:keydown
 >
@@ -358,7 +392,7 @@
             grid-template-columns: repeat(12, 1fr);
         }
     }
-    
+
     div.grid-container.has-custom-layout:not(.c) {
         grid-template-columns: var(--custom-grid-layout);
     }

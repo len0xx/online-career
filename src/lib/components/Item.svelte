@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Card } from "$lib/components"
+    import { Card } from '$lib/components'
 
     type Color = 'white' | 'green' | 'purple'
 
@@ -9,13 +9,13 @@
 </script>
 
 <div class="item">
-    { #if bubble }
+    {#if bubble}
         <div class="bubble-row">
-            <div class="bubble">{ bubble }</div>
+            <div class="bubble">{bubble}</div>
         </div>
-    { /if }
+    {/if}
     <Card {color} className="item-card">
-        <img src={ image } alt="Item">
+        <img src={image} alt="Item" />
     </Card>
     <p class="align-center item-caption">
         <slot />

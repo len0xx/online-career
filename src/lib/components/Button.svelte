@@ -8,18 +8,20 @@
     export let shadow = false
     export let wide = false
 
-    $: variantClass = `${ variant }-variant`
-    $: colorClass = `${ color }-btn`
+    $: variantClass = `${variant}-variant`
+    $: colorClass = `${color}-btn`
     $: shadowClass = shadow ? 'with-shadow' : ''
     $: wideClass = wide ? 'full-width' : ''
 </script>
 
-<button 
+<button
     on:click
     on:mouseover
     on:focus
     on:blur
-    class={ [ className, colorClass, variantClass, shadowClass, wideClass ].filter((c) => !!c.length).join(' ') }
+    class={[className, colorClass, variantClass, shadowClass, wideClass]
+        .filter((c) => !!c.length)
+        .join(' ')}
 >
     <span class="text-wrapper">
         <slot />
@@ -149,12 +151,12 @@
     button.arrow-variant::after {
         padding: 1em 1.7em;
         background-size: 36%;
-        background-image: url("/img/icons/arrow.svg");
+        background-image: url('/img/icons/arrow.svg');
     }
     button.link-variant::after {
         padding: 1em 1.2em;
         background-size: 50%;
-        background-image: url("/img/icons/link.svg");
+        background-image: url('/img/icons/link.svg');
     }
     button.link-variant:hover,
     button.arrow-variant:hover {

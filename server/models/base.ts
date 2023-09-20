@@ -2,9 +2,14 @@ import type { FindOptions, Model, ModelStatic, UpdateOptions } from 'sequelize'
 import type { Attributes, WhereAttributeHashValue } from 'sequelize/types'
 import type { Col, Fn, Literal, MakeNullishOptional } from 'sequelize/types/utils'
 
-type UpdateFields<T extends Model> = { [key in keyof Attributes<T>]?: Fn | Col | Literal | Attributes<T>[key] }
+type UpdateFields<T extends Model> = {
+    [key in keyof Attributes<T>]?: Fn | Col | Literal | Attributes<T>[key]
+}
 
-abstract class BaseService<ModelClass extends Model, ModelInterface extends MakeNullishOptional<ModelClass['_creationAttributes']>> {
+abstract class BaseService<
+    ModelClass extends Model,
+    ModelInterface extends MakeNullishOptional<ModelClass['_creationAttributes']>
+> {
     protected model: ModelStatic<ModelClass>
 
     async get(options?: FindOptions) {
@@ -31,11 +36,17 @@ abstract class BaseService<ModelClass extends Model, ModelInterface extends Make
         return await this.delete({ where: { id } })
     }
 
-    async update(options: UpdateOptions<ModelClass & { id: number }>, entity: UpdateFields<ModelClass>) {
+    async update(
+        options: UpdateOptions<ModelClass & { id: number }>,
+        entity: UpdateFields<ModelClass>
+    ) {
         return await this.model.update(entity, options)
     }
 
-    async createOrUpdate(options: UpdateOptions<ModelClass & { id: number }>, entity: UpdateFields<ModelClass> | ModelInterface) {
+    async createOrUpdate(
+        options: UpdateOptions<ModelClass & { id: number }>,
+        entity: UpdateFields<ModelClass> | ModelInterface
+    ) {
         const count = await this.count(options)
 
         if (count) {
@@ -43,13 +54,14 @@ abstract class BaseService<ModelClass extends Model, ModelInterface extends Make
         }
 
         return await this.create(entity as ModelInterface)
-
     }
 
-    async updateById(id: WhereAttributeHashValue<Attributes<ModelClass>['id']>, entity: UpdateFields<ModelClass>) {
+    async updateById(
+        id: WhereAttributeHashValue<Attributes<ModelClass>['id']>,
+        entity: UpdateFields<ModelClass>
+    ) {
         return await this.update({ where: { id } }, entity)
     }
 }
 
 export default BaseService
-

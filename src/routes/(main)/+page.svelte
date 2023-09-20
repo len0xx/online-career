@@ -1,5 +1,5 @@
 <script lang="ts">
-	import {
+    import {
         Header,
         Grid,
         Button,
@@ -16,11 +16,11 @@
         IconButton,
         MobileMenu,
         Partner
-    } from "$lib/components"
-    
-	import { onMount } from 'svelte'
-	import { fade, fly, slide } from 'svelte/transition'
-	import { mobileMenu } from '$lib/stores'
+    } from '$lib/components'
+
+    import { onMount } from 'svelte'
+    import { fade, fly, slide } from 'svelte/transition'
+    import { mobileMenu } from '$lib/stores'
 
     type ModalWindow = {
         open: () => void
@@ -40,10 +40,16 @@
     let checkboxes: string[] = []
 
     $: showStickyBtn = verticalScroll > Math.max(featuresElementEnd, 4000)
-    $: parallax1 = `translateX(${ Math.sqrt(cursor.y) * 0.16372 }px) translateY(${ Math.sqrt(verticalScroll) * 0.92471 }px)`
-    $: parallax2 = `translateX(${ Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(verticalScroll) * -0.78121 }px) translateY(${ Math.sqrt(cursor.y) * 0.41485 }px)`
-    $: parallax3 = `translateX(${ Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(verticalScroll) * 0.69481 }px) translateY(${ Math.sqrt(verticalScroll) * 0.91382 }px)`
-    $: parallax4 = `translateX(${ 20 + Math.sqrt(cursor.x) * 0.13485 * -1 }px)`
+    $: parallax1 = `translateX(${Math.sqrt(cursor.y) * 0.16372}px) translateY(${
+        Math.sqrt(verticalScroll) * 0.92471
+    }px)`
+    $: parallax2 = `translateX(${
+        Math.sqrt(cursor.x) * 0.46832 + Math.sqrt(verticalScroll) * -0.78121
+    }px) translateY(${Math.sqrt(cursor.y) * 0.41485}px)`
+    $: parallax3 = `translateX(${
+        Math.sqrt(cursor.y) * 0.25172 * -1 + Math.sqrt(verticalScroll) * 0.69481
+    }px) translateY(${Math.sqrt(verticalScroll) * 0.91382}px)`
+    $: parallax4 = `translateX(${20 + Math.sqrt(cursor.x) * 0.13485 * -1}px)`
 
     const MIN_DESKTOP_WIDTH = 768
     const MAX_TRANSLATE = 800
@@ -56,15 +62,42 @@
 
     const tickets = [
         { opacity: 1, zIndex: 1, transform: 'translateY(0) scale(1)', translate: 0, scale: 1 },
-        { opacity: 0, zIndex: 2, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 },
-        { opacity: 0, zIndex: 3, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 },
-        { opacity: 0, zIndex: 4, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 },
-        { opacity: 0, zIndex: 5, transform: `translateY(${ MAX_TRANSLATE }px) scale(1)`, translate: MAX_TRANSLATE, scale: 1 }
+        {
+            opacity: 0,
+            zIndex: 2,
+            transform: `translateY(${MAX_TRANSLATE}px) scale(1)`,
+            translate: MAX_TRANSLATE,
+            scale: 1
+        },
+        {
+            opacity: 0,
+            zIndex: 3,
+            transform: `translateY(${MAX_TRANSLATE}px) scale(1)`,
+            translate: MAX_TRANSLATE,
+            scale: 1
+        },
+        {
+            opacity: 0,
+            zIndex: 4,
+            transform: `translateY(${MAX_TRANSLATE}px) scale(1)`,
+            translate: MAX_TRANSLATE,
+            scale: 1
+        },
+        {
+            opacity: 0,
+            zIndex: 5,
+            transform: `translateY(${MAX_TRANSLATE}px) scale(1)`,
+            translate: MAX_TRANSLATE,
+            scale: 1
+        }
     ]
 
-    const setTicketOpacity = (index: number, opacity: number) => tickets[index].opacity = opacity
+    const setTicketOpacity = (index: number, opacity: number) => (tickets[index].opacity = opacity)
 
-    const applyTicketTransform = (index: number) => tickets[index].transform = `translateY(${ tickets[index].translate }px) scale(${ tickets[index].scale })`
+    const applyTicketTransform = (index: number) =>
+        (tickets[
+            index
+        ].transform = `translateY(${tickets[index].translate}px) scale(${tickets[index].scale})`)
 
     const setTicketTransform = (index: number, translate: number, scale: number) => {
         tickets[index].translate = translate
@@ -78,7 +111,7 @@
             featuresElementStart + TICKET_STEP_LENGTH * 1,
             featuresElementStart + TICKET_STEP_LENGTH * 2,
             featuresElementStart + TICKET_STEP_LENGTH * 3,
-            featuresElementStart + TICKET_STEP_LENGTH * 4,
+            featuresElementStart + TICKET_STEP_LENGTH * 4
         ]
         const passedPoints = [
             currentScroll > TICKET_STOPS[0],
@@ -87,56 +120,93 @@
             currentScroll >= TICKET_STOPS[3],
             currentScroll >= TICKET_STOPS[4]
         ]
-        const lastPoint = passedPoints.reduce((acc, cur) => cur ? acc + 1 : acc, 0)
+        const lastPoint = passedPoints.reduce((acc, cur) => (cur ? acc + 1 : acc), 0)
         const pointsLeft = passedPoints.length - lastPoint
 
         const getScaleRange = (index: number) => TICKET_STOPS[index] - SCALE_RANGE
 
-        showTicketsSignup = (currentScroll > (TICKET_STOPS[4] + 100))
+        showTicketsSignup = currentScroll > TICKET_STOPS[4] + 100
 
         if (index > 0 && currentScroll < TICKET_STOPS[index - 1]) {
             // The ticket is not shown up yet
 
             if (tickets[index].opacity !== 0) setTicketOpacity(index, 0)
-            if (tickets[index].translate !== MAX_TRANSLATE || tickets[index].scale !== 1) setTicketTransform(index, MAX_TRANSLATE, 1)
-        }
-        else if (index > 0 && currentScroll > TICKET_STOPS[index - 1] && currentScroll < TICKET_STOPS[index]) {
+            if (tickets[index].translate !== MAX_TRANSLATE || tickets[index].scale !== 1)
+                setTicketTransform(index, MAX_TRANSLATE, 1)
+        } else if (
+            index > 0 &&
+            currentScroll > TICKET_STOPS[index - 1] &&
+            currentScroll < TICKET_STOPS[index]
+        ) {
             // The ticket is in progress of animation
 
-            const generalPercentage = Math.min(Math.max(0, ((RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE)), 1)
-            const opacityPercentage = Math.min(Math.max(0, ((RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) / RANGE)), 1)
-            const translateValue = generalPercentage < 0.99 ? MAX_TRANSLATE - MAX_TRANSLATE * generalPercentage : 0
+            const generalPercentage = Math.min(
+                Math.max(0, (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - currentScroll)) / RANGE),
+                1
+            )
+            const opacityPercentage = Math.min(
+                Math.max(
+                    0,
+                    (RANGE - (TICKET_STOPS[index] - SCALE_RANGE - OPACITY_RANGE - currentScroll)) /
+                        RANGE
+                ),
+                1
+            )
+            const translateValue =
+                generalPercentage < 0.99 ? MAX_TRANSLATE - MAX_TRANSLATE * generalPercentage : 0
 
             setTicketOpacity(index, opacityPercentage)
             setTicketTransform(index, translateValue, 1)
-        }
-        else if ((index < (tickets.length - 1)) && (currentScroll > getScaleRange(1) && currentScroll < TICKET_STOPS[1]) || (currentScroll > getScaleRange(2) && currentScroll < TICKET_STOPS[2]) || (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3]) || (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4])) {
+        } else if (
+            (index < tickets.length - 1 &&
+                currentScroll > getScaleRange(1) &&
+                currentScroll < TICKET_STOPS[1]) ||
+            (currentScroll > getScaleRange(2) && currentScroll < TICKET_STOPS[2]) ||
+            (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3]) ||
+            (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4])
+        ) {
             // The ticket is being scaled down
 
             let currentRange = index + 1
-            if (currentScroll > getScaleRange(1) && currentScroll < TICKET_STOPS[1]) currentRange = 1
-            else if (currentScroll > getScaleRange(2) && currentScroll < TICKET_STOPS[2]) currentRange = 2
-            else if (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3]) currentRange = 3
-            else if (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4]) currentRange = 4
+            if (currentScroll > getScaleRange(1) && currentScroll < TICKET_STOPS[1])
+                currentRange = 1
+            else if (currentScroll > getScaleRange(2) && currentScroll < TICKET_STOPS[2])
+                currentRange = 2
+            else if (currentScroll > getScaleRange(3) && currentScroll < TICKET_STOPS[3])
+                currentRange = 3
+            else if (currentScroll > getScaleRange(4) && currentScroll < TICKET_STOPS[4])
+                currentRange = 4
 
-            const generalPercentage = Math.min(Math.max(0, (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE), 1)
+            const generalPercentage = Math.min(
+                Math.max(
+                    0,
+                    (SCALE_RANGE - (TICKET_STOPS[currentRange] - currentScroll)) / SCALE_RANGE
+                ),
+                1
+            )
 
-            const x = (tickets.length - index - pointsLeft - 1)
-            const scale = 1 - (MAX_SCALE_DECREASE_STEP * generalPercentage + (MAX_SCALE_DECREASE_STEP * x))
-            const translate = (MAX_TRANSLATE_DECREASE_STEP * generalPercentage + (MAX_TRANSLATE_DECREASE_STEP * x)) * -1
+            const x = tickets.length - index - pointsLeft - 1
+            const scale =
+                1 - (MAX_SCALE_DECREASE_STEP * generalPercentage + MAX_SCALE_DECREASE_STEP * x)
+            const translate =
+                (MAX_TRANSLATE_DECREASE_STEP * generalPercentage +
+                    MAX_TRANSLATE_DECREASE_STEP * x) *
+                -1
 
             setTicketTransform(index, translate, scale)
-        }
-        else if ((index < (tickets.length - 1)) && currentScroll > TICKET_STOPS[index] && currentScroll < (TICKET_STOPS[index + 1] - SCALE_RANGE)) {
+        } else if (
+            index < tickets.length - 1 &&
+            currentScroll > TICKET_STOPS[index] &&
+            currentScroll < TICKET_STOPS[index + 1] - SCALE_RANGE
+        ) {
             // The ticket is static
 
             setTicketOpacity(index, 1)
             setTicketTransform(index, 0, 1)
-        }
-        else if (index < (tickets.length - 1) && lastPoint > 0) {
+        } else if (index < tickets.length - 1 && lastPoint > 0) {
             // The ticket is already scaled down and hidden in a stack behind
 
-            const x = (tickets.length - index - pointsLeft - 1)
+            const x = tickets.length - index - pointsLeft - 1
             const translate = MAX_TRANSLATE_DECREASE_STEP * -x
             const scale = 1 - MAX_SCALE_DECREASE_STEP * x
 
@@ -146,7 +216,11 @@
     }
 
     const windowScroll = () => {
-        if (windowWidth > MIN_DESKTOP_WIDTH && verticalScroll >= featuresElementStart && verticalScroll < (featuresElementEnd + 100)) {
+        if (
+            windowWidth > MIN_DESKTOP_WIDTH &&
+            verticalScroll >= featuresElementStart &&
+            verticalScroll < featuresElementEnd + 100
+        ) {
             for (let i = 0; i <= 4; i++) {
                 applyAnimationOnTicket(i, verticalScroll)
             }
@@ -175,33 +249,34 @@
 </script>
 
 <svelte:window
-    bind:scrollY={ verticalScroll }
-    bind:outerWidth={ windowWidth }
-    on:scroll={ windowScroll }
-    on:mousemove={ mouseMove }
-    on:resize={ () => defineFeaturesBorders(verticalScroll) }
+    bind:scrollY={verticalScroll}
+    bind:outerWidth={windowWidth}
+    on:scroll={windowScroll}
+    on:mousemove={mouseMove}
+    on:resize={() => defineFeaturesBorders(verticalScroll)}
 />
 
 <svelte:head>
-	<title>Время Карьеры – Онлайн марафон</title>
+    <title>Время Карьеры – Онлайн марафон</title>
 </svelte:head>
 
-{ #if showStickyBtn }
+{#if showStickyBtn}
     <div class="sticky-btn mobile-hide" transition:fly={{ duration: 200, y: -200 }}>
-        <Button on:click={ modal.open }>Регистрация</Button>
+        <Button on:click={modal.open}>Регистрация</Button>
     </div>
-{ /if }
-<Modal align="center" bind:this={ modal }>
-    <Grid m={ 1 }>
-        <Heading level={ 4 } margin={{ y: 0 }}>Регистрация</Heading>
+{/if}
+<Modal align="center" bind:this={modal}>
+    <Grid m={1}>
+        <Heading level={4} margin={{ y: 0 }}>Регистрация</Heading>
         <p class="button-text no-margin">
-            Найти работу мечты можно по-разному: отправить запрос в космос, нарисовать карту желаний, попробовать свои силы на стажировках или просто заполнить эту форму.
+            Найти работу мечты можно по-разному: отправить запрос в космос, нарисовать карту
+            желаний, попробовать свои силы на стажировках или просто заполнить эту форму.
         </p>
         <p class="no-margin">
             <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/login">Войти</a>
         </p>
         <form method="POST" action="/api/signup">
-            <Grid m={ 1 }>
+            <Grid m={1}>
                 <Input name="lastName" placeholder="Фамилия" />
                 <Input name="firstName" placeholder="Имя" />
                 <Input name="patronimyc" placeholder="Отечество" />
@@ -210,25 +285,34 @@
                 <Input name="phone" placeholder="Номер телефона" />
                 <Input name="email" placeholder="E-mail" />
                 <small>
-                    Нажимая на кнопку «Регистрация» Вы даете свое согласие
-                    на обработку Ваших персональных данных, в соответствии
-                    с №152-ФЗ «О персональных данных» от 27.07.2006 года
+                    Нажимая на кнопку «Регистрация» Вы даете свое согласие на обработку Ваших
+                    персональных данных, в соответствии с №152-ФЗ «О персональных данных» от
+                    27.07.2006 года
                 </small>
                 <Button>Регистрация</Button>
             </Grid>
         </form>
     </Grid>
 </Modal>
-<MobileMenu bind:this={ $mobileMenu }>
+<MobileMenu bind:this={$mobileMenu}>
     <div class="mobile-menu-content">
         <nav>
-            <div><a href="#about" on:click={ $mobileMenu.close }>О марафоне</a></div>
-            <div><a href="#audience" on:click={ $mobileMenu.close }>Для кого</a></div>
-            <div><a href="#program" on:click={ $mobileMenu.close }>Программа</a></div>
+            <div><a href="#about" on:click={$mobileMenu.close}>О марафоне</a></div>
+            <div><a href="#audience" on:click={$mobileMenu.close}>Для кого</a></div>
+            <div><a href="#program" on:click={$mobileMenu.close}>Программа</a></div>
         </nav>
         <div class="auth-buttons">
-            <Button color="green" shadow on:click={ () => { $mobileMenu.close(); modal.open() } }>Регистрация</Button><br /><br />
-            <a href="/login"><Button color="green" shadow on:click={ $mobileMenu.close }>Войти</Button></a>
+            <Button
+                color="green"
+                shadow
+                on:click={() => {
+                    $mobileMenu.close()
+                    modal.open()
+                }}>Регистрация</Button
+            ><br /><br />
+            <a href="/login"
+                ><Button color="green" shadow on:click={$mobileMenu.close}>Войти</Button></a
+            >
         </div>
     </div>
 </MobileMenu>
@@ -240,7 +324,7 @@
             </a>
         </svelte:fragment>
         <svelte:fragment slot="right">
-            <IconButton src="/img/hamburger.svg" on:click={ $mobileMenu.open } />
+            <IconButton src="/img/hamburger.svg" on:click={$mobileMenu.open} />
         </svelte:fragment>
     </Header>
     <section class="intro">
@@ -256,72 +340,119 @@
                 <a href="#program">Программа</a>
             </svelte:fragment>
             <svelte:fragment slot="right">
-                <Button shadow on:click={ modal.open }>Регистрация</Button>
+                <Button shadow on:click={modal.open}>Регистрация</Button>
             </svelte:fragment>
         </Header>
         <div class="content">
             <div>
                 <img src="/img/marathon.svg" alt="online-marathon" class="marathon-text" />
-                <Heading className="large" margin={{ top: 0, bottom: 0.35 }} level={ 1 }>Время карьеры</Heading>
+                <Heading className="large" margin={{ top: 0, bottom: 0.35 }} level={1}
+                    >Время карьеры</Heading
+                >
                 <p class="button-text"><b>НОЯБРЬ 2023</b></p>
                 <p class="button-text intro-content">
-                    Карьерные эксперты, руководители и эйчары  компаний расскажут, каких сотрудников хантят в первую очередь, как составить продающее резюме и как влюбить всех в себя на собеседовании
+                    Карьерные эксперты, руководители и эйчары компаний расскажут, каких сотрудников
+                    хантят в первую очередь, как составить продающее резюме и как влюбить всех в
+                    себя на собеседовании
                 </p>
             </div>
             <br class="mobile-hide" />
             <div>
-                <Button variant="arrow" on:click={ modal.open } className="mobile-hide">Регистрация</Button>
-                <Button variant="arrow" on:click={ modal.open } wide className="pc-hide">Регистрация</Button>
+                <Button variant="arrow" on:click={modal.open} className="mobile-hide"
+                    >Регистрация</Button
+                >
+                <Button variant="arrow" on:click={modal.open} wide className="pc-hide"
+                    >Регистрация</Button
+                >
                 <br class="mobile-hide" />
                 <br />
                 <br />
-                <Partner background={ false } src="/img/logo/urfu.svg" />
-                <Partner background={ false } src="/img/logo/rosmol.svg" />
+                <Partner background={false} src="/img/logo/urfu.svg" />
+                <Partner background={false} src="/img/logo/rosmol.svg" />
             </div>
-            <div class="parallax-image" id="prlx-1" style:transform={ parallax1 }></div>
-            <div class="parallax-image" id="prlx-2" style:transform={ parallax2 }></div>
-            <div class="parallax-image" id="prlx-3" style:transform={ parallax3 }></div>
-            <div class="parallax-image" id="prlx-4" style:transform={ parallax4 }></div>
-            <div class="parallax-image shadow-over-prlx"></div>
+            <div class="parallax-image" id="prlx-1" style:transform={parallax1} />
+            <div class="parallax-image" id="prlx-2" style:transform={parallax2} />
+            <div class="parallax-image" id="prlx-3" style:transform={parallax3} />
+            <div class="parallax-image" id="prlx-4" style:transform={parallax4} />
+            <div class="parallax-image shadow-over-prlx" />
         </div>
     </section>
-    <section class="features" bind:this={ featuresElement }>
+    <section class="features" bind:this={featuresElement}>
         <div class="content align-center">
-            <Heading level={ 1 } margin={{ top: 0, bottom: 0.8 }}>В программе онлайн-марафона</Heading>
+            <Heading level={1} margin={{ top: 0, bottom: 0.8 }}>В программе онлайн-марафона</Heading
+            >
             <div class="tickets-wrapper mobile-hide">
-                <Ticket opacity={ tickets[0].opacity } zIndex={ tickets[0].zIndex } transform={ tickets[0].transform } image="/img/tickets/ticket-1.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
+                <Ticket
+                    opacity={tickets[0].opacity}
+                    zIndex={tickets[0].zIndex}
+                    transform={tickets[0].transform}
+                    image="/img/tickets/ticket-1.jpg"
+                >
+                    <Heading level={4} margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
                     <p class="no-margin ticket-caption">
-                        Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие специалисты нужны рынку труда, какие навыки будут востребованы у работодателей и что делать сейчас, чтобы стать первоклассным специалистом и найти работу мечты.
+                        Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие
+                        специалисты нужны рынку труда, какие навыки будут востребованы у
+                        работодателей и что делать сейчас, чтобы стать первоклассным специалистом и
+                        найти работу мечты.
                     </p>
                 </Ticket>
-                <Ticket opacity={ tickets[1].opacity } zIndex={ tickets[1].zIndex } transform={ tickets[1].transform } image="/img/tickets/ticket-2.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Начни свое дело</Heading>
+                <Ticket
+                    opacity={tickets[1].opacity}
+                    zIndex={tickets[1].zIndex}
+                    transform={tickets[1].transform}
+                    image="/img/tickets/ticket-2.jpg"
+                >
+                    <Heading level={4} margin={{ y: 0 }}>Начни свое дело</Heading>
                     <p class="no-margin ticket-caption">
-                        Успешные предприниматели поделятся своим опытом, а также расскажут, как монетизировать хобби и почему переехать на Бали и работать 3 часа в день  — плохая карьерная стратегия.
+                        Успешные предприниматели поделятся своим опытом, а также расскажут, как
+                        монетизировать хобби и почему переехать на Бали и работать 3 часа в день —
+                        плохая карьерная стратегия.
                     </p>
                 </Ticket>
-                <Ticket opacity={ tickets[2].opacity } zIndex={ tickets[2].zIndex } transform={ tickets[2].transform } image="/img/tickets/ticket-3.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Упакуем твой опыт</Heading>
+                <Ticket
+                    opacity={tickets[2].opacity}
+                    zIndex={tickets[2].zIndex}
+                    transform={tickets[2].transform}
+                    image="/img/tickets/ticket-3.jpg"
+                >
+                    <Heading level={4} margin={{ y: 0 }}>Упакуем твой опыт</Heading>
                     <p class="no-margin ticket-caption">
-                        Эксперты расскажут, почему организация школьного балла и статус "старосты" уже классный опыт для начала работы. И где еще можно найти тот самый опыт работы, без которого не берут на работу.
+                        Эксперты расскажут, почему организация школьного балла и статус "старосты"
+                        уже классный опыт для начала работы. И где еще можно найти тот самый опыт
+                        работы, без которого не берут на работу.
                     </p>
                 </Ticket>
-                <Ticket opacity={ tickets[3].opacity } zIndex={ tickets[3].zIndex } transform={ tickets[3].transform } image="/img/tickets/ticket-4.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Шаблон идеального резюме</Heading>
+                <Ticket
+                    opacity={tickets[3].opacity}
+                    zIndex={tickets[3].zIndex}
+                    transform={tickets[3].transform}
+                    image="/img/tickets/ticket-4.jpg"
+                >
+                    <Heading level={4} margin={{ y: 0 }}>Шаблон идеального резюме</Heading>
                     <p class="no-margin ticket-caption">
-                        На марафоне ты научишься составлять продающее резюме, которое поможет выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях, даже если ты студент первого курса.
+                        На марафоне ты научишься составлять продающее резюме, которое поможет
+                        выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях,
+                        даже если ты студент первого курса.
                     </p>
                 </Ticket>
-                <Ticket opacity={ tickets[4].opacity } zIndex={ tickets[4].zIndex } transform={ tickets[4].transform } image="/img/tickets/ticket-5.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Гайды и чек-листы</Heading>
+                <Ticket
+                    opacity={tickets[4].opacity}
+                    zIndex={tickets[4].zIndex}
+                    transform={tickets[4].transform}
+                    image="/img/tickets/ticket-5.jpg"
+                >
+                    <Heading level={4} margin={{ y: 0 }}>Гайды и чек-листы</Heading>
                     <p class="no-margin button-text weight-500">куда же без них</p>
                     <p class="no-margin ticket-caption">
-                        Где искать работу? Как определить хорошего работодателя по вакансии? Как составить резюме? Где и как развивать свои софт-скилс? С чего начать свое дело? – ответы на эти и многие другие вопросы ты найдешь в наших дополнительных материалах, которые ты сможешь использовать и после окончания марафона.
+                        Где искать работу? Как определить хорошего работодателя по вакансии? Как
+                        составить резюме? Где и как развивать свои софт-скилс? С чего начать свое
+                        дело? – ответы на эти и многие другие вопросы ты найдешь в наших
+                        дополнительных материалах, которые ты сможешь использовать и после окончания
+                        марафона.
                     </p>
                 </Ticket>
             </div>
-            { #if showTicketsSignup }
+            {#if showTicketsSignup}
                 <div transition:fade={{ duration: 200 }} class="mobile-hide">
                     <p class="button-text align-center">
                         Трудоустройство и исполнение всех<br />
@@ -329,48 +460,61 @@
                         и подготовиться к собеседованию
                     </p>
                     <p class="align-center">
-                        <Button shadow on:click={ modal.open }>Бесплатно, но с регистрацией</Button>
+                        <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
                     </p>
                 </div>
-            { /if }
+            {/if}
             <div class="tickets-wrapper pc-hide">
                 <Ticket image="/img/tickets/ticket-1.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
+                    <Heading level={4} margin={{ y: 0 }}>Лекции от топовых работодателей</Heading>
                     <p class="no-margin ticket-caption">
-                        Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие специалисты нужны рынку труда, какие навыки будут востребованы у работодателей и что делать сейчас, чтобы стать первоклассным специалистом и найти работу мечты.
+                        Карьерные эксперты, руководители и эйчары компаний страны расскажут, какие
+                        специалисты нужны рынку труда, какие навыки будут востребованы у
+                        работодателей и что делать сейчас, чтобы стать первоклассным специалистом и
+                        найти работу мечты.
                     </p>
                 </Ticket>
                 <br />
                 <br />
                 <Ticket image="/img/tickets/ticket-2.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Начни свое дело</Heading>
+                    <Heading level={4} margin={{ y: 0 }}>Начни свое дело</Heading>
                     <p class="no-margin ticket-caption">
-                        Успешные предприниматели поделятся своим опытом, а также расскажут, как монетизировать хобби и почему переехать на Бали и работать 3 часа в день  — плохая карьерная стратегия.
+                        Успешные предприниматели поделятся своим опытом, а также расскажут, как
+                        монетизировать хобби и почему переехать на Бали и работать 3 часа в день —
+                        плохая карьерная стратегия.
                     </p>
                 </Ticket>
                 <br />
                 <br />
                 <Ticket image="/img/tickets/ticket-3.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Упакуем твой опыт</Heading>
+                    <Heading level={4} margin={{ y: 0 }}>Упакуем твой опыт</Heading>
                     <p class="no-margin ticket-caption">
-                        Эксперты расскажут, почему организация школьного балла и статус "старосты" уже классный опыт для начала работы. И где еще можно найти тот самый опыт работы, без которого не берут на работу.
+                        Эксперты расскажут, почему организация школьного балла и статус "старосты"
+                        уже классный опыт для начала работы. И где еще можно найти тот самый опыт
+                        работы, без которого не берут на работу.
                     </p>
                 </Ticket>
                 <br />
                 <br />
                 <Ticket image="/img/tickets/ticket-4.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Шаблон идеального резюме</Heading>
+                    <Heading level={4} margin={{ y: 0 }}>Шаблон идеального резюме</Heading>
                     <p class="no-margin ticket-caption">
-                        На марафоне ты научишься составлять продающее резюме, которое поможет выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях, даже если ты студент первого курса.
+                        На марафоне ты научишься составлять продающее резюме, которое поможет
+                        выгодно подчеркнуть твои сильные стороны и сделать акцент на достижениях,
+                        даже если ты студент первого курса.
                     </p>
                 </Ticket>
                 <br />
                 <br />
                 <Ticket image="/img/tickets/ticket-5.jpg">
-                    <Heading level={ 4 } margin={{ y: 0 }}>Гайды и чек-листы</Heading>
+                    <Heading level={4} margin={{ y: 0 }}>Гайды и чек-листы</Heading>
                     <p class="no-margin button-text weight-500">куда же без них</p>
                     <p class="no-margin ticket-caption">
-                        Где искать работу? Как определить хорошего работодателя по вакансии? Как составить резюме? Где и как развивать свои софт-скилс? С чего начать свое дело? – ответы на эти и многие другие вопросы ты найдешь в наших дополнительных материалах, которые ты сможешь использовать и после окончания марафона.
+                        Где искать работу? Как определить хорошего работодателя по вакансии? Как
+                        составить резюме? Где и как развивать свои софт-скилс? С чего начать свое
+                        дело? – ответы на эти и многие другие вопросы ты найдешь в наших
+                        дополнительных материалах, которые ты сможешь использовать и после окончания
+                        марафона.
                     </p>
                 </Ticket>
                 <br />
@@ -382,7 +526,7 @@
                         и подготовиться к собеседованию
                     </p>
                     <p class="align-center">
-                        <Button shadow on:click={ modal.open }>Бесплатно, но с регистрацией</Button>
+                        <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
                     </p>
                 </div>
             </div>
@@ -392,17 +536,17 @@
         <div class="content">
             <div class="grid-1-1-2">
                 <Card color="black" className="black-card-1">
-                    <Heading margin={{ y: 0 }} level={ 3 }>10</Heading>
+                    <Heading margin={{ y: 0 }} level={3}>10</Heading>
                     <p class="button-text no-margin mobile-hide">онлайн-лекций</p>
                     <p class="no-margin pc-hide">онлайн-лекций</p>
                 </Card>
                 <Card color="black" className="black-card-2">
-                    <Heading margin={{ y: 0 }} level={ 3 }>10</Heading>
+                    <Heading margin={{ y: 0 }} level={3}>10</Heading>
                     <p class="button-text no-margin mobile-hide">топовых спикеров</p>
                     <p class="no-margin pc-hide">топовых спикеров</p>
                 </Card>
                 <Card color="black" className="black-card-3">
-                    <Heading margin={{ y: 0 }} level={ 2 }>∞</Heading>
+                    <Heading margin={{ y: 0 }} level={2}>∞</Heading>
                     <p class="button-text no-margin mobile-hide">лайфхаков для твоей карьеры</p>
                     <p class="no-margin pc-hide">лайфхаков для твоей карьеры</p>
                 </Card>
@@ -412,8 +556,15 @@
             <br />
             <div class="grid-gallery">
                 <Card className="gallery-purple" color="purple">
-                    <Heading level={ 1 } margin={{ y: 0, top: 0.4 }} lineHeight={ 1 } className="success-title">
-                        <span class="mobile-hide" style="position: relative; z-index: 1;">Путь к<br /> начинается здесь</span>
+                    <Heading
+                        level={1}
+                        margin={{ y: 0, top: 0.4 }}
+                        lineHeight={1}
+                        className="success-title"
+                    >
+                        <span class="mobile-hide" style="position: relative; z-index: 1;"
+                            >Путь к<br /> начинается здесь</span
+                        >
                         <span class="pc-hide">Путь к успеху начинается здесь</span>
                     </Heading>
                 </Card>
@@ -422,7 +573,7 @@
                         <Number>1</Number><br />
                         <p>Заполни форму</p>
                     </div>
-                    <Button shadow on:click={ modal.open }>Регистрация</Button>
+                    <Button shadow on:click={modal.open}>Регистрация</Button>
                 </Card>
                 <Card className="gallery-two" color="white">
                     <Number>2</Number><br />
@@ -461,7 +612,7 @@
             <Card color="green" className="black-text giveaway">
                 <Grid m={1}>
                     <Grid m={2} s={1}>
-                        <Heading level={ 4 } margin={{ top: 0.5 }}>
+                        <Heading level={4} margin={{ top: 0.5 }}>
                             В отличие от других<br />
                             онлайн-марафонов, воздух продавать не будем,<br />
                             но подарки подготовили:
@@ -475,11 +626,15 @@
                     </Grid>
                     <br />
                     <p class="button-text align-center giveaway-signup">
-                        Вот форма, которую нужно заполнить, чтобы стать участником<br class="mobile-hide" />
+                        Вот форма, которую нужно заполнить, чтобы стать участником<br
+                            class="mobile-hide"
+                        />
                         розыгрыша подарков и получить полезные материалы.
                     </p>
                     <br />
-                    <Button color="purple" className="white-text" on:click={ modal.open }>Регистрация</Button>
+                    <Button color="purple" className="white-text" on:click={modal.open}
+                        >Регистрация</Button
+                    >
                 </Grid>
             </Card>
         </div>
@@ -489,11 +644,16 @@
         <div class="content">
             <Grid m={2} s={1}>
                 <div>
-                    <Heading level={ 2 } margin={{ top: 0, bottom: 0.7 }} className="audience-title">
+                    <Heading level={2} margin={{ top: 0, bottom: 0.7 }} className="audience-title">
                         Онлайн-марафон<br />
                         <span style="opacity: 0;">для тех</span>, кто
                     </Heading>
-                    <img src="/img/man.jpg" alt="Иллюстрация" height="600" class="mobile-hide has-shadow has-radius" />
+                    <img
+                        src="/img/man.jpg"
+                        alt="Иллюстрация"
+                        height="600"
+                        class="mobile-hide has-shadow has-radius"
+                    />
                 </div>
                 <div>
                     <Grid m={3} s={2} placeItems="start">
@@ -503,18 +663,35 @@
                         <Emote image="/img/emotes/emote-4.png">Мечтатели</Emote>
                         <Emote image="/img/emotes/emote-5.png">Реалисты</Emote>
                         <Emote image="/img/emotes/emote-6.png">В поисках работы</Emote>
-                        <Emote image="/img/emotes/emote-7.png">Думает<br /> о предстоящем<br /> поиске работы</Emote>
-                        <Emote image="/img/emotes/emote-8.png">Думает о том,<br /> как его достал<br /> начальник</Emote>
+                        <Emote image="/img/emotes/emote-7.png"
+                            >Думает<br /> о предстоящем<br /> поиске работы</Emote
+                        >
+                        <Emote image="/img/emotes/emote-8.png"
+                            >Думает о том,<br /> как его достал<br /> начальник</Emote
+                        >
                         <Emote image="/img/emotes/emote-9.png">Читает этот текст</Emote>
                     </Grid>
                     <br />
                     <br />
-                    <Button shadow wide variant="arrow" className="pc-hide" on:click={ modal.open }>Регистрация</Button>
-                    <Button shadow wide variant="arrow" className="mobile-hide" on:click={ modal.open }>Успешный успех по ссылке</Button>
+                    <Button shadow wide variant="arrow" className="pc-hide" on:click={modal.open}
+                        >Регистрация</Button
+                    >
+                    <Button
+                        shadow
+                        wide
+                        variant="arrow"
+                        className="mobile-hide"
+                        on:click={modal.open}>Успешный успех по ссылке</Button
+                    >
                     <br />
                     <br />
                     <br />
-                    <img src="/img/man.jpg" alt="Иллюстрация" width="100%" class="pc-hide has-shadow has-radius" />
+                    <img
+                        src="/img/man.jpg"
+                        alt="Иллюстрация"
+                        width="100%"
+                        class="pc-hide has-shadow has-radius"
+                    />
                 </div>
             </Grid>
         </div>
@@ -524,73 +701,71 @@
     <section class="checkboxes">
         <div class="content">
             <Card color="purple" className="checkboxes">
-                <Heading level={ 2 } margin={{ top: 0.25 }} className="pc-hide align-center">
+                <Heading level={2} margin={{ top: 0.25 }} className="pc-hide align-center">
                     Отметь то, что<br />
                     тебе подходит
                 </Heading>
-                <Heading level={ 2 } margin={{ top: 0.25 }} className="mobile-hide">
+                <Heading level={2} margin={{ top: 0.25 }} className="mobile-hide">
                     Отметь то, что<br />
                     тебе подходит
                 </Heading>
                 <div class="checkboxes-wrapper">
-                    <Checkbox bind:group={ checkboxes } value="1" name="1">
+                    <Checkbox bind:group={checkboxes} value="1" name="1">
                         Скоро диплом – а потом что?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="2" name="2">
+                    <Checkbox bind:group={checkboxes} value="2" name="2">
                         А разве «работа с высокой зп и классным боссом» это не миф?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="3" name="3">
+                    <Checkbox bind:group={checkboxes} value="3" name="3">
                         Как в 2023 вообще найти работу?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="4" name="4">
-                        Кажется, я потерял себя
-                    </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="5" name="5">
+                    <Checkbox bind:group={checkboxes} value="4" name="4"
+                        >Кажется, я потерял себя</Checkbox
+                    >
+                    <Checkbox bind:group={checkboxes} value="5" name="5">
                         Везде требуют опыт, а если опыта нет?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="6" name="6">
+                    <Checkbox bind:group={checkboxes} value="6" name="6">
                         А есть вакансии не в колл-центре?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="7" name="7">
+                    <Checkbox bind:group={checkboxes} value="7" name="7">
                         Кажется, светит только «свободная касса»
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="8" name="8">
+                    <Checkbox bind:group={checkboxes} value="8" name="8">
                         В резюме всего одна строчка, при условии, что получу диплом
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="9" name="9">
-                        Сплошные отказы, как быть?
-                    </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="10" name="10">
+                    <Checkbox bind:group={checkboxes} value="9" name="9"
+                        >Сплошные отказы, как быть?</Checkbox
+                    >
+                    <Checkbox bind:group={checkboxes} value="10" name="10">
                         Где эта ваша «работа мечты»?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="11" name="11">
+                    <Checkbox bind:group={checkboxes} value="11" name="11">
                         Хочу быть фрилансером, но не знаю с чего начать
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="12" name="12">
+                    <Checkbox bind:group={checkboxes} value="12" name="12">
                         Как хобби превратить в работу?
                     </Checkbox>
-                    <Checkbox bind:group={ checkboxes } value="13" name="13">
+                    <Checkbox bind:group={checkboxes} value="13" name="13">
                         Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж
                     </Checkbox>
                 </div>
-                { #if checkboxes.length }
+                {#if checkboxes.length}
                     <div transition:slide={{ duration: 200, axis: 'y' }}>
                         <br />
                         <br />
-                        <Card color="white" shadow={ false } className="align-center">
+                        <Card color="white" shadow={false} className="align-center">
                             <p class="medium-text weight-500">
                                 Ответы на эти и другие вопросы<br class="mobile-hide" />
                                 ты найдешь на онлайн-марафоне<br />
                                 Время карьеры
                             </p>
-                            <p>
-                                Осталось только зарегистрироваться
-                            </p>
+                            <p>Осталось только зарегистрироваться</p>
                             <br />
                             <a href="#signup"><Button>Регистрация</Button></a>
                         </Card>
                     </div>
-                { /if }
+                {/if}
             </Card>
         </div>
     </section>
@@ -598,67 +773,97 @@
     <br />
     <section class="program pc-hide mobile-hide" id="program">
         <div class="content">
-            <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
-            <Grid m={ 1 } gap={ 2 }>
+            <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
+            <Grid m={1} gap={2}>
                 <Speech
-                    date='1 ноября'
-                    time={ [ '16:00', '17:00' ] }
-                    weekday='Ср'
-                    speakers={ [{ name: 'Иван Иванов', duty: 'Главный HR-специалист', photo: '/img/speaker-1.jpg' }] }
-                    company='Сбербанк'
-                    companyLogo='/img/sber.png'
-                    link='/'
+                    date="1 ноября"
+                    time={['16:00', '17:00']}
+                    weekday="Ср"
+                    speakers={[
+                        {
+                            name: 'Иван Иванов',
+                            duty: 'Главный HR-специалист',
+                            photo: '/img/speaker-1.jpg'
+                        }
+                    ]}
+                    company="Сбербанк"
+                    companyLogo="/img/sber.png"
+                    link="/"
                 >
                     Как очаровывать работодателя с первой фразы?
                 </Speech>
                 <Speech
-                    date='9 ноября'
-                    time={ [ '17:00', '16:00' ] }
-                    weekday='Чт'
-                    speakers={ [{ name: 'Анна Петрова', duty: 'Старший инженер в департаменте платежных систем', photo: '/img/speaker-3.jpg' }] }
-                    company='Тинькоф'
-                    companyLogo='/img/kontur.png'
-                    link='/'
+                    date="9 ноября"
+                    time={['17:00', '16:00']}
+                    weekday="Чт"
+                    speakers={[
+                        {
+                            name: 'Анна Петрова',
+                            duty: 'Старший инженер в департаменте платежных систем',
+                            photo: '/img/speaker-3.jpg'
+                        }
+                    ]}
+                    company="Тинькоф"
+                    companyLogo="/img/kontur.png"
+                    link="/"
                 >
-                    Разбираться в черновиках никто не будет: почему чистый код — одно из главных требований к разработчику
+                    Разбираться в черновиках никто не будет: почему чистый код — одно из главных
+                    требований к разработчику
                 </Speech>
                 <Speech
-                    date='14 ноября'
-                    time={ [ '18:00', '19:00' ] }
-                    weekday='Вт'
-                    speakers={ [
-                        { name: 'Петр Петров', duty: 'Руководитель группы машинного обучения и анализа данных (Data Science)', photo: '/img/speaker-4.jpg' },
-                        { name: 'Ирина Петрова', duty: 'Начальник отдела кибербезопасности и анализа данных', photo: '/img/speaker-5.jpg' }
-                    ] }
-                    company='Синара Банк'
-                    companyLogo='/img/sinara.png'
-                    link='/'
+                    date="14 ноября"
+                    time={['18:00', '19:00']}
+                    weekday="Вт"
+                    speakers={[
+                        {
+                            name: 'Петр Петров',
+                            duty: 'Руководитель группы машинного обучения и анализа данных (Data Science)',
+                            photo: '/img/speaker-4.jpg'
+                        },
+                        {
+                            name: 'Ирина Петрова',
+                            duty: 'Начальник отдела кибербезопасности и анализа данных',
+                            photo: '/img/speaker-5.jpg'
+                        }
+                    ]}
+                    company="Синара Банк"
+                    companyLogo="/img/sinara.png"
+                    link="/"
                 >
                     Направления для быстрого старта IT-специалиста
                 </Speech>
-                { #if showProgram }
+                {#if showProgram}
                     <div transition:slide={{ duration: 200, axis: 'y' }}>
                         <Speech
-                            date='9 ноября'
-                            time={ [ '17:00', '16:00' ] }
-                            weekday='Чт'
-                            speakers={ [{ name: 'Анна Петрова', duty: 'Старший инженер в департаменте платежных систем', photo: '/img/speaker-3.jpg' }] }
-                            company='Тинькоф'
-                            companyLogo='/img/kontur.png'
-                            link='/'
+                            date="9 ноября"
+                            time={['17:00', '16:00']}
+                            weekday="Чт"
+                            speakers={[
+                                {
+                                    name: 'Анна Петрова',
+                                    duty: 'Старший инженер в департаменте платежных систем',
+                                    photo: '/img/speaker-3.jpg'
+                                }
+                            ]}
+                            company="Тинькоф"
+                            companyLogo="/img/kontur.png"
+                            link="/"
                         >
-                            Разбираться в черновиках никто не будет: почему чистый код — одно из главных требований к разработчику
+                            Разбираться в черновиках никто не будет: почему чистый код — одно из
+                            главных требований к разработчику
                         </Speech>
                     </div>
-                { /if }
+                {/if}
             </Grid>
             <br />
             <br />
-            { #if !showProgram }
+            {#if !showProgram}
                 <div class="align-center" transition:slide={{ duration: 200, axis: 'y' }}>
-                    <Button color="transparent" on:click={ () => showProgram = true }>Показать все</Button>
+                    <Button color="transparent" on:click={() => (showProgram = true)}
+                        >Показать все</Button
+                    >
                 </div>
-            { /if }
+            {/if}
         </div>
     </section>
     <br class="mobile-hide" />
@@ -667,26 +872,30 @@
     <section class="signup" id="signup">
         <div class="content">
             <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
-                <Grid m={ 2 } s={ 1 } gap={ 12 } mobileGap={ 1 }>
-                    <Grid m={ 1 } alignContent="space-between">
+                <Grid m={2} s={1} gap={12} mobileGap={1}>
+                    <Grid m={1} alignContent="space-between">
                         <div>
-                            <Heading level={ 2 } margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading>
+                            <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading
+                            >
                             <p class="button-text">
-                                Найти работу мечты можно по-разному: отправить запрос в космос, нарисовать карту желаний, попробовать свои силы на стажировках или просто заполнить эту форму.
+                                Найти работу мечты можно по-разному: отправить запрос в космос,
+                                нарисовать карту желаний, попробовать свои силы на стажировках или
+                                просто заполнить эту форму.
                             </p>
                             <p>
-                                <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/login">Войти</a>
+                                <span style:opacity="0.5">Уже есть аккаунт?</span>
+                                <a href="/login">Войти</a>
                             </p>
                         </div>
                         <small class="mobile-hide">
-                            Нажимая на кнопку «Регистрация» Вы даете свое согласие
-                            на обработку Ваших персональных данных, в соответствии
-                            с №152-ФЗ «О персональных данных» от 27.07.2006 года
+                            Нажимая на кнопку «Регистрация» Вы даете свое согласие на обработку
+                            Ваших персональных данных, в соответствии с №152-ФЗ «О персональных
+                            данных» от 27.07.2006 года
                         </small>
                     </Grid>
                     <div>
                         <form method="POST" action="/api/signup">
-                            <Grid m={ 1 }>
+                            <Grid m={1}>
                                 <Input name="lastName" placeholder="Фамилия" />
                                 <Input name="firstName" placeholder="Имя" />
                                 <Input name="patronimyc" placeholder="Отечество" />
@@ -695,9 +904,9 @@
                                 <Input name="phone" placeholder="Номер телефона" />
                                 <Input name="email" placeholder="E-mail" />
                                 <small class="pc-hide">
-                                    Нажимая на кнопку «Регистрация» Вы даете свое согласие
-                                    на обработку Ваших персональных данных, в соответствии
-                                    с №152-ФЗ «О персональных данных» от 27.07.2006 года
+                                    Нажимая на кнопку «Регистрация» Вы даете свое согласие на
+                                    обработку Ваших персональных данных, в соответствии с №152-ФЗ «О
+                                    персональных данных» от 27.07.2006 года
                                 </small>
                                 <Button>Регистрация</Button>
                             </Grid>
@@ -707,7 +916,7 @@
             </Card>
         </div>
     </section>
-    <section class="footer mobile-hide"></section>
+    <section class="footer mobile-hide" />
 </main>
 
 <style>
@@ -721,7 +930,7 @@
     @media screen and (max-width: 768px) {
         :global(header) {
             position: sticky;
-            background-color: #F4F6FB;
+            background-color: #f4f6fb;
             border-radius: 0 0 var(--radius) var(--radius);
             top: 0;
             z-index: 30;

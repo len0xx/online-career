@@ -1,16 +1,13 @@
 {
-	"compilerOptions": {
-		"moduleResolution": "node",
-		"module": "es2020",
-		"lib": [
-			"es2020",
-			"DOM"
-		],
-		"target": "es2020",
-		"importsNotUsedAsValues": "error",
-		"esModuleInterop": true,
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "module": "es2020",
+        "lib": ["es2020", "DOM"],
+        "target": "es2020",
+        "importsNotUsedAsValues": "error",
+        "esModuleInterop": true,
         "allowJs": false,
-		"outDir": "./build",
-		"rootDir": "."
-	}
+        "outDir": "./build",
+        "rootDir": "."
+    }
 }

@@ -1,8 +1,8 @@
 <script>
-	export let className = ''
+    export let className = ''
 </script>
 
-<header class={ className }>
+<header class={className}>
     <div class="header-content">
         <div>
             <slot name="left" />
@@ -33,7 +33,7 @@
     }
 
     :global(header nav > a::after) {
-        content: "";
+        content: '';
         display: block;
         position: absolute;
         width: 100%;
@@ -42,7 +42,7 @@
         left: 0;
         transition: 0.1s ease-in-out;
         opacity: 0;
-        background-image: url("/img/icons/underline.svg");
+        background-image: url('/img/icons/underline.svg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;

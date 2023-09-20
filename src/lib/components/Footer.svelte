@@ -2,7 +2,7 @@
     export let className = ''
 </script>
 
-<footer class={ className }>
+<footer class={className}>
     <div class="footer-content">
         <slot />
     </div>
@@ -16,7 +16,7 @@
         padding: 3em 0;
         margin-top: 6em;
         background-color: var(--dark);
-        background-image: url("/img/footer-bg.svg");
+        background-image: url('/img/footer-bg.svg');
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
@@ -37,7 +37,7 @@
 
     @media screen and (max-width: 768px) {
         footer:not(.auth-page) {
-            background-image: url("/img/mobile-footer-bg.svg");
+            background-image: url('/img/mobile-footer-bg.svg');
             margin-top: 3em;
         }
     }

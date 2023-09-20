@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Button, Grid, Heading, Input } from "$lib/components"
+    import { Button, Grid, Heading, Input } from '$lib/components'
 </script>
 
 <svelte:head>
@@ -7,9 +7,9 @@
 </svelte:head>
 
 <div class="align-center">
-    <Heading level={ 2 } margin={{ bottom: 0.4 }}>Вход</Heading>
+    <Heading level={2} margin={{ bottom: 0.4 }}>Вход</Heading>
     <form action="" class="fix-width">
-        <Grid m={ 1 }>
+        <Grid m={1}>
             <p>Нет аккаунта? <a class="green-link" href="/reg">Регистрация</a></p>
             <Input name="email" id="email" placeholder="Email" type="email" />
             <Input name="password" id="password" placeholder="Пароль" type="password" />

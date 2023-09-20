@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Button } from "$lib/components"
+    import { Button } from '$lib/components'
 
     type Weekday = 'Пн' | 'Вт' | 'Ср' | 'Чт' | 'Пт' | 'Сб' | 'Вс'
     type Speaker = {
@@ -19,11 +19,11 @@
 
 <div class="speech">
     <div class="side-block speech-details">
-        <div class="company-logo" style:background-image={ `url("${ companyLogo }")` }></div>
-        <div class="speech-date">{ date }</div>
+        <div class="company-logo" style:background-image={`url("${companyLogo}")`} />
+        <div class="speech-date">{date}</div>
         <div>
-            <div class="speech-weekday">{ weekday }</div>
-            <div class="speech-time">{ time.length === 2 ? `${ time[0] } - ${ time[1] }` : time[0] }</div>
+            <div class="speech-weekday">{weekday}</div>
+            <div class="speech-time">{time.length === 2 ? `${time[0]} - ${time[1]}` : time[0]}</div>
             <div class="speech-time-caption">Время МСК</div>
         </div>
     </div>
@@ -31,28 +31,34 @@
         <div class="speech-title">
             <slot />
         </div>
-        <div class="speakers { `amount-${ speakers.length }` }">
-            { #each speakers as speaker }
+        <div class="speakers {`amount-${speakers.length}`}">
+            {#each speakers as speaker}
                 <div class="speaker-details">
                     <div>
-                        <span class="name">{ speaker.name }</span>
-                        <span class="company">{ company }</span>
+                        <span class="name">{speaker.name}</span>
+                        <span class="company">{company}</span>
                     </div>
-                    <div class="duty">{ speaker.duty }</div>
+                    <div class="duty">{speaker.duty}</div>
                 </div>
-            { /each }
+            {/each}
         </div>
     </div>
-    <div class="side-block speaker-picture" style:background-image={ `url("${ speakers.length === 1 ? speakers[0].photo : '' }")` }>
+    <div
+        class="side-block speaker-picture"
+        style:background-image={`url("${speakers.length === 1 ? speakers[0].photo : ''}")`}
+    >
         <div class="speakers-pictures">
-            { #if speakers.length > 1 }
-                    { #each speakers as speaker }
-                        <div class="speaker-miniature" style:background-image={ `url("${ speaker.photo }")` } />
-                    { /each }
-            { /if }
+            {#if speakers.length > 1}
+                {#each speakers as speaker}
+                    <div
+                        class="speaker-miniature"
+                        style:background-image={`url("${speaker.photo}")`}
+                    />
+                {/each}
+            {/if}
         </div>
         <div>
-            <a target="_blank" href={ link.toString() }>
+            <a target="_blank" href={link.toString()}>
                 <Button variant="link" color="white">Ссылка</Button>
             </a>
         </div>
@@ -200,8 +206,9 @@
             align-items: center;
             gap: 1em;
             min-height: unset;
-            grid-template-areas: "details picture"
-                                 "text text";
+            grid-template-areas:
+                'details picture'
+                'text text';
         }
 
         .speech > .side-block {
@@ -236,15 +243,15 @@
         }
 
         .speech > .side-block.speech-details {
-            grid-area: details
+            grid-area: details;
         }
 
         .speech > .side-block.speaker-picture {
-            grid-area: picture
+            grid-area: picture;
         }
 
         .speech > .center-block {
-            grid-area: text
+            grid-area: text;
         }
     }
 </style>

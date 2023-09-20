@@ -17,7 +17,14 @@
 {#if visible}
     <div class="mobile-menu" transition:fly={{ x: 300, duration: 300 }}>
         <div class="close-btn">
-            <img src="/img/icons/modal-close.svg" alt="Close modal" width="36" height="36" on:click={ close } on:keydown> 
+            <img
+                src="/img/icons/modal-close.svg"
+                alt="Close modal"
+                width="36"
+                height="36"
+                on:click={close}
+                on:keydown
+            />
         </div>
         <slot />
     </div>

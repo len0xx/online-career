@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { computePadding } from "$lib/utilities"
-	import type { Padding } from "../../types"
+    import { computePadding } from '$lib/utilities'
+    import type { Padding } from '../../types'
 
     type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6
 
@@ -12,19 +12,19 @@
     export let margin: Padding = defaultMargin
     export let node: HTMLElement | null = null
 
-    $: tag = `h${ level }`
+    $: tag = `h${level}`
 </script>
 
 <svelte:element
+    this={tag}
     on:click
     on:mouseover
     on:focus
     on:blur
-    bind:this={ node }
-    style:line-height={ lineHeight }
-    style:margin={ computePadding({ ...defaultMargin, ...margin }) }
-    this={ tag }
-    class={ [ className, 'heading' ].filter((c) => !!c.length).join(' ') }
+    bind:this={node}
+    style:line-height={lineHeight}
+    style:margin={computePadding({ ...defaultMargin, ...margin })}
+    class={[className, 'heading'].filter((c) => !!c.length).join(' ')}
 >
     <slot />
 </svelte:element>

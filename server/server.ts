@@ -19,9 +19,11 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 if (NODE_ENV === 'development') {
-	app.use(cors())
+    app.use(cors())
 }
 
 app.use('/api/user', userRouter)
 
-app.listen(APP_PORT ? +APP_PORT : 4000, APP_IP ?? 'localhost', () => console.log(`The server is up and running at http://${APP_IP}:${APP_PORT}`))
+app.listen(APP_PORT ? +APP_PORT : 4000, APP_IP ?? 'localhost', () =>
+    console.log(`The server is up and running at http://${APP_IP}:${APP_PORT}`)
+)

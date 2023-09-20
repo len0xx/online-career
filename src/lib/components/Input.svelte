@@ -2,7 +2,27 @@
     import { imask } from 'svelte-imask'
     import { createEventDispatcher, onMount } from 'svelte'
 
-    type InputType = 'text' | 'email' | 'tel' | 'number' | 'password' | 'search' | 'url' | 'date' | 'time' | 'datetime-local' | 'month' | 'week' | 'color' | 'file' | 'checkbox' | 'radio' | 'submit' | 'hidden' | 'range' | 'button'
+    type InputType =
+        | 'text'
+        | 'email'
+        | 'tel'
+        | 'number'
+        | 'password'
+        | 'search'
+        | 'url'
+        | 'date'
+        | 'time'
+        | 'datetime-local'
+        | 'month'
+        | 'week'
+        | 'color'
+        | 'file'
+        | 'checkbox'
+        | 'radio'
+        | 'submit'
+        | 'hidden'
+        | 'range'
+        | 'button'
 
     export let marginX = 0
     export let marginY = 0
@@ -55,50 +75,53 @@
 
     onMount(valueChanged)
 
-    if (wide !== null) className = className.length ? [className, 'kit-input-wide'].join(' ') : 'kit-input-wide'
+    if (wide !== null)
+        className = className.length ? [className, 'kit-input-wide'].join(' ') : 'kit-input-wide'
     $: sizeClass = textSize === 'S' ? 'small' : textSize === 'L' ? 'large' : 'medium'
 </script>
 
 <!-- svelte-ignore a11y-autofocus -->
 <input
-    { id }
-    { min }
-    { max }
-    { type }
-    { name }
-    { size }
-    { step }
-    { list }
-    { pattern }
-    { readonly }
-    { multiple }
-    { required }
-    { disabled }
-    { autofocus }
-    value={ internalValue }
+    {id}
+    {min}
+    {max}
+    {type}
+    {name}
+    {size}
+    {step}
+    {list}
+    {pattern}
+    {readonly}
+    {multiple}
+    {required}
+    {disabled}
+    {autofocus}
+    value={internalValue}
     on:click
     on:focus
     on:blur
     on:change
     on:mouseover
     on:mouseleave
-    on:input={ inputHandler }
-    on:change={ changeHandler }
-    class="{ className } size-{sizeClass}"
+    on:input={inputHandler}
+    on:change={changeHandler}
+    class="{className} size-{sizeClass}"
     class:filledIn
     class:white
-    bind:this={ node }
-    use:imask={ mask || undefined }
-    placeholder={ placeholder || undefined }
-    style:margin-top={ (marginTop !== null ? marginTop : marginY) + 'em' }
-    style:margin-bottom={ (marginBottom !== null ? marginBottom : marginY) + 'em' }
-    style:margin-left={ (marginLeft !== null ? marginLeft : marginX) + 'em' }
-    style:margin-right={ (marginRight !== null ? marginRight : marginX) + 'em' }
-    style:border-width={ (lineWidth) + 'px' }
+    bind:this={node}
+    use:imask={mask || undefined}
+    placeholder={placeholder || undefined}
+    style:margin-top={(marginTop !== null ? marginTop : marginY) + 'em'}
+    style:margin-bottom={(marginBottom !== null ? marginBottom : marginY) + 'em'}
+    style:margin-left={(marginLeft !== null ? marginLeft : marginX) + 'em'}
+    style:margin-right={(marginRight !== null ? marginRight : marginX) + 'em'}
+    style:border-width={lineWidth + 'px'}
 />
 
 <style>
-    input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]) {
+    input:not([type='hidden']):not([type='button']):not([type='submit']):not([type='checkbox']):not(
+            [type='radio']
+        ):not([type='file']):not([type='range']) {
         background: var(--white);
         border-radius: 50px;
         box-shadow: unset;
@@ -110,18 +133,24 @@
         line-height: 1.2;
     }
 
-	@media screen and (max-width: 768px) {
-		input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]) {
-			padding: 1rem 1.25rem;
-		}
-	}
+    @media screen and (max-width: 768px) {
+        input:not([type='hidden']):not([type='button']):not([type='submit']):not(
+                [type='checkbox']
+            ):not([type='radio']):not([type='file']):not([type='range']) {
+            padding: 1rem 1.25rem;
+        }
+    }
 
-    input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]).filledIn {
+    input:not([type='hidden']):not([type='button']):not([type='submit']):not([type='checkbox']):not(
+            [type='radio']
+        ):not([type='file']):not([type='range']).filledIn {
         border-bottom-color: var(--blue);
         color: var(--blue);
     }
 
-    input:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not(.filledIn):focus {
+    input:not([type='hidden']):not([type='button']):not([type='submit']):not([type='checkbox']):not(
+            [type='radio']
+        ):not([type='file']):not([type='range']):not(.filledIn):focus {
         border-bottom-color: rgba(0, 0, 0, 0.4);
     }
 
@@ -129,17 +158,23 @@
         color: rgba(0, 0, 0, 0.2);
     }
 
-    input.white:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]) {
+    input.white:not([type='hidden']):not([type='button']):not([type='submit']):not(
+            [type='checkbox']
+        ):not([type='radio']):not([type='file']):not([type='range']) {
         color: white;
         border-bottom-color: rgba(255, 255, 255, 0.3);
     }
 
-    input.white:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]).filledIn {
+    input.white:not([type='hidden']):not([type='button']):not([type='submit']):not(
+            [type='checkbox']
+        ):not([type='radio']):not([type='file']):not([type='range']).filledIn {
         color: white;
         border-bottom-color: rgba(255, 255, 255, 1);
     }
 
-    input.white:not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not(.filledIn):focus {
+    input.white:not([type='hidden']):not([type='button']):not([type='submit']):not(
+            [type='checkbox']
+        ):not([type='radio']):not([type='file']):not([type='range']):not(.filledIn):focus {
         border-bottom-color: rgba(255, 255, 255, 0.5);
     }
 

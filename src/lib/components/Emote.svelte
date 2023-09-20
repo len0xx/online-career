@@ -1,13 +1,19 @@
 <script lang="ts">
-	import { Card } from "$lib/components"
+    import { Card } from '$lib/components'
 
     export let image: string
 </script>
 
 <div class="emote">
     <Card color="grey" className="image-wrapper">
-        <img class="primary-emote" src={ image } alt="Emote icon" width="100" height="100" />
-        <img class="secondary-emote" src="/img/emotes/chert.png" alt="Chert icon" width="100" height="100" />
+        <img class="primary-emote" src={image} alt="Emote icon" width="100" height="100" />
+        <img
+            class="secondary-emote"
+            src="/img/emotes/chert.png"
+            alt="Chert icon"
+            width="100"
+            height="100"
+        />
     </Card>
     <p class="emote-caption align-center"><slot /></p>
 </div>

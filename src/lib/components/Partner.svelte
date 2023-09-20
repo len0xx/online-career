@@ -1,14 +1,14 @@
 <script lang="ts">
     export let src: string
-    export let alt = ""
+    export let alt = ''
     export let background = true
     export let className = ''
 
     $: bgClass = background ? 'white-bg' : ''
 </script>
 
-<div class={ ['partner-logo', className, bgClass].filter((c) => !!c).join(' ') }>
-    <img { src } { alt }>
+<div class={['partner-logo', className, bgClass].filter((c) => !!c).join(' ')}>
+    <img {src} {alt} />
 </div>
 
 <style>
