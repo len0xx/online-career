@@ -14,8 +14,18 @@
     <form action="" class="fix-width">
         <Grid m={ 1 }>
             <p>Уже есть аккаунт? <a class="green-link" href="/login">Войти</a></p>
-            <Input name="email" id="email" placeholder="Email" type="email" />
-            <Input name="password" id="password" placeholder="Пароль" type="password" />
+            <Input name="lastName" placeholder="Фамилия" />
+            <Input name="firstName" placeholder="Имя" />
+            <Input name="patronimyc" placeholder="Отечество" />
+            <Input name="region" placeholder="Регион" />
+            <Input name="status" placeholder="Статус" />
+            <Input name="phone" placeholder="Номер телефона" />
+            <Input name="email" placeholder="E-mail" />
+            <small>
+                Нажимая на кнопку «Регистрация» Вы даете свое согласие
+                на обработку Ваших персональных данных, в соответствии
+                с №152-ФЗ «О персональных данных» от 27.07.2006 года
+            </small>
             <Button wide shadow>Регистрация</Button>
         </Grid>
     </form>
