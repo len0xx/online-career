@@ -1,6 +1,8 @@
-<script lang="ts"></script>
+<script lang="ts">
+    export let className = ''
+</script>
 
-<footer>
+<footer class={ className }>
     <div class="footer-content">
         <slot />
     </div>
@@ -20,6 +22,11 @@
         background-size: cover;
     }
 
+    footer.auth-page {
+        margin: 0;
+        background: transparent;
+    }
+
     footer > .footer-content {
         display: block;
         position: relative;
@@ -29,7 +36,7 @@
     }
 
     @media screen and (max-width: 768px) {
-        footer {
+        footer:not(.auth-page) {
             background-image: url("/img/mobile-footer-bg.svg");
             margin-top: 3em;
         }

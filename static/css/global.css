@@ -62,13 +62,6 @@ html {
     overflow-x: hidden;
 }
 
-@media screen and (min-width: 768px) {
-    html {
-        scroll-behavior: smooth;
-        scroll-snap-type: y proximity;
-    }
-}
-
 .button-text {
 	font-size: var(--button-text);
 }
@@ -116,7 +109,8 @@ small {
     font-size: var(--tiny);
 }
 
-main > section > div.content {
+section > div.content-wrapper > div.content,
+section > div.content {
     display: block;
     position: relative;
     margin: 0 auto;
@@ -584,6 +578,15 @@ footer {
     min-height: 100%;
 }
 
+a.green-link {
+    color: var(--green);
+    transition: 0.1s ease-in-out;
+}
+
+a.green-link:hover {
+    color: var(--darker-green)
+}
+
 .mobile-menu-content > nav > div {
     margin-bottom: 2em;
 }
@@ -639,14 +642,6 @@ footer {
         bottom: 0;
         z-index: 19;
         background: linear-gradient(0deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
-    }
-
-    header {
-        position: sticky;
-        background-color: #F4F6FB;
-        border-radius: 0 0 var(--radius) var(--radius);
-        top: 0;
-        z-index: 30;
     }
 
     .parallax-image {

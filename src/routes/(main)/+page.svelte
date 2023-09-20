@@ -232,7 +232,9 @@
 <main>
     <Header className="pc-hide">
         <svelte:fragment slot="left">
-            <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" height="36" /></a>
+            <a href="/">
+                <img src="/img/logo/careertime.svg" alt="Logo" height="36" />
+            </a>
         </svelte:fragment>
         <svelte:fragment slot="right">
             <IconButton src="/img/hamburger.svg" on:click={ $mobileMenu.open } />
@@ -241,7 +243,9 @@
     <section class="intro">
         <Header className="mobile-hide">
             <svelte:fragment slot="left">
-                <a href="/"><img src="/img/logo/careertime.svg" alt="Logo" /></a>
+                <a href="/">
+                    <img src="/img/logo/careertime.svg" alt="Logo" />
+                </a>
             </svelte:fragment>
             <svelte:fragment>
                 <a href="#about">О марафоне</a>
@@ -704,3 +708,22 @@
     </section>
     <section class="footer mobile-hide"></section>
 </main>
+
+<style>
+    @media screen and (min-width: 768px) {
+        :global(html) {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        :global(header) {
+            position: sticky;
+            background-color: #F4F6FB;
+            border-radius: 0 0 var(--radius) var(--radius);
+            top: 0;
+            z-index: 30;
+        }
+    }
+</style>
