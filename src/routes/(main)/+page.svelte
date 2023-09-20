@@ -225,7 +225,7 @@
         </nav>
         <div class="auth-buttons">
             <Button color="green" shadow on:click={ () => { $mobileMenu.close(); modal.open() } }>Регистрация</Button><br /><br />
-            <a href="/"><Button color="green" shadow on:click={ $mobileMenu.close }>Войти</Button></a>
+            <a href="/login"><Button color="green" shadow on:click={ $mobileMenu.close }>Войти</Button></a>
         </div>
     </div>
 </MobileMenu>
