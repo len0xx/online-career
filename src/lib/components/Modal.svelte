@@ -49,7 +49,7 @@
         <div class="shadow"></div>
         <div>
             { #if closable }
-                <div class="align-center">
+                <div class="align-center pc-hide">
                     <div class="close pc-hide" on:click={ close } on:keydown>
                         <img src="/img/icons/modal-close.svg" alt="Close modal">
                     </div>
@@ -138,15 +138,15 @@
         border-radius: 50%;
         width: 64px;
         height: 64px;
-        margin: 1em auto;
     }
 
     :global(.kit-modal-wrapper .close.pc-hide) {
         width: 48px;
         height: 48px;
+        margin: 1em auto;
     }
 
-    :global(.kit-modal-wrapper .close.mobile-hide) {
+    :global(.kit-modal-wrapper div.close.mobile-hide:not(.s)) {
         position: absolute;
         top: 0;
         left: 105%;
@@ -173,6 +173,7 @@
     @media screen and (max-width: 768px) {
         .kit-modal-wrapper .kit-modal {
             width: 90%;
+            margin: 2em auto 5em auto;
         }
 
         .kit-modal-wrapper .kit-modal > .kit-modal-content {
