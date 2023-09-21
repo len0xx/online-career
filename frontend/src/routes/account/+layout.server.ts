@@ -5,7 +5,7 @@ export const load: LayoutServerLoad = async ({ fetch, cookies }) => {
     // Костыль, но на сервере по-другому не работает
     const options: RequestInit = {
         headers: {
-            'Authorization': cookies.get('token')
+            Authorization: cookies.get('token')
         }
     }
     const response = await fetch(apiRoute('user/validate'), options)

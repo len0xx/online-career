@@ -10,7 +10,10 @@ import {
 const NODE_ENV = process.env.NODE_ENV
 const PORT = +process.env.PORT
 const COOKIE_SIGNATURE = process.env.COOKIE_SIGNATURE
-const ORIGIN = NODE_ENV === 'dev' ? 'http://localhost:3000' : 'https://xn----7sbbhpbxldpedi9aeb1qpa7c.xn--p1ai'
+const ORIGIN =
+    NODE_ENV === 'dev'
+        ? 'http://localhost:3000'
+        : 'https://xn----7sbbhpbxldpedi9aeb1qpa7c.xn--p1ai'
 
 async function bootstrap() {
     const app = await NestFactory.create<NestFastifyApplication>(
@@ -19,7 +22,7 @@ async function bootstrap() {
     )
 
     await app.register(fastifyCookie, {
-        secret: COOKIE_SIGNATURE,
+        secret: COOKIE_SIGNATURE
     })
 
     app.enableCors({

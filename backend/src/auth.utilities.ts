@@ -33,8 +33,7 @@ export const Authorization = createParamDecorator(
             if (user) {
                 if (sanitize) delete user.password
                 return user
-            }
-            else {
+            } else {
                 return null
             }
         } catch (e) {

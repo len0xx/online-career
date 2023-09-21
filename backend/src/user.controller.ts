@@ -41,7 +41,15 @@ export class UserController {
     @Header('Content-Type', 'application/json')
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() data: CreateUserDto): Promise<string> {
-        if (!data.email || !data.firstName || !data.lastName || !data.patronymic || !data.region || !data.status || !data.phone) {
+        if (
+            !data.email ||
+            !data.firstName ||
+            !data.lastName ||
+            !data.patronymic ||
+            !data.region ||
+            !data.status ||
+            !data.phone
+        ) {
             throw new BadRequestException(
                 'Пожалуйста, заполните все поля в форме'
             )
@@ -148,7 +156,10 @@ export class UserController {
     @Post('auth')
     @Header('Content-Type', 'application/json')
     @HttpCode(HttpStatus.OK)
-    async auth(@Body() data: AuthUserDto, @Res({ passthrough: true }) response: FastifyReply): Promise<string> {
+    async auth(
+        @Body() data: AuthUserDto,
+        @Res({ passthrough: true }) response: FastifyReply
+    ): Promise<string> {
         if (!data.email || !data.password) {
             throw new BadRequestException('Заполните поля "Email" и "Пароль"')
         }
@@ -174,8 +185,13 @@ export class UserController {
         })
         payload.token = token
         const date = new Date()
-        date.setDate( date.getDate() + 7 )
-        response.setCookie('token', token, { secure: true, httpOnly: true, expires: date, path: '/' })
+        date.setDate(date.getDate() + 7)
+        response.setCookie('token', token, {
+            secure: true,
+            httpOnly: true,
+            expires: date,
+            path: '/'
+        })
         return JSON.stringify({ ok: true, payload })
     }
 
