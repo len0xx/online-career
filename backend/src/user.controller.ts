@@ -139,13 +139,14 @@ export class UserController {
             id: user.id,
             email: user.email,
             firstName: user.firstName,
-            lastName: user.lastName,
-            fullName: user.fullName
+            lastName: user.lastName
         }
-        const token = jwt.sign(payload, NEST_AUTH_SECRET, {
-            expiresIn: 7 * 24 * 60 * 60
-        })
-        payload.backendToken = token
+        const token = jwt.sign(
+            payload,
+            NEST_AUTH_SECRET,
+            { expiresIn: 7 * 24 * 60 * 60 }
+        )
+        payload.token = token
         return JSON.stringify({ ok: true, payload })
     }
 

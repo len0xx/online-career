@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Button, Grid, Heading, Input } from '$lib/components'
+    import Form from '$lib/components/Form.svelte'
+    import { apiRoute } from '$lib/utilities'
 </script>
 
 <svelte:head>
@@ -8,7 +10,7 @@
 
 <div class="align-center">
     <Heading level={2} margin={{ bottom: 0.4 }}>Забыли пароль</Heading>
-    <form action="" class="fix-width">
+    <Form action={ apiRoute('user/forgot-pass') } className="fix-width">
         <Grid m={1}>
             <p>
                 Введите e-mail, указанный при регистрации и мы отправим на него письмо с ссылкой для
@@ -17,16 +19,16 @@
             <Input name="email" id="email" placeholder="Email" type="email" />
             <Button wide shadow>Отправить письмо</Button>
         </Grid>
-    </form>
+    </Form>
 </div>
 
 <style>
-    form {
+    :global(form) {
         margin: 0 auto;
     }
 
     @media screen and (min-width: 769px) {
-        form.fix-width {
+        :global(form.fix-width) {
             max-width: 456px;
         }
     }

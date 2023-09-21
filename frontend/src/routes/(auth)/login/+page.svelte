@@ -1,5 +1,7 @@
 <script lang="ts">
     import { Button, Grid, Heading, Input } from '$lib/components'
+    import Form from '$lib/components/Form.svelte'
+    import { apiRoute } from '$lib/utilities'
 </script>
 
 <svelte:head>
@@ -8,7 +10,7 @@
 
 <div class="align-center">
     <Heading level={2} margin={{ bottom: 0.4 }}>Вход</Heading>
-    <form action="" class="fix-width">
+    <Form action={ apiRoute('user/auth') } method="POST" className="fix-width" successText="Вы успешно авторизованы">
         <Grid m={1}>
             <p>Нет аккаунта? <a class="green-link" href="/reg">Регистрация</a></p>
             <Input name="email" id="email" placeholder="Email" type="email" />
@@ -16,16 +18,16 @@
             <p><a href="/restore">Забыли пароль?</a></p>
             <Button wide shadow>Войти</Button>
         </Grid>
-    </form>
+    </Form>
 </div>
 
 <style>
-    form {
+    :global(form) {
         margin: 0 auto;
     }
 
     @media screen and (min-width: 769px) {
-        form.fix-width {
+        :global(form.fix-width) {
             max-width: 456px;
         }
     }
