@@ -43,7 +43,7 @@
     export let multiple: boolean = null
     export let disabled: boolean = null
     export let required = false
-    export let white = true
+    export let white = false
     export let autofocus: boolean = null
     export let placeholder: string = null
     export let marginTop: number = null
@@ -155,7 +155,7 @@
     }
 
     input::placeholder {
-        color: rgba(0, 0, 0, 0.2);
+        color: rgba(0, 0, 0, 0.3);
     }
 
     input.white:not([type='hidden']):not([type='button']):not([type='submit']):not(
