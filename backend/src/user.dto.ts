@@ -12,9 +12,12 @@ export default class UserDto {
 
 export class CreateUserDto {
     email: string
-    firstName?: string
-    lastName?: string
-    password?: string
+    firstName: string
+    lastName: string
+    patronymic: string
+    phone: string
+    status: string
+    region: string
     code: string
 }
 

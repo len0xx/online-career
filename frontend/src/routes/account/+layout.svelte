@@ -1,8 +1,26 @@
 <script lang="ts">
-    import { Grid, Footer, Partner } from '$lib/components'
+    import { Grid, Button, Header, Footer, Partner } from '$lib/components'
 </script>
 
-<slot />
+<Header className="mobile-hide">
+    <svelte:fragment slot="left">
+        <a href="/">
+            <img src="/img/logo/careertime.svg" alt="Logo" />
+        </a>
+    </svelte:fragment>
+    <svelte:fragment>
+        <a href="#about">Моя программа</a>
+        <a href="#audience">Уведомления</a>
+    </svelte:fragment>
+    <svelte:fragment slot="right">
+        <Button shadow color="white">Выйти</Button>
+    </svelte:fragment>
+</Header>
+<section class="account-page">
+    <div class="content">
+        <slot />
+    </div>
+</section>
 <Footer>
     <Grid m={2} s={1} gap={1} mobileGap={3}>
         <div class="contacts">

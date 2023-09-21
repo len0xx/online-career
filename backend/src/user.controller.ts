@@ -41,9 +41,9 @@ export class UserController {
     @Header('Content-Type', 'application/json')
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() data: CreateUserDto): Promise<string> {
-        if (!data.email || !data.firstName || !data.lastName) {
+        if (!data.email || !data.firstName || !data.lastName || !data.patronymic || !data.region || !data.status || !data.phone) {
             throw new BadRequestException(
-                'Поля "Email", "Имя" и "Фамилия" обязательны к заполнению'
+                'Пожалуйста, заполните все поля в форме'
             )
         }
 
@@ -61,6 +61,10 @@ export class UserController {
                 email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName,
+                patronymic: data.patronymic,
+                region: data.region,
+                status: data.status,
+                phone: data.phone,
                 code
             }
             await this.userService.create(user)
@@ -189,7 +193,6 @@ export class UserController {
 
         try {
             const data = await this.userService.get({ id }, true)
-            console.log(data)
             return JSON.stringify({ ok: true, user: data })
         } catch (e) {
             console.error(e)
