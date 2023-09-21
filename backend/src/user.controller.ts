@@ -16,12 +16,9 @@ import { ExtendedUser, UserService } from './user.service'
 import { compare, hash } from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
 import { Authorization } from './auth.utilities'
-import { User } from '@prisma/client'
 import {
     AuthUserDto,
-    CreateUserDto,
-    UpdatePasswordDto,
-    UpdateUserDto
+    CreateUserDto
 } from './user.dto'
 
 const NEST_ACCESS_TOKEN = process.env.NEST_ACCESS_TOKEN as string
