@@ -1,24 +1,50 @@
-import { BadRequestException, Body, Controller, Get, Header, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, UnauthorizedException } from "@nestjs/common"
-import { ExtendedUser, UserService } from "./user.service"
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Get,
+    Header,
+    HttpCode,
+    HttpStatus,
+    Param,
+    ParseIntPipe,
+    Patch,
+    Post,
+    UnauthorizedException
+} from '@nestjs/common'
+import { ExtendedUser, UserService } from './user.service'
 import { compare, hash } from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
-import { Authorization } from "./auth.utilities"
-import { User } from "@prisma/client"
-import { AuthUserDto, CreateUserDto, UpdatePasswordDto, UpdateUserDto } from "./user.dto"
+import { Authorization } from './auth.utilities'
+import { User } from '@prisma/client'
+import {
+    AuthUserDto,
+    CreateUserDto,
+    UpdatePasswordDto,
+    UpdateUserDto
+} from './user.dto'
 
 const NEST_ACCESS_TOKEN = process.env.NEST_ACCESS_TOKEN as string
 const NEST_AUTH_SECRET = process.env.AUTH_SECRET as string
 
 @Controller('api/user')
 export class UserController {
-    constructor( private readonly userService: UserService ) {}
+    constructor(private readonly userService: UserService) {}
 
     @Post('create')
     @Header('Content-Type', 'application/json')
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() data: CreateUserDto): Promise<string> {
-        if (!data.email || !data.firstName || !data.lastName || !data.password || !data.passwordRepeat) {
-            throw new BadRequestException('Fields "email", "firstName", "lastName" and "password" are required')
+        if (
+            !data.email ||
+            !data.firstName ||
+            !data.lastName ||
+            !data.password ||
+            !data.passwordRepeat
+        ) {
+            throw new BadRequestException(
+                'Fields "email", "firstName", "lastName" and "password" are required'
+            )
         }
 
         const existingUser = await this.userService.getByEmail(data.email)
@@ -27,7 +53,7 @@ export class UserController {
         }
 
         if (data.password !== data.passwordRepeat) {
-            throw new BadRequestException('Passwords don\'t match')
+            throw new BadRequestException("Passwords don't match")
         }
 
         data.password = await hash(data.password, 14)
@@ -41,8 +67,7 @@ export class UserController {
             }
             await this.userService.create(user)
             return JSON.stringify({ created: true })
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e)
             throw new BadRequestException('Could not create a new user')
         }
@@ -60,10 +85,12 @@ export class UserController {
         }
 
         const user = await this.userService.getByEmail(data.email)
-        if (!user) throw new BadRequestException('Invalid "email" or "password"')
+        if (!user)
+            throw new BadRequestException('Invalid "email" or "password"')
 
         const match = await compare(data.password, user.password)
-        if (!match) throw new BadRequestException('Invalid "email" or "password"')
+        if (!match)
+            throw new BadRequestException('Invalid "email" or "password"')
 
         const payload: Record<string, string | number> = {
             id: user.id,
@@ -72,7 +99,9 @@ export class UserController {
             lastName: user.lastName,
             fullName: user.fullName
         }
-        const token = jwt.sign(payload, NEST_AUTH_SECRET, { expiresIn: 7 * 24 * 60 * 60 })
+        const token = jwt.sign(payload, NEST_AUTH_SECRET, {
+            expiresIn: 7 * 24 * 60 * 60
+        })
         payload.backendToken = token
         return JSON.stringify(payload)
     }
@@ -141,16 +170,17 @@ export class UserController {
     @Header('Content-Type', 'application/json')
     async getAuthorized(@Authorization() user: ExtendedUser): Promise<string> {
         if (!user) {
-            throw new UnauthorizedException('You must authorize first to access this resource')
+            throw new UnauthorizedException(
+                'You must authorize first to access this resource'
+            )
         }
 
         const id = user.id
-        
+
         try {
             const data = await this.userService.get({ id }, true)
             return JSON.stringify(data)
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e)
             throw new BadRequestException('Could not get user data')
         }
@@ -162,8 +192,7 @@ export class UserController {
         try {
             const data = await this.userService.get({ id }, true)
             return JSON.stringify(data)
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e)
             throw new BadRequestException('Could not get user data')
         }

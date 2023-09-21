@@ -3,6 +3,7 @@ import Card from './Card.svelte'
 import Checkbox from './Checkbox.svelte'
 import Emote from './Emote.svelte'
 import Footer from './Footer.svelte'
+import Form from './Form.svelte'
 import Grid from './Grid.svelte'
 import Header from './Header.svelte'
 import Heading from './Heading.svelte'
@@ -22,6 +23,7 @@ export {
     Checkbox,
     Emote,
     Footer,
+    Form,
     Grid,
     Header,
     Heading,
