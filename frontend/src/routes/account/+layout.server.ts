@@ -8,9 +8,7 @@ export const load: LayoutServerLoad = async ({ fetch, cookies }) => {
             'Authorization': cookies.get('token')
         }
     }
-    console.log(cookies.get('token'))
     const response = await fetch(apiRoute('user/validate'), options)
-    console.log(response)
 
     if (response.ok) {
         const user = (await response.json()).user
