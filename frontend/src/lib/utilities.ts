@@ -176,6 +176,9 @@ export const sendWindowAJAX = (
         type: options.method,
         data: finalData,
         dataType: 'json',
+        xhrFields: {
+            withCredentials: true
+        },
         processData: options.contentType === 'multipart/form-data' ? false : true
     })
 

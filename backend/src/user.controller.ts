@@ -74,6 +74,7 @@ export class UserController {
 
     @Post('set-pass')
     @Header('Content-Type', 'application/json')
+    @HttpCode(HttpStatus.OK)
     async setPassword(@Body() data: SetPasswordUserDto): Promise<string> {
         if (!data.code) {
             throw new BadRequestException(
@@ -112,6 +113,7 @@ export class UserController {
 
     @Post('forgot-pass')
     @Header('Content-Type', 'application/json')
+    @HttpCode(HttpStatus.OK)
     async forgotPassword(@Body() data: { email: string }): Promise<string> {
         if (!data.email) {
             throw new BadRequestException(
@@ -141,6 +143,7 @@ export class UserController {
 
     @Post('auth')
     @Header('Content-Type', 'application/json')
+    @HttpCode(HttpStatus.OK)
     async auth(@Body() data: AuthUserDto, @Res({ passthrough: true }) response: FastifyReply): Promise<string> {
         if (!data.email || !data.password) {
             throw new BadRequestException('Заполните поля "Email" и "Пароль"')
@@ -166,17 +169,19 @@ export class UserController {
             expiresIn: 7 * 24 * 60 * 60
         })
         payload.token = token
-        const expireDate = new Date( new Date().setDate( new Date().getDate() + 1 ) )
-        response.setCookie('token', token, { secure: true, httpOnly: true, expires: expireDate })
+        const date = new Date()
+        date.setDate( date.getDate() + 7 )
+        response.setCookie('token', token, { secure: true, httpOnly: true, expires: date, path: '/' })
         return JSON.stringify({ ok: true, payload })
     }
 
-    @Get()
+    @Get('validate')
     @Header('Content-Type', 'application/json')
+    @HttpCode(HttpStatus.OK)
     async getAuthorized(@Authorization() user: ExtendedUser): Promise<string> {
         if (!user) {
             throw new UnauthorizedException(
-                'You must authorize first to access this resource'
+                'Для доступа к этому ресурсу необходимо авторизоваться'
             )
         }
 
@@ -184,15 +189,17 @@ export class UserController {
 
         try {
             const data = await this.userService.get({ id }, true)
-            return JSON.stringify({ ok: true, data })
+            console.log(data)
+            return JSON.stringify({ ok: true, user: data })
         } catch (e) {
             console.error(e)
-            throw new BadRequestException('Could not get user data')
+            throw new BadRequestException('Не удалось подтвердить авторизацию')
         }
     }
 
     @Get(':id')
     @Header('Content-Type', 'application/json')
+    @HttpCode(HttpStatus.OK)
     async getById(@Param('id', ParseIntPipe) id: number): Promise<string> {
         try {
             const data = await this.userService.get({ id }, true)

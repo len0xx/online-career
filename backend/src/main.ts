@@ -7,22 +7,24 @@ import {
     NestFastifyApplication
 } from '@nestjs/platform-fastify'
 
+const NODE_ENV = process.env.NODE_ENV
 const PORT = +process.env.PORT
 const COOKIE_SIGNATURE = process.env.COOKIE_SIGNATURE
+const ORIGIN = NODE_ENV === 'dev' ? 'http://localhost:3000' : 'https://онлайн-времякарьеры.рф'
 
 async function bootstrap() {
     const app = await NestFactory.create<NestFastifyApplication>(
         AppModule,
         new FastifyAdapter()
     )
-    
+
     await app.register(fastifyCookie, {
         secret: COOKIE_SIGNATURE,
     })
 
-
     app.enableCors({
-        origin: '*',
+        origin: ORIGIN,
+        credentials: true,
         allowedHeaders: '*',
         methods: 'GET,POST,PATCH,OPTIONS,DELETE'
     })
