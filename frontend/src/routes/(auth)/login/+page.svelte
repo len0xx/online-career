@@ -10,7 +10,12 @@
 
 <div class="align-center">
     <Heading level={2} margin={{ bottom: 0.4 }}>Вход</Heading>
-    <Form action={ apiRoute('user/auth') } method="POST" className="fix-width" successText="Вы успешно авторизованы">
+    <Form
+        action={apiRoute('user/auth')}
+        method="POST"
+        className="fix-width"
+        successText="Вы успешно авторизованы"
+    >
         <Grid m={1}>
             <p>Нет аккаунта? <a class="green-link" href="/reg">Регистрация</a></p>
             <Input name="email" id="email" placeholder="Email" type="email" />

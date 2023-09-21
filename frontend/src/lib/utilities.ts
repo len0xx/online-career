@@ -17,7 +17,8 @@ export const DEV_DOMAIN = 'http://localhost:4000'
 // Create slug from the title
 export function formatSlug(input: string): string {
     const date = new Date()
-    const tokens = input.trim()
+    const tokens = input
+        .trim()
         .toLocaleLowerCase()
         .replace(/([^a-z0-9 ])/g, '')
         .replace(/ {2}/g, ' ')
@@ -37,7 +38,7 @@ export function formatSlug(input: string): string {
 // Create a plain JSON from FormData
 export function transformFormData(form: FormData): Record<string, unknown> {
     const object: Record<string, unknown> = {}
-    form.forEach((value, key) => object[key] = value)
+    form.forEach((value, key) => (object[key] = value))
     return object
 }
 
@@ -54,11 +55,15 @@ export const transformBytes = (bytes: number, decimals = 2) => {
 }
 
 const redirectDelay = 500
-export const redirect = (location: string) => setTimeout(() => { window.location.href = location }, redirectDelay)
+export const redirect = (location: string) =>
+    setTimeout(() => {
+        window.location.href = location
+    }, redirectDelay)
 
-const doubleDigit = (num: number): string => num < 10 ? `0${num}` : num.toString()
+const doubleDigit = (num: number): string => (num < 10 ? `0${num}` : num.toString())
 
-export const formatDate = (date: Date): string => `${doubleDigit(date.getDate())}.${doubleDigit(date.getMonth() + 1)}.${date.getFullYear()}`
+export const formatDate = (date: Date): string =>
+    `${doubleDigit(date.getDate())}.${doubleDigit(date.getMonth() + 1)}.${date.getFullYear()}`
 
 export function encodeQuery(data: Record<string, string>): string {
     delete data['page']
@@ -83,7 +88,8 @@ export const range: RangeGenerator = (to: number, step = 1) => rangeFrom(0, to, 
 export const random = (min = 0, max = 1) => Math.floor(Math.random() * (max - min) + min)
 
 // Transform the padding value from PaddingValue type to actual CSS
-export const applyPadding = (value: PaddingValue): string => (typeof value == 'number') ? value + 'em' : value || '0'
+export const applyPadding = (value: PaddingValue): string =>
+    typeof value == 'number' ? value + 'em' : value || '0'
 
 // Transform padding values from JS style to CSS (eg. "2em 4em 2em 4em")
 // where the order is from top to left clockwise
@@ -95,7 +101,8 @@ export const computePadding = (padding: Padding): string => {
         padding.right === undefined &&
         padding.x === undefined &&
         padding.y === undefined
-    ) return undefined
+    )
+        return undefined
 
     return [
         applyPadding(padding.top !== undefined ? padding.top : padding.y),
@@ -117,7 +124,7 @@ export const applyTransitions = (transitions: TransitionReceiver): TransitionDes
         inFunc: transitions.in ? transitions.in.func : () => undefined,
         inOptions: transitions.in ? transitions.in.options : undefined,
         outFunc: transitions.out ? transitions.out.func : () => undefined,
-        outOptions: transitions.out ? transitions.out.options : undefined,
+        outOptions: transitions.out ? transitions.out.options : undefined
     }
 }
 
@@ -133,10 +140,10 @@ export const shuffle = <T>(array: Array<T>): Array<T> => {
 }
 
 interface AJAXOptions {
-    method: RESTMethod,
-    contentType?: ContentType,
-    data?: FormData | Record<string, string | string[]> | null,
-    csrfToken?: string,
+    method: RESTMethod
+    contentType?: ContentType
+    data?: FormData | Record<string, string | string[]> | null
+    csrfToken?: string
     headers?: JQuery.PlainObject<string> | null
 }
 
@@ -151,11 +158,13 @@ export const sendWindowAJAX = (
 
     if (!options.contentType) options.contentType = 'application/x-www-form-urlencoded'
 
-    if (options.data instanceof FormData && options.contentType === 'application/x-www-form-urlencoded') {
+    if (
+        options.data instanceof FormData &&
+        options.contentType === 'application/x-www-form-urlencoded'
+    ) {
         finalData = serialize(options.data)
         if (options.csrfToken) finalData.csrf = options.csrfToken
-    }
-    else if (options.data && options.data instanceof FormData) {
+    } else if (options.data && options.data instanceof FormData) {
         finalData = options.data
         if (options.csrfToken) finalData.set('csrf', options.csrfToken)
     }
@@ -173,20 +182,21 @@ export const sendWindowAJAX = (
     request.done((res) => {
         if (res.ok === true) {
             if (callbackSuccess) callbackSuccess(res)
-        }
-        else if (res.ok === false) {
+        } else if (res.ok === false) {
             if (callbackError) callbackError(res)
             console.error(res)
-        }
-        else {
+        } else {
             if (callbackSuccess) callbackSuccess(res)
         }
     })
 
     request.fail((jqXHR) => {
-        if (callbackError) callbackError(
-            (jqXHR.responseJSON && (jqXHR.responseJSON.message || jqXHR.responseJSON.error)) ? (jqXHR.responseJSON.message || jqXHR.responseJSON.error) : jqXHR.responseText
-        )
+        if (callbackError)
+            callbackError(
+                jqXHR.responseJSON && (jqXHR.responseJSON.message || jqXHR.responseJSON.error)
+                    ? jqXHR.responseJSON.message || jqXHR.responseJSON.error
+                    : jqXHR.responseText
+            )
     })
 }
 
@@ -194,15 +204,18 @@ type ApplicationMode = 'development' | 'production'
 
 const NODE_ENV: ApplicationMode = 'development'
 
-export const getBaseUrl = (mode: ApplicationMode) => ((mode == 'production') ? BASE_DOMAIN : DEV_DOMAIN)
+export const getBaseUrl = (mode: ApplicationMode) =>
+    mode == 'production' ? BASE_DOMAIN : DEV_DOMAIN
 
-export const apiRoute = (route: string, url?: string) => `${ url || (getBaseUrl(NODE_ENV) + '/api') }/${route}`
+export const apiRoute = (route: string, url?: string) =>
+    `${url || getBaseUrl(NODE_ENV) + '/api'}/${route}`
 
-export const isImage = (extension: string) => ['jpeg', 'jpg', 'png', 'svg'].includes(extension.toLowerCase())
+export const isImage = (extension: string) =>
+    ['jpeg', 'jpg', 'png', 'svg'].includes(extension.toLowerCase())
 
 export const getCorrectSum = (sum: string | number, showMark = true) => {
     const mark = '₽'
-    const correctSum = Number(sum).toLocaleString(undefined, {minimumFractionDigits: 2})
+    const correctSum = Number(sum).toLocaleString(undefined, { minimumFractionDigits: 2 })
     return showMark ? `${correctSum}&nbsp;${mark}` : correctSum
 }
 
@@ -211,9 +224,9 @@ export const serialize = (data: FormData) => {
     for (const [key, value] of data) {
         if (obj[key] !== undefined) {
             if (!Array.isArray(obj[key])) {
-                obj[key] = [ obj[key].toString() ]
+                obj[key] = [obj[key].toString()]
             }
-            (obj[key] as string[]).push(value.toString())
+            ;(obj[key] as string[]).push(value.toString())
         } else {
             obj[key] = value.toString()
         }

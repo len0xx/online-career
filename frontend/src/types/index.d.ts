@@ -15,22 +15,26 @@ export type Align =
     | 'revert-layer'
 
 export interface Padding {
-    x?: PaddingValue,
-    y?: PaddingValue,
-    top?: PaddingValue,
-    bottom?: PaddingValue,
-    left?: PaddingValue,
+    x?: PaddingValue
+    y?: PaddingValue
+    top?: PaddingValue
+    bottom?: PaddingValue
+    left?: PaddingValue
     right?: PaddingValue
 }
 
-export type ContentType = 'multipart/form-data' | 'application/x-www-form-urlencoded' | 'text/plain' | 'application/json'
+export type ContentType =
+    | 'multipart/form-data'
+    | 'application/x-www-form-urlencoded'
+    | 'text/plain'
+    | 'application/json'
 
 export type RESTMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD'
 
 export interface DefaultAJAXResponse {
-    ok: boolean,
-    response?: Record<string, unknown>,
-    message: string,
+    ok: boolean
+    response?: Record<string, unknown>
+    message: string
     error?: string
 }
 
@@ -48,26 +52,29 @@ export type ExtendedSizes = DefaultSizes | 'XL'
 export type PaddingValue = string | number
 
 export interface TransitionOptions {
-    delay?: number,
-    duration?: number,
+    delay?: number
+    duration?: number
     easing?: EasingFunction
 }
 
-export type TransitionFunction = (node: HTMLElement, options: TransitionOptions) => SvelteTransitionReturnType
+export type TransitionFunction = (
+    node: HTMLElement,
+    options: TransitionOptions
+) => SvelteTransitionReturnType
 
 export interface Transition {
-    func: TransitionFunction,
+    func: TransitionFunction
     options: TransitionOptions
 }
 
 export interface TransitionReceiver {
-    in?: Transition,
+    in?: Transition
     out?: Transition
 }
 
 export interface TransitionDescriber {
-    inFunc: TransitionFunction,
-    inOptions: TransitionOptions,
-    outFunc: TransitionFunction,
+    inFunc: TransitionFunction
+    inOptions: TransitionOptions
+    outFunc: TransitionFunction
     outOptions: TransitionOptions
 }

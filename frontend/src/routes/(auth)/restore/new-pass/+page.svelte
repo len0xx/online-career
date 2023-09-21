@@ -17,10 +17,10 @@
 </svelte:head>
 
 <div class="align-center">
-    { #if pageOk }
+    {#if pageOk}
         <Heading level={2} margin={{ bottom: 0.4 }}>Придумайте пароль</Heading>
-        <Form action={ apiRoute('user/set-pass') } method="POST" className="fix-width">
-            <input type="hidden" name="code" value={ urlParams ? urlParams.get('code') : '' } />
+        <Form action={apiRoute('user/set-pass')} method="POST" className="fix-width">
+            <input type="hidden" name="code" value={urlParams ? urlParams.get('code') : ''} />
             <Grid m={1}>
                 <p>Придумайте новый пароль для входа в личный кабинет</p>
                 <Input name="password" id="password" placeholder="Пароль" type="password" />
@@ -33,11 +33,11 @@
                 <Button wide shadow>Установить пароль</Button>
             </Grid>
         </Form>
-    { :else }
-        <Heading level={ 2 }>Ошибка</Heading>
+    {:else}
+        <Heading level={2}>Ошибка</Heading>
         <p>Кажется, код, необходимый для восстановления пароля, отсутствует</p>
         <p><a href="/" class="green-link">Вернуться на главную</a></p>
-    { /if }
+    {/if}
 </div>
 
 <style>

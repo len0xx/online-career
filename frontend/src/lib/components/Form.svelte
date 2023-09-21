@@ -43,15 +43,13 @@
                         successFinalText = res.message || successText || 'Форма успешно отправлена'
                         dispatch('success', res)
                         if (redirect) redirectTo(redirect)
-                    }
-                    else if (res.ok === false || res.error) {
+                    } else if (res.ok === false || res.error) {
                         submitted = true
                         success = false
                         errorFinalText = res.message || res.error || errorText
                         dispatch('error', { error: res })
                     }
-                }
-                else {
+                } else {
                     submitted = true
                     success = true
                     successFinalText = res.message || successText || 'Форма успешно отправлена'
@@ -72,19 +70,27 @@
 
 <form {id} class={className} {action} {method} on:submit|preventDefault={handleSubmit}>
     <slot />
-    { #if alerts && submitted }
+    {#if alerts && submitted}
         <div class="alerts mt-4" transition:blur|local={{ duration: 200 }}>
-            { #if success }
-                <div transition:blur|local={{ duration: 200 }} class="alert alert-success mb-0" role="alert">
-                    { successFinalText }
+            {#if success}
+                <div
+                    transition:blur|local={{ duration: 200 }}
+                    class="alert alert-success mb-0"
+                    role="alert"
+                >
+                    {successFinalText}
                 </div>
-            { :else }
-                <div transition:blur|local={{ duration: 200 }} class="alert alert-danger mb-0" role="alert">
-                    Произошла ошибка{ errorFinalText ? `: ${errorFinalText}` : '' }
+            {:else}
+                <div
+                    transition:blur|local={{ duration: 200 }}
+                    class="alert alert-danger mb-0"
+                    role="alert"
+                >
+                    Произошла ошибка{errorFinalText ? `: ${errorFinalText}` : ''}
                 </div>
             {/if}
         </div>
-    {  /if }
+    {/if}
 </form>
 
 <style>

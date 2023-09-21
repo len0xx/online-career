@@ -46,9 +46,16 @@ const NOTISEND_PARAMETER_RESET = 300292
 const NOTISEND_TOKEN = 'a0b9de66365e7dabfe152d326e06c846'
 const NOTISEND_BASE_URI = 'https://api.notisend.ru/v1'
 
-export const addNotisendRecipient = async (group: NOTISEND_ALLOWED_GROUPS, email: string, code: string) => {
+export const addNotisendRecipient = async (
+    group: NOTISEND_ALLOWED_GROUPS,
+    email: string,
+    code: string
+) => {
     const url = `${NOTISEND_BASE_URI}/email/lists/${group}/recipients`
-    const parameter_id = group === NOTISEND_WELCOME_GROUP ? NOTISEND_PARAMETER_WELCOME : NOTISEND_PARAMETER_RESET
+    const parameter_id =
+        group === NOTISEND_WELCOME_GROUP
+            ? NOTISEND_PARAMETER_WELCOME
+            : NOTISEND_PARAMETER_RESET
     const payload = {
         email,
         values: [

@@ -98,7 +98,7 @@ export class UserService {
 
     async update(
         where: Prisma.UserWhereUniqueInput,
-        data: Omit<Partial<UserDto>, 'id'>,
+        data: Omit<Partial<UserDto>, 'id'>
     ): Promise<ExtendedUser> {
         return this.extend(await this.prisma.user.update({ where, data }))
     }
