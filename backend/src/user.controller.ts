@@ -9,10 +9,12 @@ import {
     Param,
     ParseIntPipe,
     Post,
+    Res,
     UnauthorizedException
 } from '@nestjs/common'
 import { ExtendedUser, UserService } from './user.service'
 import { compare, hash } from 'bcrypt'
+import { FastifyReply } from 'fastify'
 import * as jwt from 'jsonwebtoken'
 import {
     Authorization,
@@ -139,7 +141,7 @@ export class UserController {
 
     @Post('auth')
     @Header('Content-Type', 'application/json')
-    async auth(@Body() data: AuthUserDto): Promise<string> {
+    async auth(@Body() data: AuthUserDto, @Res({ passthrough: true }) response: FastifyReply): Promise<string> {
         if (!data.email || !data.password) {
             throw new BadRequestException('Заполните поля "Email" и "Пароль"')
         }
@@ -164,6 +166,8 @@ export class UserController {
             expiresIn: 7 * 24 * 60 * 60
         })
         payload.token = token
+        const expireDate = new Date( new Date().setDate( new Date().getDate() + 1 ) )
+        response.setCookie('token', token, { secure: true, httpOnly: true, expires: expireDate })
         return JSON.stringify({ ok: true, payload })
     }
 

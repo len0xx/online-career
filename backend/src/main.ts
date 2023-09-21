@@ -1,18 +1,25 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import { PrismaService } from './prisma.service'
+import fastifyCookie from '@fastify/cookie'
 import {
     FastifyAdapter,
     NestFastifyApplication
 } from '@nestjs/platform-fastify'
 
 const PORT = +process.env.PORT
+const COOKIE_SIGNATURE = process.env.COOKIE_SIGNATURE
 
 async function bootstrap() {
     const app = await NestFactory.create<NestFastifyApplication>(
         AppModule,
         new FastifyAdapter()
     )
+    
+    await app.register(fastifyCookie, {
+        secret: COOKIE_SIGNATURE,
+    })
+
 
     app.enableCors({
         origin: '*',
