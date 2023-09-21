@@ -64,6 +64,16 @@ export class UserService {
         )
     }
 
+    async getByCode(
+        code: string,
+        sanitize = false
+    ): Promise<ExtendedUser | null> {
+        return this.extend(
+            await this.prisma.user.findFirst({ where: { code } }),
+            sanitize
+        )
+    }
+
     async getAll(
         args?: {
             select?: Prisma.UserSelect
@@ -86,12 +96,12 @@ export class UserService {
         return this.extend(await this.prisma.user.create({ data }))
     }
 
-    // async update(
-    //     where: Prisma.UserWhereUniqueInput,
-    //     data: Partial<UserDto>,
-    // ): Promise<ExtendedUser> {
-    //     return this.extend(await this.prisma.user.update({ where, data }))
-    // }
+    async update(
+        where: Prisma.UserWhereUniqueInput,
+        data: Omit<Partial<UserDto>, 'id'>,
+    ): Promise<ExtendedUser> {
+        return this.extend(await this.prisma.user.update({ where, data }))
+    }
 
     // async updateById(id: number, data: Partial<UserDto>): Promise<ExtendedUser | null> {
     //     return this.extend(await this.prisma.user.update({ where: { id }, data }))

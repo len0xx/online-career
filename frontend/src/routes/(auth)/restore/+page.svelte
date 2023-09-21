@@ -15,8 +15,7 @@
                 восстановления пароля
             </p>
             <Input name="email" id="email" placeholder="Email" type="email" />
-            <Input name="password" id="password" placeholder="Пароль" type="password" />
-            <Button wide shadow>Регистрация</Button>
+            <Button wide shadow>Отправить письмо</Button>
         </Grid>
     </form>
 </div>

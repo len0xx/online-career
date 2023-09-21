@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { Button, Grid, Heading, Input } from '$lib/components'
+    import { Button, Form, Grid, Heading, Input } from '$lib/components'
+    import { apiRoute } from '$lib/utilities'
 </script>
 
 <svelte:head>
@@ -8,7 +9,7 @@
 
 <div class="align-center">
     <Heading level={2} margin={{ bottom: 0.4 }}>Регистрация</Heading>
-    <form action="" class="fix-width">
+    <Form action={ apiRoute('user/create') } method="POST" className="fix-width">
         <Grid m={1}>
             <p>Уже есть аккаунт? <a class="green-link" href="/login">Войти</a></p>
             <Input name="lastName" placeholder="Фамилия" />
@@ -25,16 +26,16 @@
             </small>
             <Button wide shadow>Регистрация</Button>
         </Grid>
-    </form>
+    </Form>
 </div>
 
 <style>
-    form {
+    :global(form) {
         margin: 0 auto;
     }
 
     @media screen and (min-width: 769px) {
-        form.fix-width {
+        :global(form.fix-width) {
             max-width: 456px;
         }
     }

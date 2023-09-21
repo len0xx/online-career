@@ -185,16 +185,9 @@ export const sendWindowAJAX = (
 
     request.fail((jqXHR) => {
         if (callbackError) callbackError(
-            (jqXHR.responseJSON && jqXHR.responseJSON.error) ? jqXHR.responseJSON.error : jqXHR.responseText
+            (jqXHR.responseJSON && (jqXHR.responseJSON.message || jqXHR.responseJSON.error)) ? (jqXHR.responseJSON.message || jqXHR.responseJSON.error) : jqXHR.responseText
         )
     })
-}
-
-export const paymentStatuses = {
-    'confirmation': 'На подтверждении',
-    'success': 'Успешно',
-    'failure': 'Ошибка',
-    'refunded': 'Возврат'
 }
 
 type ApplicationMode = 'development' | 'production'

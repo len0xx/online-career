@@ -8,17 +8,18 @@ import {
     HttpStatus,
     Param,
     ParseIntPipe,
-    Patch,
     Post,
     UnauthorizedException
 } from '@nestjs/common'
 import { ExtendedUser, UserService } from './user.service'
 import { compare, hash } from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
-import { Authorization } from './auth.utilities'
+import { Authorization, addNotisendRecipient } from './auth.utilities'
+import { createHash } from 'crypto'
 import {
     AuthUserDto,
-    CreateUserDto
+    CreateUserDto,
+    SetPasswordUserDto
 } from './user.dto'
 
 const NEST_ACCESS_TOKEN = process.env.NEST_ACCESS_TOKEN as string
@@ -35,39 +36,58 @@ export class UserController {
         if (
             !data.email ||
             !data.firstName ||
-            !data.lastName ||
-            !data.password ||
-            !data.passwordRepeat
+            !data.lastName
         ) {
             throw new BadRequestException(
-                'Fields "email", "firstName", "lastName" and "password" are required'
+                'Поля "Email", "Имя" и "Фамилия" обязательны к заполнению'
             )
         }
 
         const existingUser = await this.userService.getByEmail(data.email)
         if (existingUser) {
-            throw new BadRequestException('User with this email already exists')
+            throw new BadRequestException('Пользователь с таким Email уже существует')
         }
 
-        if (data.password !== data.passwordRepeat) {
-            throw new BadRequestException("Passwords don't match")
-        }
-
-        data.password = await hash(data.password, 14)
+        const time = +(new Date())
+        const random = Math.random() * 100
+        const code = createHash("md5").update(`${ time }.${ data.email }.${ random }`).digest("hex")
 
         try {
             const user = {
                 email: data.email,
-                password: data.password,
+                // password: data.password,
                 firstName: data.firstName,
-                lastName: data.lastName
+                lastName: data.lastName,
+                code
             }
             await this.userService.create(user)
-            return JSON.stringify({ created: true })
+            await addNotisendRecipient(data.email, code)
+            return JSON.stringify({ ok: true, created: true })
         } catch (e) {
             console.error(e)
-            throw new BadRequestException('Could not create a new user')
+            throw new BadRequestException('Не удалось создать пользователя')
         }
+    }
+
+    @Post('set-pass')
+    @Header('Content-Type', 'application/json')
+    async setPassword(@Body() data: SetPasswordUserDto): Promise<string> {
+        if (!data.code) {
+            throw new BadRequestException('Код для восстановления пароля не указан, попробуйте перейти по ссылке из письма ещё раз')
+        }
+
+        if (!data.password || !data.passwordRepeat || data.password !== data.passwordRepeat) {
+            throw new BadRequestException('Введенные пароли не совпадают')
+        }
+
+        const user = await this.userService.getByCode(data.code)
+        if (!user)
+            throw new BadRequestException('Указан неверный или недействительный код для восстановления пароля')
+
+        data.password = await hash(data.password, 14)
+
+        await this.userService.update({ code: data.code }, { password: data.password })
+        return JSON.stringify({ ok: true })
     }
 
     @Post('auth')
@@ -100,68 +120,8 @@ export class UserController {
             expiresIn: 7 * 24 * 60 * 60
         })
         payload.backendToken = token
-        return JSON.stringify(payload)
+        return JSON.stringify({ ok: true, payload })
     }
-
-    // @Patch('')
-    // @Header('Content-Type', 'application/json')
-    // async update(@Body() data: UpdateUserDto, @Authorization() user: User): Promise<string> {
-    //     if (!data.firstName && !data.lastName) {
-    //         throw new BadRequestException('Missing data ("firstName", "lastName" and "about")')
-    //     }
-
-    //     if (!user) {
-    //         throw new UnauthorizedException('You must authorize first to access this resource')
-    //     }
-
-    //     const userId = user.id
-    //     const updated = {
-    //         firstName: data.firstName.toString(),
-    //         lastName: data.lastName.toString()
-    //     }
-
-    //     try {
-    //         await this.userService.updateById(userId, updated)
-    //         return JSON.stringify({ updated: true })
-    //     }
-    //     catch (e) {
-    //         console.error(e)
-    //         throw new BadRequestException('Could not update a user')
-    //     }
-    // }
-
-    // @Patch('password')
-    // @Header('Content-Type', 'application/json')
-    // async updatePassword(@Body() data: UpdatePasswordDto, @Authorization({ sanitize: false }) user: ExtendedUser): Promise<string> {
-    //     if (!data.password && !data.newPassword && !data.newPasswordRep) {
-    //         throw new BadRequestException('Please fill in all the required fields')
-    //     }
-
-    //     if (!user) {
-    //         throw new UnauthorizedException('You must authorize first to access this resource')
-    //     }
-
-    //     const userId = user.id
-
-    //     const check = await compare(data.password, user.password)
-    //     if (!check) throw new BadRequestException('Incorrect password. Please try again')
-
-    //     const match = data.newPassword === data.newPasswordRep
-    //     if (!match) throw new BadRequestException('The new passwords do not match. Please try again')
-
-    //     const updated = {
-    //         password: await hash(data.password, 14)
-    //     }
-
-    //     try {
-    //         await this.userService.updateById(userId, updated)
-    //         return JSON.stringify({ updated: true })
-    //     }
-    //     catch (e) {
-    //         console.error(e)
-    //         throw new BadRequestException('Could not change the password')
-    //     }
-    // }
 
     @Get()
     @Header('Content-Type', 'application/json')
@@ -176,7 +136,7 @@ export class UserController {
 
         try {
             const data = await this.userService.get({ id }, true)
-            return JSON.stringify(data)
+            return JSON.stringify({ ok: true, data })
         } catch (e) {
             console.error(e)
             throw new BadRequestException('Could not get user data')
@@ -188,7 +148,7 @@ export class UserController {
     async getById(@Param('id', ParseIntPipe) id: number): Promise<string> {
         try {
             const data = await this.userService.get({ id }, true)
-            return JSON.stringify(data)
+            return JSON.stringify({ ok: true, data })
         } catch (e) {
             console.error(e)
             throw new BadRequestException('Could not get user data')

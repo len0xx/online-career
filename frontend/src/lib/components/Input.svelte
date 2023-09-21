@@ -43,7 +43,7 @@
     export let multiple: boolean = null
     export let disabled: boolean = null
     export let required = false
-    export let white = false
+    export let white = true
     export let autofocus: boolean = null
     export let placeholder: string = null
     export let marginTop: number = null
@@ -145,7 +145,7 @@
             [type='radio']
         ):not([type='file']):not([type='range']).filledIn {
         border-bottom-color: var(--blue);
-        color: var(--blue);
+        color: black;
     }
 
     input:not([type='hidden']):not([type='button']):not([type='submit']):not([type='checkbox']):not(
@@ -161,14 +161,14 @@
     input.white:not([type='hidden']):not([type='button']):not([type='submit']):not(
             [type='checkbox']
         ):not([type='radio']):not([type='file']):not([type='range']) {
-        color: white;
+        color: black;
         border-bottom-color: rgba(255, 255, 255, 0.3);
     }
 
     input.white:not([type='hidden']):not([type='button']):not([type='submit']):not(
             [type='checkbox']
         ):not([type='radio']):not([type='file']):not([type='range']).filledIn {
-        color: white;
+        color: black;
         border-bottom-color: rgba(255, 255, 255, 1);
     }
 

@@ -44,10 +44,10 @@
                         dispatch('success', res)
                         if (redirect) redirectTo(redirect)
                     }
-                    else if (res.ok === false) {
+                    else if (res.ok === false || res.error) {
                         submitted = true
                         success = false
-                        errorFinalText = res.error || errorText
+                        errorFinalText = res.message || res.error || errorText
                         dispatch('error', { error: res })
                     }
                 }
@@ -89,6 +89,6 @@
 
 <style>
     div.alert {
-        color: black;
+        color: white;
     }
 </style>

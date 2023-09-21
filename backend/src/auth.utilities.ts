@@ -1,7 +1,6 @@
 import * as jwt from 'jsonwebtoken'
 import { ExtendedUser, FullUser, UserService } from './user.service'
 import { PrismaService } from './prisma.service'
-import fetch from 'node-fetch'
 import { ExecutionContext, createParamDecorator } from '@nestjs/common'
 import UserDto from './user.dto'
 import { IncomingMessage } from 'http'
@@ -52,7 +51,7 @@ export const addNotisendRecipient = async (email: string, code: string) => {
             {
                 parameter_id: NOTISEND_PARAMETER_1,
                 value:
-                    'https://xn----7sbbhpbxldpedi9aeb1qpa7c.xn--p1ai/restore/?code=' +
+                    'https://онлайн-времякарьеры.рф/restore/new-pass/?code=' +
                     code
             }
         ]

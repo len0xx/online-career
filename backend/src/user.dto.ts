@@ -1,18 +1,21 @@
+import { Role } from "@prisma/client"
+
 export default class UserDto {
     id: number
     email: string
     firstName?: string
     lastName?: string
     password: string
-    role: string
+    role: Role
+    code: string
 }
 
 export class CreateUserDto {
     email: string
     firstName?: string
     lastName?: string
-    password: string
-    passwordRepeat: string
+    password?: string
+    code: string
 }
 
 export class UpdateUserDto {
@@ -21,14 +24,14 @@ export class UpdateUserDto {
     lastName: string
 }
 
-export class UpdatePasswordDto {
-    password: string
-    newPassword: string
-    newPasswordRep: string
-}
-
 export class AuthUserDto {
     email: string
     password: string
     token: string
+}
+
+export class SetPasswordUserDto {
+    code: string
+    password: string
+    passwordRepeat: string
 }
