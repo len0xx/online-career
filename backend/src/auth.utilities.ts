@@ -38,18 +38,22 @@ export const Authorization = createParamDecorator(
     }
 )
 
-const NOTISEND_GROUP = '425874'
-const NOTISEND_PARAMETER_1 = 300292
+export type NOTISEND_ALLOWED_GROUPS = '425826' | '425874'
+export const NOTISEND_WELCOME_GROUP: NOTISEND_ALLOWED_GROUPS = '425826'
+export const NOTISEND_RESET_GROUP: NOTISEND_ALLOWED_GROUPS = '425874'
+const NOTISEND_PARAMETER_WELCOME = 300291
+const NOTISEND_PARAMETER_RESET = 300292
 const NOTISEND_TOKEN = 'a0b9de66365e7dabfe152d326e06c846'
 const NOTISEND_BASE_URI = 'https://api.notisend.ru/v1'
 
-export const addNotisendRecipient = async (email: string, code: string) => {
-    const url = `${NOTISEND_BASE_URI}/email/lists/${NOTISEND_GROUP}/recipients`
+export const addNotisendRecipient = async (group: NOTISEND_ALLOWED_GROUPS, email: string, code: string) => {
+    const url = `${NOTISEND_BASE_URI}/email/lists/${group}/recipients`
+    const parameter_id = group === NOTISEND_WELCOME_GROUP ? NOTISEND_PARAMETER_WELCOME : NOTISEND_PARAMETER_RESET
     const payload = {
         email,
         values: [
             {
-                parameter_id: NOTISEND_PARAMETER_1,
+                parameter_id,
                 value:
                     'https://онлайн-времякарьеры.рф/restore/new-pass/?code=' +
                     code

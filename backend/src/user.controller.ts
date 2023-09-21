@@ -14,7 +14,7 @@ import {
 import { ExtendedUser, UserService } from './user.service'
 import { compare, hash } from 'bcrypt'
 import * as jwt from 'jsonwebtoken'
-import { Authorization, addNotisendRecipient } from './auth.utilities'
+import { Authorization, NOTISEND_RESET_GROUP, NOTISEND_WELCOME_GROUP, addNotisendRecipient } from './auth.utilities'
 import { createHash } from 'crypto'
 import {
     AuthUserDto,
@@ -22,8 +22,13 @@ import {
     SetPasswordUserDto
 } from './user.dto'
 
-const NEST_ACCESS_TOKEN = process.env.NEST_ACCESS_TOKEN as string
-const NEST_AUTH_SECRET = process.env.AUTH_SECRET as string
+const { NEST_AUTH_SECRET } = process.env
+
+const generateCode = (email: string) => {
+    const time = +(new Date())
+    const random = Math.random() * 100
+    return createHash("md5").update(`${ time }.${ email }.${ random }`).digest("hex")
+}
 
 @Controller('api/user')
 export class UserController {
@@ -48,20 +53,17 @@ export class UserController {
             throw new BadRequestException('Пользователь с таким Email уже существует')
         }
 
-        const time = +(new Date())
-        const random = Math.random() * 100
-        const code = createHash("md5").update(`${ time }.${ data.email }.${ random }`).digest("hex")
+        const code = generateCode(data.email)
 
         try {
             const user = {
                 email: data.email,
-                // password: data.password,
                 firstName: data.firstName,
                 lastName: data.lastName,
                 code
             }
             await this.userService.create(user)
-            await addNotisendRecipient(data.email, code)
+            await addNotisendRecipient(NOTISEND_WELCOME_GROUP, data.email, code)
             return JSON.stringify({ ok: true, created: true })
         } catch (e) {
             console.error(e)
@@ -84,30 +86,54 @@ export class UserController {
         if (!user)
             throw new BadRequestException('Указан неверный или недействительный код для восстановления пароля')
 
-        data.password = await hash(data.password, 14)
 
-        await this.userService.update({ code: data.code }, { password: data.password })
-        return JSON.stringify({ ok: true })
+        try {
+            data.password = await hash(data.password, 14)
+            await this.userService.update({ code: data.code }, { password: data.password })
+            return JSON.stringify({ ok: true })
+        }
+        catch (e) {
+            console.error(e)
+            throw new BadRequestException('Не удалось установить пароль, попробуйте повторить попытку позднее')
+        }
+    }
+
+    @Post('forgot-pass')
+    @Header('Content-Type', 'application/json')
+    async forgotPassword(@Body() data: { email: string }): Promise<string> {
+        if (!data.email) {
+            throw new BadRequestException('Пожалуйста укажите Email для восстановления пароля')
+        }
+
+        try {
+            const user = await this.userService.getByEmail(data.email)
+            if (user) {
+                const code = generateCode(data.email)
+                await this.userService.update({ email: data.email }, { code })
+                await addNotisendRecipient(NOTISEND_RESET_GROUP, data.email, code)
+            }
+            return JSON.stringify({ ok: true })
+        }
+        catch (e) {
+            console.error(e)
+            throw new BadRequestException('Не удалось отправить письмо для восстановления пароля, попробуйте позже')
+        }
     }
 
     @Post('auth')
     @Header('Content-Type', 'application/json')
     async auth(@Body() data: AuthUserDto): Promise<string> {
         if (!data.email || !data.password) {
-            throw new BadRequestException('Invalid "email" or "password"')
-        }
-
-        if (!data.token || data.token !== NEST_ACCESS_TOKEN) {
-            throw new UnauthorizedException('Unauthorized application')
+            throw new BadRequestException('Заполните поля "Email" и "Пароль"')
         }
 
         const user = await this.userService.getByEmail(data.email)
         if (!user)
-            throw new BadRequestException('Invalid "email" or "password"')
+            throw new BadRequestException('Пользователь с таким Email не найден')
 
         const match = await compare(data.password, user.password)
         if (!match)
-            throw new BadRequestException('Invalid "email" or "password"')
+            throw new BadRequestException('Указана неверная пара Email/Пароль')
 
         const payload: Record<string, string | number> = {
             id: user.id,
