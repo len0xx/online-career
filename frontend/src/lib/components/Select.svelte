@@ -86,6 +86,10 @@
 
 <style>
     select {
+        display: inline-block;
+        position: relative;
+        min-width: unset;
+        max-width: 100% !important;
         background: var(--white);
         border-radius: 50px;
         box-shadow: unset;
@@ -96,7 +100,15 @@
         padding: 1.5rem 2rem;
         line-height: 1.2;
         color: black;
+        -webkit-appearance: none;
         outline: none;
+    }
+
+    @media screen and (max-width: 768px) {
+        select {
+            width: 100% !important;
+            padding: 1rem 1.25rem;
+        }
     }
 
     select::placeholder {

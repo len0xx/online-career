@@ -18,14 +18,14 @@
     <Footer className="auth-page">
         <Grid m={2} s={1} gap={1} mobileGap={3}>
             <div class="contacts">
-                <a href="https://vk.com/timeforcareer" target="_blank"
+                <a href="https://vk.com/timeforcareer" class="mobile-hide" target="_blank"
                     ><img src="/img/logo/vk.svg" alt="VK link" /></a
                 >
-                <a href="https://t.me/timeforcareer" target="_blank"
+                <a href="https://t.me/timeforcareer" class="mobile-hide" target="_blank"
                     ><img src="/img/logo/tg.svg" alt="Telegram link" /></a
                 >
-                <br class="pc-hide" />
-                <br class="pc-hide" />
+                <br class="pc-hide mobile-hide" />
+                <br class="pc-hide mobile-hide" />
                 <br class="pc-hide" />
                 <a href="mailto:friend@urfu.ru" target="_top" class="email">friend@urfu.ru</a>
             </div>
