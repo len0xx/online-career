@@ -104,6 +104,6 @@
     }
 
     :global(select > option:disabled) {
-        color: rgba(0, 0, 0, 0.3)
+        color: rgba(0, 0, 0, 0.3);
     }
 </style>

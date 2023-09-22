@@ -295,15 +295,15 @@
                 <Input name="patronimyc" placeholder="Отечество" />
                 <Select name="region">
                     <option value="" selected disabled>Регион</option>
-                    { #each regions as region }
-                        <option value={ region }>{ region }</option>
-                    { /each }
+                    {#each regions as region}
+                        <option value={region}>{region}</option>
+                    {/each}
                 </Select>
                 <Select name="status">
                     <option value="" selected disabled>Статус</option>
-                    { #each allowedStatuses as status }
-                        <option value={ status }>{ status }</option>
-                    { /each }
+                    {#each allowedStatuses as status}
+                        <option value={status}>{status}</option>
+                    {/each}
                 </Select>
                 <Input name="phone" placeholder="Номер телефона" />
                 <Input name="email" placeholder="E-mail" />
@@ -983,15 +983,15 @@
                                     <Input name="patronimyc" placeholder="Отечество" />
                                     <Select name="region">
                                         <option value="" selected disabled>Регион</option>
-                                        { #each regions as region }
-                                            <option value={ region }>{ region }</option>
-                                        { /each }
+                                        {#each regions as region}
+                                            <option value={region}>{region}</option>
+                                        {/each}
                                     </Select>
                                     <Select name="status">
                                         <option value="" selected disabled>Статус</option>
-                                        { #each allowedStatuses as status }
-                                            <option value={ status }>{ status }</option>
-                                        { /each }
+                                        {#each allowedStatuses as status}
+                                            <option value={status}>{status}</option>
+                                        {/each}
                                     </Select>
                                     <Input name="phone" placeholder="Номер телефона" />
                                     <Input name="email" placeholder="E-mail" />
