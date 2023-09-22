@@ -5,7 +5,7 @@
     type ImageExtension = 'svg' | 'png' | 'jpg' | 'jpeg' | 'webp'
 
     export let id: string = undefined
-    export let margin: Padding = { }
+    export let margin: Padding = {}
     export let name: string
     export let alt: string = undefined
     export let width = 32
@@ -24,13 +24,13 @@
     {id}
     {src}
     {alt}
-    in:inFunc={ inOptions }
-    out:outFunc={ outOptions }
-    style:margin={ computePadding(margin) }
-    style:--icon-width={ width + 'px' }
-    style:--icon-height={ height + 'px' }
-    class={ ['kit-icon', className].filter(Boolean).join(' ') }
-    bind:this={ node }
+    in:inFunc={inOptions}
+    out:outFunc={outOptions}
+    style:margin={computePadding(margin)}
+    style:--icon-width={width + 'px'}
+    style:--icon-height={height + 'px'}
+    class={['kit-icon', className].filter(Boolean).join(' ')}
+    bind:this={node}
     on:click
     on:keydown
     on:focus

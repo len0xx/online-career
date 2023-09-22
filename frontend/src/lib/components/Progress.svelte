@@ -2,7 +2,7 @@
     import { Icon } from '$lib/components'
     import { getSizeIndex, getSizeName } from '$lib/utilities'
     import type { DefaultSizes, TransitionReceiver } from '../../types'
-    
+
     type RotationSpeed = 1 | 2 | 3
 
     export let id: string = undefined
@@ -11,7 +11,7 @@
     export let size: DefaultSizes = 'M'
     export let speed: RotationSpeed = 2
     export let transition: TransitionReceiver = { in: undefined, out: undefined }
-    
+
     $: iconSize = [40, 60, 80][getSizeIndex(size)]
     $: sizeClass = `size-${getSizeName(size)}`
     $: speedClass = `speed-${speed}`
@@ -22,9 +22,9 @@
     {transition}
     bind:node
     name="progress"
-    className={ ['kit-progress', className, sizeClass, speedClass].filter(Boolean).join(' ') }
-    width={ iconSize }
-    height={ iconSize }
+    className={['kit-progress', className, sizeClass, speedClass].filter(Boolean).join(' ')}
+    width={iconSize}
+    height={iconSize}
     on:click
     on:mouseleave
     on:mousedown
@@ -35,13 +35,13 @@
 <style>
     @keyframes -global-rotation {
         from {
-            transform: rotate(0deg)
+            transform: rotate(0deg);
         }
         to {
-            transform: rotate(359deg)
+            transform: rotate(359deg);
         }
     }
-    
+
     :global(.kit-progress) {
         display: inline-block;
         vertical-align: middle;

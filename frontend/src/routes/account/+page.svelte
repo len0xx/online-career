@@ -7,9 +7,10 @@
     // export let data: LayoutServerData
 </script>
 
-<Heading level={ 3 } margin={{ top: 0, bottom: 0.5 }}>Моя программа</Heading>
+<Heading level={3} margin={{ top: 0, bottom: 0.5 }}>Моя программа</Heading>
 <p>
-    Программа пока что недоступна, скоро опубликуем и вы сможете выбрать лекции, которые планируете посетить и сформировать персональное расписание
+    Программа пока что недоступна, скоро опубликуем и вы сможете выбрать лекции, которые планируете
+    посетить и сформировать персональное расписание
 </p>
 <br />
 <Card color="white" shadow padding={{ y: 4 }} className="align-center">
@@ -18,7 +19,7 @@
 <br />
 <br />
 
-<Heading level={ 4 }>
+<Heading level={4}>
     Чек-лист участника конкурса призов, где<br class="mobile-hide" />
     можно получить iPhone, беспроводные наушники,<br class="mobile-hide" />
     колонку с Алисой и фирменный мерч:
@@ -41,7 +42,8 @@
 </Grid>
 
 <style>
-    ul, p {
+    ul,
+    p {
         max-width: 700px;
     }
 </style>

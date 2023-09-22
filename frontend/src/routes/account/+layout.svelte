@@ -8,7 +8,7 @@
     const logout = async () => {
         const res = await fetch(apiRoute('user/logout'))
         const response = await res.json()
-        
+
         if (response.ok) {
             redirect('/')
         }
@@ -26,10 +26,10 @@
         <a href="/account/notifications">Уведомления</a>
     </svelte:fragment>
     <svelte:fragment slot="right">
-        { #if data && data.user }
-            <Button shadow>{ data.user.fullName }</Button>
-        { /if }
-        <Button shadow color="white" on:click={ logout }>Выйти</Button>
+        {#if data && data.user}
+            <Button shadow>{data.user.fullName}</Button>
+        {/if}
+        <Button shadow color="white" on:click={logout}>Выйти</Button>
     </svelte:fragment>
 </Header>
 <section class="account-page">
@@ -68,7 +68,7 @@
     section.account-page {
         min-height: 60vh;
     }
-    
+
     div.contacts > a {
         display: inline-block;
         vertical-align: middle;
