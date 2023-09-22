@@ -1,5 +1,18 @@
 <script lang="ts">
     import { Grid, Button, Header, Footer, Partner } from '$lib/components'
+    import { apiRoute, redirect } from '$lib/utilities'
+    import type { LayoutServerData } from './$types'
+
+    export let data: LayoutServerData
+
+    const logout = async () => {
+        const res = await fetch(apiRoute('user/logout'))
+        const response = await res.json()
+        
+        if (response.ok) {
+            redirect('/')
+        }
+    }
 </script>
 
 <Header className="mobile-hide">
@@ -9,11 +22,14 @@
         </a>
     </svelte:fragment>
     <svelte:fragment>
-        <a href="#about">Моя программа</a>
-        <a href="#audience">Уведомления</a>
+        <a href="/account">Моя программа</a>
+        <a href="/account/notifications">Уведомления</a>
     </svelte:fragment>
     <svelte:fragment slot="right">
-        <Button shadow color="white">Выйти</Button>
+        { #if data && data.user }
+            <Button shadow>{ data.user.fullName }</Button>
+        { /if }
+        <Button shadow color="white" on:click={ logout }>Выйти</Button>
     </svelte:fragment>
 </Header>
 <section class="account-page">
@@ -49,6 +65,10 @@
 </Footer>
 
 <style>
+    section.account-page {
+        min-height: 60vh;
+    }
+    
     div.contacts > a {
         display: inline-block;
         vertical-align: middle;

@@ -14,4 +14,7 @@ export const load: LayoutServerLoad = async ({ fetch, cookies }) => {
         const user = (await response.json()).user
         return { user }
     }
+    // else {
+    //     redirect('/')
+    // }
 }

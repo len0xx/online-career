@@ -27,7 +27,7 @@
         action={apiRoute('user/create')}
         method="POST"
         className="fix-width"
-        on:success={modal.open}
+        on:success={ modal.open }
     >
         <Grid m={1}>
             <p>Уже есть аккаунт? <a class="green-link" href="/login">Войти</a></p>

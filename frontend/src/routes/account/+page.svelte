@@ -1,11 +1,24 @@
 <script lang="ts">
     import { Heading, Item, Grid } from '$lib/components'
-    import type { LayoutServerData } from './$types'
+    import Card from '$lib/components/Card.svelte'
+    import Progress from '$lib/components/Progress.svelte'
+    // import type { LayoutServerData } from './$types'
 
-    export let data: LayoutServerData
+    // export let data: LayoutServerData
 </script>
 
-<Heading level={4} margin={{ top: 0 }}>
+<Heading level={ 3 } margin={{ top: 0, bottom: 0.5 }}>Моя программа</Heading>
+<p>
+    Программа пока что недоступна, скоро опубликуем и вы сможете выбрать лекции, которые планируете посетить и сформировать персональное расписание
+</p>
+<br />
+<Card color="white" shadow padding={{ y: 4 }} className="align-center">
+    <Progress />
+</Card>
+<br />
+<br />
+
+<Heading level={ 4 }>
     Чек-лист участника конкурса призов, где<br class="mobile-hide" />
     можно получить iPhone, беспроводные наушники,<br class="mobile-hide" />
     колонку с Алисой и фирменный мерч:
@@ -26,3 +39,9 @@
     <Item image="/img/gifts/airpods.png" bubble="x3">Наушники Airpods</Item>
     <Item image="/img/gifts/iphone.png" bubble="x1">iPhone 14</Item>
 </Grid>
+
+<style>
+    ul, p {
+        max-width: 700px;
+    }
+</style>

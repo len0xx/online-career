@@ -21,6 +21,8 @@
     import { onMount } from 'svelte'
     import { fade, fly, slide } from 'svelte/transition'
     import { mobileMenu } from '$lib/stores'
+    import Form from '$lib/components/Form.svelte'
+    import { apiRoute } from '$lib/utilities'
 
     type ModalWindow = {
         open: () => void
@@ -30,6 +32,7 @@
 
     let featuresElement: HTMLElement | null = null
     let modal: ModalWindow
+    let successModal: ModalWindow
     let verticalScroll = 0
     let windowWidth = 0
     let cursor = { x: 0, y: 0 }
@@ -275,7 +278,12 @@
         <p class="no-margin">
             <span style:opacity="0.5">Уже есть аккаунт?</span> <a href="/login">Войти</a>
         </p>
-        <form method="POST" action="/api/signup">
+        <Form
+            action={apiRoute('user/create')}
+            method="POST"
+            className="fix-width"
+            on:success={ modal.open }
+        >
             <Grid m={1}>
                 <Input name="lastName" placeholder="Фамилия" />
                 <Input name="firstName" placeholder="Имя" />
@@ -291,7 +299,19 @@
                 </small>
                 <Button>Регистрация</Button>
             </Grid>
-        </form>
+        </Form>
+    </Grid>
+</Modal>
+<Modal align="center" bind:this={successModal}>
+    <Grid m={1}>
+        <Heading level={4} margin={{ y: 0 }}>
+            Подтвердите e-mail и задайте пароль для входа в личный кабинет
+        </Heading>
+        <p class="button-text no-margin">
+            В личном кабинете вы сможете выбрать лекции, которые планируете посмотреть и мы вам о
+            них напомним
+        </p>
+        <Button on:click={successModal.close}>Хорошо</Button>
     </Grid>
 </Modal>
 <MobileMenu bind:this={$mobileMenu}>
@@ -894,7 +914,12 @@
                         </small>
                     </Grid>
                     <div>
-                        <form method="POST" action="/api/signup">
+                        <Form
+                            action={apiRoute('user/create')}
+                            method="POST"
+                            className="fix-width"
+                            on:success={ modal.open }
+                        >
                             <Grid m={1}>
                                 <Input name="lastName" placeholder="Фамилия" />
                                 <Input name="firstName" placeholder="Имя" />
@@ -910,7 +935,7 @@
                                 </small>
                                 <Button>Регистрация</Button>
                             </Grid>
-                        </form>
+                        </Form>
                     </div>
                 </Grid>
             </Card>

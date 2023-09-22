@@ -7,6 +7,7 @@ import Form from './Form.svelte'
 import Grid from './Grid.svelte'
 import Header from './Header.svelte'
 import Heading from './Heading.svelte'
+import Icon from './Icon.svelte'
 import IconButton from './IconButton.svelte'
 import Input from './Input.svelte'
 import Item from './Item.svelte'
@@ -14,6 +15,7 @@ import MobileMenu from './MobileMenu.svelte'
 import Modal from './Modal.svelte'
 import Number from './Number.svelte'
 import Partner from './Partner.svelte'
+import Progress from './Progress.svelte'
 import Speech from './Speech.svelte'
 import Ticket from './Ticket.svelte'
 
@@ -27,6 +29,7 @@ export {
     Grid,
     Header,
     Heading,
+    Icon,
     IconButton,
     Input,
     Item,
@@ -34,6 +37,7 @@ export {
     Modal,
     Number,
     Partner,
+    Progress,
     Speech,
     Ticket
 }

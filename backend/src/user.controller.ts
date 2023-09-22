@@ -195,6 +195,23 @@ export class UserController {
         return JSON.stringify({ ok: true, payload })
     }
 
+    @Get('logout')
+    @Header('Content-Type', 'application/json')
+    @HttpCode(HttpStatus.OK)
+    async logout(
+        @Res({ passthrough: true }) response: FastifyReply
+    ): Promise<string> {
+        const date = new Date()
+        date.setDate(date.getDate() - 1)
+        response.setCookie('token', null, {
+            secure: true,
+            httpOnly: true,
+            expires: date,
+            path: '/'
+        })
+        return JSON.stringify({ ok: true })
+    }
+
     @Get('validate')
     @Header('Content-Type', 'application/json')
     @HttpCode(HttpStatus.OK)
