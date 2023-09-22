@@ -2,9 +2,6 @@
     import { Heading, Item, Grid } from '$lib/components'
     import Card from '$lib/components/Card.svelte'
     import Progress from '$lib/components/Progress.svelte'
-    // import type { LayoutServerData } from './$types'
-
-    // export let data: LayoutServerData
 </script>
 
 <Heading level={3} margin={{ top: 0, bottom: 0.5 }}>Моя программа</Heading>
@@ -25,7 +22,7 @@
     колонку с Алисой и фирменный мерч:
 </Heading>
 <ul>
-    <li>проверь подписку на аккаунты проекта в <a href="https://t.me/timeforcareer" target="_blank">Telegram</a> и <a href="https://vk.com/timeforcareer" target="_blank">ВКонтакте</a></li>
+    <li>проверь подписку на аккаунты проекта в <a class="green-link" href="https://t.me/timeforcareer" target="_blank">Telegram</a> и <a class="green-link" href="https://vk.com/timeforcareer" target="_blank">ВКонтакте</a></li>
     <li>смотри стримы в онлайне и отмечайся в комментариях</li>
     <li>
         выполняй дополнительные задания и зарабатывай больше баллов. Их мы будем отправлять тебе в
