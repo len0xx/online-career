@@ -267,7 +267,7 @@
     <title>Время Карьеры – Онлайн марафон</title>
 </svelte:head>
 
-{#if showStickyBtn}
+{#if showStickyBtn && !user}
     <div class="sticky-btn mobile-hide" transition:fly={{ duration: 200, y: -200 }}>
         <Button on:click={modal.open}>Регистрация</Button>
     </div>
@@ -392,13 +392,18 @@
             </div>
             <br class="mobile-hide" />
             <div>
-                <Button variant="arrow" on:click={modal.open} className="mobile-hide"
-                    >Регистрация</Button
-                >
-                <Button variant="arrow" on:click={modal.open} wide className="pc-hide"
-                    >Регистрация</Button
-                >
-                <br class="mobile-hide" />
+                { #if !user }
+                    <Button variant="arrow" on:click={modal.open} className="mobile-hide"
+                        >Регистрация</Button
+                    >
+                    <Button variant="arrow" on:click={modal.open} wide className="pc-hide"
+                        >Регистрация</Button
+                    >
+                    <br class="mobile-hide" />
+                { :else }
+                    <br />
+                    <br />
+                { /if }
                 <br />
                 <br />
                 <Partner background={false} src="/img/logo/urfu.svg" />
@@ -493,9 +498,11 @@
                         желаний не обещаем, но поможем прокачать резюме<br />
                         и подготовиться к собеседованию
                     </p>
-                    <p class="align-center">
-                        <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
-                    </p>
+                    { #if !user }
+                        <p class="align-center">
+                            <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
+                        </p>
+                    { /if }
                 </div>
             {/if}
             <div class="tickets-wrapper pc-hide">
@@ -559,9 +566,11 @@
                         желаний не обещаем, но поможем прокачать резюме<br />
                         и подготовиться к собеседованию
                     </p>
-                    <p class="align-center">
-                        <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
-                    </p>
+                    { #if !user }
+                        <p class="align-center">
+                            <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
+                        </p>
+                    { /if }
                 </div>
             </div>
         </div>
@@ -607,7 +616,9 @@
                         <Number>1</Number><br />
                         <p>Заполни форму</p>
                     </div>
-                    <Button shadow on:click={modal.open}>Регистрация</Button>
+                    { #if !user }
+                        <Button shadow on:click={modal.open}>Регистрация</Button>
+                    { /if }
                 </Card>
                 <Card className="gallery-two" color="white">
                     <Number>2</Number><br />
@@ -658,17 +669,19 @@
                         <Item image="/img/gifts/airpods.png" bubble="x3">Наушники Airpods</Item>
                         <Item image="/img/gifts/iphone.png" bubble="x1">iPhone 14</Item>
                     </Grid>
-                    <br />
-                    <p class="button-text align-center giveaway-signup">
-                        Вот форма, которую нужно заполнить, чтобы стать участником<br
-                            class="mobile-hide"
-                        />
-                        розыгрыша подарков и получить полезные материалы.
-                    </p>
-                    <br />
-                    <Button color="purple" className="white-text" on:click={modal.open}
-                        >Регистрация</Button
-                    >
+                    { #if !user }
+                        <br />
+                        <p class="button-text align-center giveaway-signup">
+                            Вот форма, которую нужно заполнить, чтобы стать участником<br
+                                class="mobile-hide"
+                            />
+                            розыгрыша подарков и получить полезные материалы.
+                        </p>
+                        <br />
+                        <Button color="purple" className="white-text" on:click={modal.open}
+                            >Регистрация</Button
+                        >
+                    { /if }
                 </Grid>
             </Card>
         </div>
@@ -707,17 +720,19 @@
                     </Grid>
                     <br />
                     <br />
-                    <Button shadow wide variant="arrow" className="pc-hide" on:click={modal.open}
-                        >Регистрация</Button
-                    >
-                    <Button
-                        shadow
-                        wide
-                        variant="arrow"
-                        className="mobile-hide"
-                        on:click={modal.open}>Успешный успех по ссылке</Button
-                    >
-                    <br />
+                    { #if !user }
+                        <Button shadow wide variant="arrow" className="pc-hide" on:click={modal.open}
+                            >Регистрация</Button
+                        >
+                        <Button
+                            shadow
+                            wide
+                            variant="arrow"
+                            className="mobile-hide"
+                            on:click={modal.open}>Успешный успех по ссылке</Button
+                        >
+                        <br />
+                    { /if }
                     <br />
                     <br />
                     <img
@@ -732,79 +747,81 @@
     </section>
     <br />
     <br />
-    <section class="checkboxes">
-        <div class="content">
-            <Card color="purple" className="checkboxes">
-                <Heading level={2} margin={{ top: 0.25 }} className="pc-hide align-center">
-                    Отметь то, что<br />
-                    тебе подходит
-                </Heading>
-                <Heading level={2} margin={{ top: 0.25 }} className="mobile-hide">
-                    Отметь то, что<br />
-                    тебе подходит
-                </Heading>
-                <div class="checkboxes-wrapper">
-                    <Checkbox bind:group={checkboxes} value="1" name="1">
-                        Скоро диплом – а потом что?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="2" name="2">
-                        А разве «работа с высокой зп и классным боссом» это не миф?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="3" name="3">
-                        Как в 2023 вообще найти работу?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="4" name="4"
-                        >Кажется, я потерял себя</Checkbox
-                    >
-                    <Checkbox bind:group={checkboxes} value="5" name="5">
-                        Везде требуют опыт, а если опыта нет?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="6" name="6">
-                        А есть вакансии не в колл-центре?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="7" name="7">
-                        Кажется, светит только «свободная касса»
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="8" name="8">
-                        В резюме всего одна строчка при условии, что получу диплом
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="9" name="9"
-                        >Сплошные отказы, как быть?</Checkbox
-                    >
-                    <Checkbox bind:group={checkboxes} value="10" name="10">
-                        Где эта ваша «работа мечты»?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="11" name="11">
-                        Хочу быть фрилансером, но не знаю с чего начать
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="12" name="12">
-                        Как хобби превратить в работу?
-                    </Checkbox>
-                    <Checkbox bind:group={checkboxes} value="13" name="13">
-                        Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж
-                    </Checkbox>
-                </div>
-                {#if checkboxes.length}
-                    <div transition:slide={{ duration: 200, axis: 'y' }}>
-                        <br />
-                        <br />
-                        <Card color="white" shadow={false} className="align-center">
-                            <p class="medium-text weight-500">
-                                Ответы на эти и другие вопросы<br class="mobile-hide" />
-                                ты найдешь на онлайн-марафоне<br />
-                                Время карьеры
-                            </p>
-                            <p>Осталось только зарегистрироваться</p>
-                            <br />
-                            <a href="#signup"><Button>Регистрация</Button></a>
-                        </Card>
+    { #if !user }
+        <section class="checkboxes">
+            <div class="content">
+                <Card color="purple" className="checkboxes">
+                    <Heading level={2} margin={{ top: 0.25 }} className="pc-hide align-center">
+                        Отметь то, что<br />
+                        тебе подходит
+                    </Heading>
+                    <Heading level={2} margin={{ top: 0.25 }} className="mobile-hide">
+                        Отметь то, что<br />
+                        тебе подходит
+                    </Heading>
+                    <div class="checkboxes-wrapper">
+                        <Checkbox bind:group={checkboxes} value="1" name="1">
+                            Скоро диплом – а потом что?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="2" name="2">
+                            А разве «работа с высокой зп и классным боссом» это не миф?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="3" name="3">
+                            Как в 2023 вообще найти работу?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="4" name="4"
+                            >Кажется, я потерял себя</Checkbox
+                        >
+                        <Checkbox bind:group={checkboxes} value="5" name="5">
+                            Везде требуют опыт, а если опыта нет?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="6" name="6">
+                            А есть вакансии не в колл-центре?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="7" name="7">
+                            Кажется, светит только «свободная касса»
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="8" name="8">
+                            В резюме всего одна строчка при условии, что получу диплом
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="9" name="9"
+                            >Сплошные отказы, как быть?</Checkbox
+                        >
+                        <Checkbox bind:group={checkboxes} value="10" name="10">
+                            Где эта ваша «работа мечты»?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="11" name="11">
+                            Хочу быть фрилансером, но не знаю с чего начать
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="12" name="12">
+                            Как хобби превратить в работу?
+                        </Checkbox>
+                        <Checkbox bind:group={checkboxes} value="13" name="13">
+                            Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж
+                        </Checkbox>
                     </div>
-                {/if}
-            </Card>
-        </div>
-    </section>
-    <br />
-    <br />
+                    {#if checkboxes.length}
+                        <div transition:slide={{ duration: 200, axis: 'y' }}>
+                            <br />
+                            <br />
+                            <Card color="white" shadow={false} className="align-center">
+                                <p class="medium-text weight-500">
+                                    Ответы на эти и другие вопросы<br class="mobile-hide" />
+                                    ты найдешь на онлайн-марафоне<br />
+                                    Время карьеры
+                                </p>
+                                <p>Осталось только зарегистрироваться</p>
+                                <br />
+                                <a href="#signup"><Button>Регистрация</Button></a>
+                            </Card>
+                        </div>
+                    {/if}
+                </Card>
+            </div>
+        </section>
+        <br />
+        <br />
+    { /if }
     <section class="program pc-hide mobile-hide" id="program">
         <div class="content">
             <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
@@ -900,61 +917,63 @@
             {/if}
         </div>
     </section>
-    <br class="mobile-hide" />
-    <br class="mobile-hide" />
-    <br class="mobile-hide" />
-    <section class="signup" id="signup">
-        <div class="content">
-            <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
-                <Grid m={2} s={1} gap={12} mobileGap={1}>
-                    <Grid m={1} alignContent="space-between">
+    { #if !user }
+        <br class="mobile-hide" />
+        <br class="mobile-hide" />
+        <br class="mobile-hide" />
+        <section class="signup" id="signup">
+            <div class="content">
+                <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
+                    <Grid m={2} s={1} gap={12} mobileGap={1}>
+                        <Grid m={1} alignContent="space-between">
+                            <div>
+                                <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading
+                                >
+                                <p class="button-text">
+                                    Найти работу мечты можно по-разному: отправить запрос в космос,
+                                    нарисовать карту желаний, попробовать свои силы на стажировках или
+                                    просто заполнить эту форму.
+                                </p>
+                                <p>
+                                    <span style:opacity="0.5">Уже есть аккаунт?</span>
+                                    <a href="/login">Войти</a>
+                                </p>
+                            </div>
+                            <small class="mobile-hide">
+                                Нажимая на кнопку «Регистрация» Вы даете свое согласие на обработку
+                                Ваших персональных данных, в соответствии с №152-ФЗ «О персональных
+                                данных» от 27.07.2006 года
+                            </small>
+                        </Grid>
                         <div>
-                            <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading
+                            <Form
+                                action={apiRoute('user/create')}
+                                method="POST"
+                                className="fix-width"
+                                on:success={modal.open}
                             >
-                            <p class="button-text">
-                                Найти работу мечты можно по-разному: отправить запрос в космос,
-                                нарисовать карту желаний, попробовать свои силы на стажировках или
-                                просто заполнить эту форму.
-                            </p>
-                            <p>
-                                <span style:opacity="0.5">Уже есть аккаунт?</span>
-                                <a href="/login">Войти</a>
-                            </p>
+                                <Grid m={1}>
+                                    <Input name="lastName" placeholder="Фамилия" />
+                                    <Input name="firstName" placeholder="Имя" />
+                                    <Input name="patronimyc" placeholder="Отечество" />
+                                    <Input name="region" placeholder="Регион" />
+                                    <Input name="status" placeholder="Статус" />
+                                    <Input name="phone" placeholder="Номер телефона" />
+                                    <Input name="email" placeholder="E-mail" />
+                                    <small class="pc-hide">
+                                        Нажимая на кнопку «Регистрация» Вы даете свое согласие на
+                                        обработку Ваших персональных данных, в соответствии с №152-ФЗ «О
+                                        персональных данных» от 27.07.2006 года
+                                    </small>
+                                    <Button>Регистрация</Button>
+                                </Grid>
+                            </Form>
                         </div>
-                        <small class="mobile-hide">
-                            Нажимая на кнопку «Регистрация» Вы даете свое согласие на обработку
-                            Ваших персональных данных, в соответствии с №152-ФЗ «О персональных
-                            данных» от 27.07.2006 года
-                        </small>
                     </Grid>
-                    <div>
-                        <Form
-                            action={apiRoute('user/create')}
-                            method="POST"
-                            className="fix-width"
-                            on:success={modal.open}
-                        >
-                            <Grid m={1}>
-                                <Input name="lastName" placeholder="Фамилия" />
-                                <Input name="firstName" placeholder="Имя" />
-                                <Input name="patronimyc" placeholder="Отечество" />
-                                <Input name="region" placeholder="Регион" />
-                                <Input name="status" placeholder="Статус" />
-                                <Input name="phone" placeholder="Номер телефона" />
-                                <Input name="email" placeholder="E-mail" />
-                                <small class="pc-hide">
-                                    Нажимая на кнопку «Регистрация» Вы даете свое согласие на
-                                    обработку Ваших персональных данных, в соответствии с №152-ФЗ «О
-                                    персональных данных» от 27.07.2006 года
-                                </small>
-                                <Button>Регистрация</Button>
-                            </Grid>
-                        </Form>
-                    </div>
-                </Grid>
-            </Card>
-        </div>
-    </section>
+                </Card>
+            </div>
+        </section>
+    { /if }
     <section class="footer mobile-hide" />
 </main>
 
