@@ -371,7 +371,7 @@
             <svelte:fragment slot="right">
                 {#if user}
                     <a href="/account"
-                        ><Button shadow on:click={modal.open}>Личный кабинет</Button></a
+                        ><Button shadow>Личный кабинет</Button></a
                     >
                 {:else}
                     <Button shadow on:click={modal.open}>Регистрация</Button>
