@@ -60,7 +60,7 @@
 </Header>
 <section class="account-page">
     <div class="content">
-        <Button wide shadow className="mobile-hide">{ user.firstName }</Button>
+        <Button wide shadow className="pc-hide">{ user.firstName }</Button>
         <slot />
     </div>
 </section>
