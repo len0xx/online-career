@@ -1,9 +1,13 @@
 <script lang="ts">
     import { Grid, Button, Header, Footer, Partner } from '$lib/components'
+    import MobileMenu from '$lib/components/MobileMenu.svelte'
     import { apiRoute, redirect } from '$lib/utilities'
+    import { mobileMenu } from '$lib/stores'
     import type { LayoutServerData } from './$types'
+    import IconButton from '$lib/components/IconButton.svelte'
 
     export let data: LayoutServerData
+    $: user = data.user
 
     const logout = async () => {
         const res = await fetch(apiRoute('user/logout'), { credentials: 'include' })
@@ -15,6 +19,18 @@
     }
 </script>
 
+<MobileMenu bind:this={$mobileMenu}>
+    <div class="mobile-menu-content">
+        <nav>
+            <div><a href="/" on:click={$mobileMenu.close}>Главная страница</a></div>
+            <div><a href="/account" on:click={$mobileMenu.close}>Моя программа</a></div>
+            <div><a href="/account/notifications" on:click={$mobileMenu.close}>Уведомления</a></div>
+        </nav>
+        <div class="auth-buttons">
+            <Button color="green" wide shadow on:click={logout}>Выйти</Button>
+        </div>
+    </div>
+</MobileMenu>
 <Header className="mobile-hide">
     <svelte:fragment slot="left">
         <a href="/">
@@ -26,14 +42,25 @@
         <a href="/account/notifications">Уведомления</a>
     </svelte:fragment>
     <svelte:fragment slot="right">
-        {#if data && data.user}
-            <Button shadow>{data.user.fullName}</Button>
+        {#if user}
+            <Button shadow>{user.firstName}</Button>
         {/if}
         <Button shadow color="white" on:click={logout}>Выйти</Button>
     </svelte:fragment>
 </Header>
+<Header className="pc-hide">
+    <svelte:fragment slot="left">
+        <a href="/">
+            <img src="/img/logo/careertime.svg" alt="Logo" />
+        </a>
+    </svelte:fragment>
+    <svelte:fragment slot="right">
+        <IconButton src="/img/hamburger.svg" on:click={$mobileMenu.open} />
+    </svelte:fragment>
+</Header>
 <section class="account-page">
     <div class="content">
+        <Button wide shadow className="mobile-hide">{ user.firstName }</Button>
         <slot />
     </div>
 </section>
