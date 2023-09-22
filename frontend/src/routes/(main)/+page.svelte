@@ -292,7 +292,7 @@
             <Grid m={1}>
                 <Input name="lastName" placeholder="Фамилия" />
                 <Input name="firstName" placeholder="Имя" />
-                <Input name="patronimyc" placeholder="Отечество" />
+                <Input name="patronimyc" placeholder="Отчество" />
                 <Select name="region">
                     <option value="" selected disabled>Регион</option>
                     {#each regions as region}
@@ -980,7 +980,7 @@
                                 <Grid m={1}>
                                     <Input name="lastName" placeholder="Фамилия" />
                                     <Input name="firstName" placeholder="Имя" />
-                                    <Input name="patronimyc" placeholder="Отечество" />
+                                    <Input name="patronimyc" placeholder="Отчество" />
                                     <Select name="region">
                                         <option value="" selected disabled>Регион</option>
                                         {#each regions as region}

@@ -34,7 +34,7 @@
             <p>Уже есть аккаунт? <a class="green-link" href="/login">Войти</a></p>
             <Input name="lastName" placeholder="Фамилия" />
             <Input name="firstName" placeholder="Имя" />
-            <Input name="patronimyc" placeholder="Отечество" />
+            <Input name="patronimyc" placeholder="Отчество" />
             <Select name="region">
                 <option value="" selected disabled>Регион</option>
                 {#each regions as region}

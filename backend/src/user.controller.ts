@@ -17,21 +17,15 @@ import { compare, hash } from 'bcrypt'
 import { FastifyReply } from 'fastify'
 import * as jwt from 'jsonwebtoken'
 import {
-    Authorization,
+    Authorization
+} from './auth.utilities'
+import { AuthUserDto, CreateUserDto, SetPasswordUserDto } from './user.dto'
+import { ValidationSchema, emailRegex, validateSchema,
     NOTISEND_RESET_GROUP,
     NOTISEND_WELCOME_GROUP,
-    addNotisendRecipient
-} from './auth.utilities'
-import { createHash } from 'crypto'
-import { AuthUserDto, CreateUserDto, SetPasswordUserDto } from './user.dto'
+    addNotisendRecipient, generateCode, regions, allowedStatuses } from './util'
 
-const { NEST_AUTH_SECRET } = process.env
-
-const generateCode = (email: string) => {
-    const time = +new Date()
-    const random = Math.random() * 100
-    return createHash('md5').update(`${time}.${email}.${random}`).digest('hex')
-}
+const { NEST_AUTH_SECRET, NODE_ENV } = process.env
 
 @Controller('api/user')
 export class UserController {
@@ -41,18 +35,53 @@ export class UserController {
     @Header('Content-Type', 'application/json')
     @HttpCode(HttpStatus.CREATED)
     async create(@Body() data: CreateUserDto): Promise<string> {
-        if (
-            !data.email ||
-            !data.firstName ||
-            !data.lastName ||
-            !data.patronimyc ||
-            !data.region ||
-            !data.status ||
-            !data.phone
-        ) {
-            throw new BadRequestException(
-                'Пожалуйста, заполните все поля в форме'
-            )
+        const schema: ValidationSchema<string> = {
+            firstName: {
+                minLen: 2,
+                maxLen: 30,
+                required: true,
+                errorText: 'Поле "Имя" должно быть от 2 до 30 символов в длину'
+            },
+            lastName: {
+                minLen: 2,
+                maxLen: 30,
+                required: true,
+                errorText: 'Поле "Фамилия" должно быть от 2 до 30 символов в длину'
+            },
+            patronimyc: {
+                minLen: 2,
+                maxLen: 30,
+                required: true,
+                errorText: 'Поле "Отчество" должно быть от 2 до 30 символов в длину'
+            },
+            region: {
+                isIn: regions,
+                required: true,
+                errorText: 'Указано некорректное значение поля "Регион"'
+            },
+            status: {
+                isIn: allowedStatuses,
+                required: true,
+                errorText: 'Указано некорректное значение поля "Статус"'
+            },
+            phone: {
+                minLen: 11,
+                maxLen: 20,
+                required: true,
+                errorText: 'Номер телефона должен содержать от 11 до 20 символов, например: +79990009900'
+            },
+            email: {
+                match: emailRegex,
+                required: true,
+                errorText: 'Пожалуйста укажите корректный Email'
+            }
+        }
+        
+        try {
+            validateSchema(schema, data as unknown as Record<string, string>)
+        }
+        catch (e) {
+            throw new BadRequestException(e.message)
         }
 
         const existingUser = await this.userService.getByEmail(data.email)
@@ -72,7 +101,7 @@ export class UserController {
                 code
             }
             await this.userService.create(user)
-            await addNotisendRecipient(NOTISEND_WELCOME_GROUP, data.email, code)
+            if (NODE_ENV !== 'dev') await addNotisendRecipient(NOTISEND_WELCOME_GROUP, data.email, code)
             return JSON.stringify({ ok: true, created: true })
         } catch (e) {
             console.error(e)
@@ -96,6 +125,22 @@ export class UserController {
             data.password !== data.passwordRepeat
         ) {
             throw new BadRequestException('Введенные пароли не совпадают')
+        }
+
+        const schema: ValidationSchema<string> = {
+            password: {
+                minLen: 6,
+                maxLen: 30,
+                required: true,
+                errorText: 'Пароль должен быть длиной от 6 до 30 символов'
+            }
+        }
+        
+        try {
+            validateSchema(schema, { password: data.password })
+        }
+        catch (e) {
+            throw new BadRequestException(e.message)
         }
 
         const user = await this.userService.getByCode(data.code)
@@ -129,12 +174,26 @@ export class UserController {
             )
         }
 
+        const schema: ValidationSchema<string> = {
+            email: {
+                match: emailRegex,
+                errorText: 'Пожалуйста укажите корректный Email'
+            }
+        }
+                
+        try {
+            validateSchema(schema, { email: data.email })
+        }
+        catch (e) {
+            throw new BadRequestException(e.message)
+        }
+
         try {
             const user = await this.userService.getByEmail(data.email)
             if (user) {
                 const code = generateCode(data.email)
                 await this.userService.update({ email: data.email }, { code })
-                await addNotisendRecipient(
+                if (NODE_ENV !== 'dev') await addNotisendRecipient(
                     NOTISEND_RESET_GROUP,
                     data.email,
                     code
