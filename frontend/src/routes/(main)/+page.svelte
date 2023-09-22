@@ -306,7 +306,7 @@
                     {/each}
                 </Select>
                 <Input name="phone" placeholder="Номер телефона" />
-                <Input name="email" placeholder="E-mail" />
+                <Input name="email" type="email" placeholder="E-mail" />
                 <small>
                     Нажимая на кнопку «Регистрация» Вы даете свое согласие на обработку Ваших
                     персональных данных, в соответствии с №152-ФЗ «О персональных данных» от
@@ -994,7 +994,7 @@
                                         {/each}
                                     </Select>
                                     <Input name="phone" placeholder="Номер телефона" />
-                                    <Input name="email" placeholder="E-mail" />
+                                    <Input name="email" type="email" placeholder="E-mail" />
                                     <small class="pc-hide">
                                         Нажимая на кнопку «Регистрация» Вы даете свое согласие на
                                         обработку Ваших персональных данных, в соответствии с
