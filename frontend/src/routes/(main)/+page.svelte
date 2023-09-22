@@ -23,6 +23,10 @@
     import { mobileMenu } from '$lib/stores'
     import Form from '$lib/components/Form.svelte'
     import { apiRoute } from '$lib/utilities'
+    import type { LayoutServerData } from './$types'
+
+    export let data: LayoutServerData
+    $: user = data.user
 
     type ModalWindow = {
         open: () => void
@@ -344,6 +348,11 @@
             </a>
         </svelte:fragment>
         <svelte:fragment slot="right">
+            { #if user }
+                <a href="/account"><IconButton src="/img/icons/person.svg" /></a>
+            { :else }
+                <a href="/login"><IconButton src="/img/icons/person.svg" /></a>
+            { /if }
             <IconButton src="/img/hamburger.svg" on:click={$mobileMenu.open} />
         </svelte:fragment>
     </Header>
@@ -360,7 +369,12 @@
                 <a href="#program">Программа</a>
             </svelte:fragment>
             <svelte:fragment slot="right">
-                <Button shadow on:click={modal.open}>Регистрация</Button>
+                { #if user }
+                    <a href="/account"><Button shadow on:click={modal.open}>Личный кабинет</Button></a>
+                { :else }
+                    <Button shadow on:click={modal.open}>Регистрация</Button>
+                    <a href="/login"><IconButton shadow size="L" src="/img/icons/person.svg" /></a>
+                { /if }
             </svelte:fragment>
         </Header>
         <div class="content">

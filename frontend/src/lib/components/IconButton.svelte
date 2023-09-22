@@ -1,9 +1,13 @@
 <script lang="ts">
+    type Size = 'S' | 'L'
+    
     export let className = ''
     export let shadow = false
     export let src: string
+    export let size: Size = 'S'
 
-    $: shadowClass = shadow ? 'with-shadow' : ''
+    $: sizeClass = size === 'S' ? 'small-size' : 'large-size'
+    $: shadowClass = shadow ? 'has-shadow' : ''
 </script>
 
 <button
@@ -11,7 +15,7 @@
     on:mouseover
     on:focus
     on:blur
-    class={[className, shadowClass].filter((c) => !!c.length).join(' ')}
+    class={[className, shadowClass, sizeClass].filter((c) => !!c.length).join(' ')}
 >
     <img {src} alt="Button icon" />
 </button>
@@ -30,11 +34,22 @@
         cursor: pointer;
         transition: 0.1s ease-in-out;
         box-sizing: border-box;
+        vertical-align: middle;
+    }
+
+    button.large-size {
+        width: 64px;
+        height: 64px;
     }
 
     button > img {
         width: 20px;
         height: 20px;
+    }
+
+    button.large-size > img {
+        width: 32px;
+        height: 32px;
     }
 
     button {

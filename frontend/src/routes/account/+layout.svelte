@@ -6,7 +6,7 @@
     export let data: LayoutServerData
 
     const logout = async () => {
-        const res = await fetch(apiRoute('user/logout'))
+        const res = await fetch(apiRoute('user/logout'), { credentials: 'include' })
         const response = await res.json()
 
         if (response.ok) {

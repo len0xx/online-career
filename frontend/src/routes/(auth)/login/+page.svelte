@@ -13,6 +13,7 @@
     <Form
         action={apiRoute('user/auth')}
         method="POST"
+        redirect="/account"
         className="fix-width"
         successText="Вы успешно авторизованы"
     >

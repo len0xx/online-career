@@ -43,6 +43,7 @@
         transition: 0.1s ease-in-out;
         font-weight: 500;
         box-sizing: border-box;
+        vertical-align: middle;
     }
 
     button.full-width {
