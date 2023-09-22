@@ -22,7 +22,7 @@
     колонку с Алисой и фирменный мерч:
 </Heading>
 <ul>
-    <li>проверь подписку на аккаунты проекта в <a class="green-link" href="https://t.me/timeforcareer" target="_blank">Telegram</a> и <a class="green-link" href="https://vk.com/timeforcareer" target="_blank">ВКонтакте</a></li>
+    <li>проверь подписку на аккаунты проекта в <a class="green-darker-link" href="https://t.me/timeforcareer" target="_blank">Telegram</a> и <a class="green-darker-link" href="https://vk.com/timeforcareer" target="_blank">ВКонтакте</a></li>
     <li>смотри стримы в онлайне и отмечайся в комментариях</li>
     <li>
         выполняй дополнительные задания и зарабатывай больше баллов. Их мы будем отправлять тебе в

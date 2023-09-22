@@ -3,7 +3,9 @@
     --white: #ffffff;
     --purple: #4c40dc;
     --green: #c0ef5d;
+    --green-2: #80aa26;
     --darker-green: #aad451;
+    --darker-green-2: #668d12;
     --darker-purple: #3f34c1;
     --grey: #e6e9f0;
     --dark: #262626;
@@ -607,6 +609,15 @@ a.green-link {
 
 a.green-link:hover {
     color: var(--darker-green);
+}
+
+a.green-darker-link {
+    color: var(--green-2);
+    transition: 0.1s ease-in-out;
+}
+
+a.green-darker-link:hover {
+    color: var(--darker-green-2);
 }
 
 .mobile-menu-content > nav > div {
