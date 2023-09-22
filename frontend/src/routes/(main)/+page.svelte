@@ -286,7 +286,7 @@
             action={apiRoute('user/create')}
             method="POST"
             className="fix-width"
-            on:success={modal.open}
+            on:success={successModal.open}
         >
             <Grid m={1}>
                 <Input name="lastName" placeholder="Фамилия" />
@@ -950,7 +950,7 @@
                                 action={apiRoute('user/create')}
                                 method="POST"
                                 className="fix-width"
-                                on:success={modal.open}
+                                on:success={successModal.open}
                             >
                                 <Grid m={1}>
                                     <Input name="lastName" placeholder="Фамилия" />
