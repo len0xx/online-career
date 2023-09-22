@@ -205,7 +205,7 @@ export const sendWindowAJAX = (
 
 type ApplicationMode = 'development' | 'production'
 
-const NODE_ENV: ApplicationMode = 'development'
+const NODE_ENV: ApplicationMode = 'production'
 
 export const getBaseUrl = (mode: ApplicationMode) =>
     mode == 'production' ? BASE_DOMAIN : DEV_DOMAIN

@@ -14,10 +14,17 @@ export class CreateUserDto {
     email: string
     firstName: string
     lastName: string
-    patronymic: string
+    patronimyc: string
     phone: string
     status: string
     region: string
+    code: string
+}
+
+export class CreateUserCleanDto {
+    email: string
+    firstName: string
+    lastName: string
     code: string
 }
 

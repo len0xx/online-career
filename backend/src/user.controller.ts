@@ -45,7 +45,7 @@ export class UserController {
             !data.email ||
             !data.firstName ||
             !data.lastName ||
-            !data.patronymic ||
+            !data.patronimyc ||
             !data.region ||
             !data.status ||
             !data.phone
@@ -69,10 +69,6 @@ export class UserController {
                 email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName,
-                patronymic: data.patronymic,
-                region: data.region,
-                status: data.status,
-                phone: data.phone,
                 code
             }
             await this.userService.create(user)

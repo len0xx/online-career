@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { PrismaService } from './prisma.service'
 import { User, Prisma } from '@prisma/client'
 import type UserDto from './user.dto'
-import { CreateUserDto } from './user.dto'
+import { CreateUserCleanDto, CreateUserDto } from './user.dto'
 
 export interface AdditionalUserFields {
     fullName: string
@@ -91,7 +91,7 @@ export class UserService {
     }
 
     async create(
-        data: Omit<CreateUserDto, 'passwordRepeat'>
+        data: CreateUserCleanDto
     ): Promise<ExtendedUser> {
         return this.extend(await this.prisma.user.create({ data }))
     }
