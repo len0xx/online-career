@@ -10,7 +10,7 @@
 
 <div class="align-center">
     <Heading level={2} margin={{ bottom: 0.4 }}>Забыли пароль</Heading>
-    <Form action={apiRoute('user/forgot-pass')} className="fix-width">
+    <Form action={apiRoute('user/forgot-pass')} method="POST" className="fix-width">
         <Grid m={1}>
             <p>
                 Введите e-mail, указанный при регистрации и мы отправим на него письмо с ссылкой для
