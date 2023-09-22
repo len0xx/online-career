@@ -22,8 +22,9 @@
     import { fade, fly, slide } from 'svelte/transition'
     import { mobileMenu } from '$lib/stores'
     import Form from '$lib/components/Form.svelte'
-    import { apiRoute } from '$lib/utilities'
+    import { allowedStatuses, apiRoute, regions } from '$lib/utilities'
     import type { LayoutServerData } from './$types'
+    import Select from '$lib/components/Select.svelte'
 
     export let data: LayoutServerData
     $: user = data.user
@@ -292,8 +293,18 @@
                 <Input name="lastName" placeholder="Фамилия" />
                 <Input name="firstName" placeholder="Имя" />
                 <Input name="patronimyc" placeholder="Отечество" />
-                <Input name="region" placeholder="Регион" />
-                <Input name="status" placeholder="Статус" />
+                <Select name="region">
+                    <option value="" selected disabled>Регион</option>
+                    { #each regions as region }
+                        <option value={ region }>{ region }</option>
+                    { /each }
+                </Select>
+                <Select name="status">
+                    <option value="" selected disabled>Статус</option>
+                    { #each allowedStatuses as status }
+                        <option value={ status }>{ status }</option>
+                    { /each }
+                </Select>
                 <Input name="phone" placeholder="Номер телефона" />
                 <Input name="email" placeholder="E-mail" />
                 <small>
@@ -370,9 +381,7 @@
             </svelte:fragment>
             <svelte:fragment slot="right">
                 {#if user}
-                    <a href="/account"
-                        ><Button shadow>Личный кабинет</Button></a
-                    >
+                    <a href="/account"><Button shadow>Личный кабинет</Button></a>
                 {:else}
                     <Button shadow on:click={modal.open}>Регистрация</Button>
                     <a href="/login"><IconButton shadow size="L" src="/img/icons/person.svg" /></a>
@@ -972,8 +981,18 @@
                                     <Input name="lastName" placeholder="Фамилия" />
                                     <Input name="firstName" placeholder="Имя" />
                                     <Input name="patronimyc" placeholder="Отечество" />
-                                    <Input name="region" placeholder="Регион" />
-                                    <Input name="status" placeholder="Статус" />
+                                    <Select name="region">
+                                        <option value="" selected disabled>Регион</option>
+                                        { #each regions as region }
+                                            <option value={ region }>{ region }</option>
+                                        { /each }
+                                    </Select>
+                                    <Select name="status">
+                                        <option value="" selected disabled>Статус</option>
+                                        { #each allowedStatuses as status }
+                                            <option value={ status }>{ status }</option>
+                                        { /each }
+                                    </Select>
                                     <Input name="phone" placeholder="Номер телефона" />
                                     <Input name="email" placeholder="E-mail" />
                                     <small class="pc-hide">

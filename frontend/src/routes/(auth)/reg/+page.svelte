@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Button, Form, Modal, Grid, Heading, Input } from '$lib/components'
-    import { apiRoute } from '$lib/utilities'
+    import Select from '$lib/components/Select.svelte'
+    import { allowedStatuses, apiRoute, regions } from '$lib/utilities'
 
     let modal: { open: () => void; close: () => void } | null = null
 </script>
@@ -34,8 +35,18 @@
             <Input name="lastName" placeholder="Фамилия" />
             <Input name="firstName" placeholder="Имя" />
             <Input name="patronimyc" placeholder="Отечество" />
-            <Input name="region" placeholder="Регион" />
-            <Input name="status" placeholder="Статус" />
+            <Select name="region">
+                <option value="" selected disabled>Регион</option>
+                { #each regions as region }
+                    <option value={ region }>{ region }</option>
+                { /each }
+            </Select>
+            <Select name="status">
+                <option value="" selected disabled>Статус</option>
+                { #each allowedStatuses as status }
+                    <option value={ status }>{ status }</option>
+                { /each }
+            </Select>
             <Input name="phone" placeholder="Номер телефона" />
             <Input name="email" placeholder="E-mail" />
             <small>
