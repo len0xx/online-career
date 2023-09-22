@@ -61,6 +61,8 @@
 <section class="account-page">
     <div class="content">
         <Button wide shadow className="pc-hide">{ user.firstName }</Button>
+        <br class="pc-hide" />
+        <br class="pc-hide" />
         <slot />
     </div>
 </section>
