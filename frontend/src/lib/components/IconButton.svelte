@@ -1,6 +1,6 @@
 <script lang="ts">
     type Size = 'S' | 'L'
-    
+
     export let className = ''
     export let shadow = false
     export let src: string

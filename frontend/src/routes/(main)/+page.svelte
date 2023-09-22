@@ -348,11 +348,11 @@
             </a>
         </svelte:fragment>
         <svelte:fragment slot="right">
-            { #if user }
+            {#if user}
                 <a href="/account"><IconButton src="/img/icons/person.svg" /></a>
-            { :else }
+            {:else}
                 <a href="/login"><IconButton src="/img/icons/person.svg" /></a>
-            { /if }
+            {/if}
             <IconButton src="/img/hamburger.svg" on:click={$mobileMenu.open} />
         </svelte:fragment>
     </Header>
@@ -369,12 +369,14 @@
                 <a href="#program">Программа</a>
             </svelte:fragment>
             <svelte:fragment slot="right">
-                { #if user }
-                    <a href="/account"><Button shadow on:click={modal.open}>Личный кабинет</Button></a>
-                { :else }
+                {#if user}
+                    <a href="/account"
+                        ><Button shadow on:click={modal.open}>Личный кабинет</Button></a
+                    >
+                {:else}
                     <Button shadow on:click={modal.open}>Регистрация</Button>
                     <a href="/login"><IconButton shadow size="L" src="/img/icons/person.svg" /></a>
-                { /if }
+                {/if}
             </svelte:fragment>
         </Header>
         <div class="content">
@@ -392,7 +394,7 @@
             </div>
             <br class="mobile-hide" />
             <div>
-                { #if !user }
+                {#if !user}
                     <Button variant="arrow" on:click={modal.open} className="mobile-hide"
                         >Регистрация</Button
                     >
@@ -400,10 +402,10 @@
                         >Регистрация</Button
                     >
                     <br class="mobile-hide" />
-                { :else }
+                {:else}
                     <br />
                     <br />
-                { /if }
+                {/if}
                 <br />
                 <br />
                 <Partner background={false} src="/img/logo/urfu.svg" />
@@ -498,11 +500,13 @@
                         желаний не обещаем, но поможем прокачать резюме<br />
                         и подготовиться к собеседованию
                     </p>
-                    { #if !user }
+                    {#if !user}
                         <p class="align-center">
-                            <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
+                            <Button shadow on:click={modal.open}
+                                >Бесплатно, но с регистрацией</Button
+                            >
                         </p>
-                    { /if }
+                    {/if}
                 </div>
             {/if}
             <div class="tickets-wrapper pc-hide">
@@ -566,11 +570,13 @@
                         желаний не обещаем, но поможем прокачать резюме<br />
                         и подготовиться к собеседованию
                     </p>
-                    { #if !user }
+                    {#if !user}
                         <p class="align-center">
-                            <Button shadow on:click={modal.open}>Бесплатно, но с регистрацией</Button>
+                            <Button shadow on:click={modal.open}
+                                >Бесплатно, но с регистрацией</Button
+                            >
                         </p>
-                    { /if }
+                    {/if}
                 </div>
             </div>
         </div>
@@ -616,9 +622,9 @@
                         <Number>1</Number><br />
                         <p>Заполни форму</p>
                     </div>
-                    { #if !user }
+                    {#if !user}
                         <Button shadow on:click={modal.open}>Регистрация</Button>
-                    { /if }
+                    {/if}
                 </Card>
                 <Card className="gallery-two" color="white">
                     <Number>2</Number><br />
@@ -669,7 +675,7 @@
                         <Item image="/img/gifts/airpods.png" bubble="x3">Наушники Airpods</Item>
                         <Item image="/img/gifts/iphone.png" bubble="x1">iPhone 14</Item>
                     </Grid>
-                    { #if !user }
+                    {#if !user}
                         <br />
                         <p class="button-text align-center giveaway-signup">
                             Вот форма, которую нужно заполнить, чтобы стать участником<br
@@ -681,7 +687,7 @@
                         <Button color="purple" className="white-text" on:click={modal.open}
                             >Регистрация</Button
                         >
-                    { /if }
+                    {/if}
                 </Grid>
             </Card>
         </div>
@@ -720,9 +726,13 @@
                     </Grid>
                     <br />
                     <br />
-                    { #if !user }
-                        <Button shadow wide variant="arrow" className="pc-hide" on:click={modal.open}
-                            >Регистрация</Button
+                    {#if !user}
+                        <Button
+                            shadow
+                            wide
+                            variant="arrow"
+                            className="pc-hide"
+                            on:click={modal.open}>Регистрация</Button
                         >
                         <Button
                             shadow
@@ -732,7 +742,7 @@
                             on:click={modal.open}>Успешный успех по ссылке</Button
                         >
                         <br />
-                    { /if }
+                    {/if}
                     <br />
                     <br />
                     <img
@@ -747,7 +757,7 @@
     </section>
     <br />
     <br />
-    { #if !user }
+    {#if !user}
         <section class="checkboxes">
             <div class="content">
                 <Card color="purple" className="checkboxes">
@@ -797,7 +807,8 @@
                             Как хобби превратить в работу?
                         </Checkbox>
                         <Checkbox bind:group={checkboxes} value="13" name="13">
-                            Мечтаю о работе в технологичном стартапе, но пока есть только папин гараж
+                            Мечтаю о работе в технологичном стартапе, но пока есть только папин
+                            гараж
                         </Checkbox>
                     </div>
                     {#if checkboxes.length}
@@ -821,7 +832,7 @@
         </section>
         <br />
         <br />
-    { /if }
+    {/if}
     <section class="program pc-hide mobile-hide" id="program">
         <div class="content">
             <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
@@ -917,22 +928,27 @@
             {/if}
         </div>
     </section>
-    { #if !user }
+    {#if !user}
         <br class="mobile-hide" />
         <br class="mobile-hide" />
         <br class="mobile-hide" />
         <section class="signup" id="signup">
             <div class="content">
-                <Card color="purple" className="signup-block" padding={{ x: 2.4, top: 3.2, bottom: 4 }}>
+                <Card
+                    color="purple"
+                    className="signup-block"
+                    padding={{ x: 2.4, top: 3.2, bottom: 4 }}
+                >
                     <Grid m={2} s={1} gap={12} mobileGap={1}>
                         <Grid m={1} alignContent="space-between">
                             <div>
-                                <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Регистрация</Heading
+                                <Heading level={2} margin={{ top: 0, bottom: 0.5 }}
+                                    >Регистрация</Heading
                                 >
                                 <p class="button-text">
                                     Найти работу мечты можно по-разному: отправить запрос в космос,
-                                    нарисовать карту желаний, попробовать свои силы на стажировках или
-                                    просто заполнить эту форму.
+                                    нарисовать карту желаний, попробовать свои силы на стажировках
+                                    или просто заполнить эту форму.
                                 </p>
                                 <p>
                                     <span style:opacity="0.5">Уже есть аккаунт?</span>
@@ -962,8 +978,8 @@
                                     <Input name="email" placeholder="E-mail" />
                                     <small class="pc-hide">
                                         Нажимая на кнопку «Регистрация» Вы даете свое согласие на
-                                        обработку Ваших персональных данных, в соответствии с №152-ФЗ «О
-                                        персональных данных» от 27.07.2006 года
+                                        обработку Ваших персональных данных, в соответствии с
+                                        №152-ФЗ «О персональных данных» от 27.07.2006 года
                                     </small>
                                     <Button>Регистрация</Button>
                                 </Grid>
@@ -973,7 +989,7 @@
                 </Card>
             </div>
         </section>
-    { /if }
+    {/if}
     <section class="footer mobile-hide" />
 </main>
 

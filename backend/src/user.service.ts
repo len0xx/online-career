@@ -90,9 +90,7 @@ export class UserService {
         )
     }
 
-    async create(
-        data: CreateUserCleanDto
-    ): Promise<ExtendedUser> {
+    async create(data: CreateUserCleanDto): Promise<ExtendedUser> {
         return this.extend(await this.prisma.user.create({ data }))
     }
 

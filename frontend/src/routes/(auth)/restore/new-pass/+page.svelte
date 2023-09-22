@@ -19,7 +19,13 @@
 <div class="align-center">
     {#if pageOk}
         <Heading level={2} margin={{ bottom: 0.4 }}>Придумайте пароль</Heading>
-        <Form action={apiRoute('user/set-pass')} method="POST" className="fix-width" redirect="/login" successText="Пароль успешно установлен">
+        <Form
+            action={apiRoute('user/set-pass')}
+            method="POST"
+            className="fix-width"
+            redirect="/login"
+            successText="Пароль успешно установлен"
+        >
             <input type="hidden" name="code" value={urlParams ? urlParams.get('code') : ''} />
             <Grid m={1}>
                 <p>Придумайте новый пароль для входа в личный кабинет</p>

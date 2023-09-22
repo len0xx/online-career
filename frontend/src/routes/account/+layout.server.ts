@@ -13,8 +13,7 @@ export const load: LayoutServerLoad = async ({ fetch, cookies }) => {
     if (response.ok) {
         const user = (await response.json()).user
         return { user }
-    }
-    else {
+    } else {
         throw redirect(307, '/login')
     }
 }
