@@ -18,6 +18,7 @@
 <svelte:element
     this={tag}
     on:click
+    on:keydown
     on:mouseover
     on:focus
     on:blur

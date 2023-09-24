@@ -2,28 +2,6 @@
     import { imask } from 'svelte-imask'
     import { createEventDispatcher, onMount } from 'svelte'
 
-    type InputType =
-        | 'text'
-        | 'email'
-        | 'tel'
-        | 'number'
-        | 'password'
-        | 'search'
-        | 'url'
-        | 'date'
-        | 'time'
-        | 'datetime-local'
-        | 'month'
-        | 'week'
-        | 'color'
-        | 'file'
-        | 'checkbox'
-        | 'radio'
-        | 'submit'
-        | 'hidden'
-        | 'range'
-        | 'button'
-
     export let id: string = undefined
     export let mask: unknown = null
     export let node: HTMLSelectElement = undefined

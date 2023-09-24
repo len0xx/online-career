@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var lazyVideos = [].slice.call(document.querySelectorAll('video.lazy'))
 
     if ('IntersectionObserver' in window) {
-        var lazyVideoObserver = new IntersectionObserver(function (entries, observer) {
+        var lazyVideoObserver = new IntersectionObserver(function (entries) {
             entries.forEach(function (video) {
                 if (video.isIntersecting) {
                     for (var source in video.target.children) {

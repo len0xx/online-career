@@ -4,6 +4,8 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "none",
+    "bracketSpacing": true,
+    "bracketSameLine": false,
     "printWidth": 100,
     "plugins": ["prettier-plugin-svelte"],
     "pluginSearchDirs": ["."],

@@ -25,12 +25,16 @@
     <li>
         проверь подписку на аккаунты проекта в <a
             class="green-darker-link"
+            rel="noreferrer"
             href="https://t.me/timeforcareer"
             target="_blank">Telegram</a
         >
         и
-        <a class="green-darker-link" href="https://vk.com/timeforcareer" target="_blank"
-            >ВКонтакте</a
+        <a
+            class="green-darker-link"
+            rel="noreferrer"
+            href="https://vk.com/timeforcareer"
+            target="_blank">ВКонтакте</a
         >
     </li>
     <li>смотри стримы в онлайне и отмечайся в комментариях</li>

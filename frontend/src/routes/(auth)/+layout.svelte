@@ -18,11 +18,17 @@
     <Footer className="auth-page">
         <Grid m={2} s={1} gap={1} mobileGap={3}>
             <div class="contacts">
-                <a href="https://vk.com/timeforcareer" class="mobile-hide" target="_blank"
-                    ><img src="/img/logo/vk.svg" alt="VK link" /></a
+                <a
+                    href="https://vk.com/timeforcareer"
+                    rel="noreferrer"
+                    class="mobile-hide"
+                    target="_blank"><img src="/img/logo/vk.svg" alt="VK link" /></a
                 >
-                <a href="https://t.me/timeforcareer" class="mobile-hide" target="_blank"
-                    ><img src="/img/logo/tg.svg" alt="Telegram link" /></a
+                <a
+                    href="https://t.me/timeforcareer"
+                    rel="noreferrer"
+                    class="mobile-hide"
+                    target="_blank"><img src="/img/logo/tg.svg" alt="Telegram link" /></a
                 >
                 <br class="pc-hide mobile-hide" />
                 <br class="pc-hide mobile-hide" />
@@ -30,13 +36,13 @@
                 <a href="mailto:friend@urfu.ru" target="_top" class="email">friend@urfu.ru</a>
             </div>
             <div class="partners">
-                <a href="https://времякарьеры.рф" target="_blank"
+                <a href="https://времякарьеры.рф" rel="noreferrer" target="_blank"
                     ><Partner src="/img/logo/careertime-black.svg" /></a
                 ><br class="pc-hide" />
-                <a href="https://urfu.ru" target="_blank"
+                <a href="https://urfu.ru" rel="noreferrer" target="_blank"
                     ><Partner src="/img/logo/urfu-black.svg" /></a
                 ><br class="pc-hide" />
-                <a href="https://myrosmol.ru" target="_blank"
+                <a href="https://myrosmol.ru" rel="noreferrer" target="_blank"
                     ><Partner src="/img/logo/rosmol-black.svg" /></a
                 >
             </div>

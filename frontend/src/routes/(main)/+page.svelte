@@ -343,11 +343,14 @@
                 on:click={() => {
                     $mobileMenu.close()
                     modal.open()
-                }}>Регистрация</Button
-            ><br /><br />
-            <a href="/login"
-                ><Button color="green" shadow on:click={$mobileMenu.close}>Войти</Button></a
+                }}
             >
+                Регистрация
+            </Button>
+            <br /><br />
+            <a href="/login">
+                <Button color="green" shadow on:click={$mobileMenu.close}>Войти</Button>
+            </a>
         </div>
     </div>
 </MobileMenu>

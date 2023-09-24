@@ -58,7 +58,7 @@
             {/if}
         </div>
         <div>
-            <a target="_blank" href={link.toString()}>
+            <a target="_blank" rel="noreferrer" href={link.toString()}>
                 <Button variant="link" color="white">Ссылка</Button>
             </a>
         </div>
