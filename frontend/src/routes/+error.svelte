@@ -90,7 +90,7 @@
         section.error-page {
             min-height: calc(100svh - 600px);
         }
-        
+
         a.email {
             font-size: var(--header-3);
         }
