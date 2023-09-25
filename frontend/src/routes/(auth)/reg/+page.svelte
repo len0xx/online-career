@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { Button, Form, Modal, Grid, Heading, Input } from '$lib/components'
-    import Select from '$lib/components/Select.svelte'
-    import { allowedStatuses, apiRoute, regions } from '$lib/utilities'
+    import { Button, Form, Modal, Select, Grid, Heading, Input } from '$lib/components'
+    import { allowedStatuses, apiRoute, regions, sendBitrix } from '$lib/utilities'
 
     let modal: { open: () => void; close: () => void } | null = null
+    let form: HTMLFormElement
 </script>
 
 <svelte:head>
@@ -28,7 +28,11 @@
         action={apiRoute('user/create')}
         method="POST"
         className="fix-width"
-        on:success={modal.open}
+        bind:node={form}
+        on:success={() => {
+            modal.open()
+            sendBitrix(form)
+        }}
     >
         <Grid m={1}>
             <p>Уже есть аккаунт? <a class="green-link" href="/login">Войти</a></p>

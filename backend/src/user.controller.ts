@@ -64,12 +64,12 @@ export class UserController {
             region: {
                 isIn: regions,
                 required: true,
-                errorText: 'Указано некорректное значение поля "Регион"'
+                errorText: 'Указано некорректное значение поля "Регион". Пожалуйста, выберите значение из выпадающего списка'
             },
             status: {
                 isIn: allowedStatuses,
                 required: true,
-                errorText: 'Указано некорректное значение поля "Статус"'
+                errorText: 'Указано некорректное значение поля "Статус". Пожалуйста, выберите значение из выпадающего списка'
             },
             phone: {
                 minLen: 11,

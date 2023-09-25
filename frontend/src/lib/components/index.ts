@@ -16,6 +16,7 @@ import Modal from './Modal.svelte'
 import Number from './Number.svelte'
 import Partner from './Partner.svelte'
 import Progress from './Progress.svelte'
+import Select from './Select.svelte'
 import Speech from './Speech.svelte'
 import Ticket from './Ticket.svelte'
 
@@ -38,6 +39,7 @@ export {
     Number,
     Partner,
     Progress,
+    Select,
     Speech,
     Ticket
 }

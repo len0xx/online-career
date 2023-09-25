@@ -244,6 +244,46 @@ export const smoothScrollTo = (target: string) => {
     })
 }
 
+export const BITRIX_ENDPOINT =
+    'https://fgaouvo.bitrix24.ru/bitrix/services/main/ajax.php?action=crm.site.form.fill'
+
+export const sendBitrix = (form: HTMLFormElement) => {
+    const formOrigin = new FormData(form)
+    const formData = new FormData()
+
+    const vals = {
+        CONTACT_LAST_NAME: [formOrigin.get('lastName')],
+        CONTACT_NAME: [formOrigin.get('firstName')],
+        CONTACT_SECOND_NAME: [formOrigin.get('patronimyc')],
+        CONTACT_EMAIL: [formOrigin.get('email')],
+        CONTACT_PHONE: [formOrigin.get('phone')],
+        CONTACT_UF_CRM_CONTACT_1695627928865: [formOrigin.get('region')],
+        CONTACT_UF_CRM_CONTACT_1695627949010: [formOrigin.get('status')]
+    }
+
+    formData.append('values', JSON.stringify(vals))
+    formData.append('properties', '{}')
+    formData.append('consents', '{"AGREEMENT_10":"Y"}')
+    formData.append('recaptcha', 'undefined')
+    formData.append('timeZoneOffset', '-300')
+    formData.append('id', '346')
+    formData.append('sec', 'fcw38g')
+    formData.append('lang', 'ru')
+    formData.append(
+        'trace',
+        '{"url":"https://b24-dl2b2f.bitrix24.site/crm_form_n2pvn/","device":{"isMobile":false},"tags":{"ts":1695384254,"list":{},"gclid":null},"client":{},"pages":{"list":[["https://b24-dl2b2f.bitrix24.site/crm_form_n2pvn/",1695614491,"Регистрация на мероприятие "Время карьер"]]},"gid":null,"previous":{"list":[]}}'
+    )
+    formData.append('entities', '[]')
+    formData.append('security_sign', 'undefined')
+
+    const requestOptions = {
+        method: 'POST' as RESTMethod,
+        data: formData
+    }
+
+    sendWindowAJAX(BITRIX_ENDPOINT, requestOptions)
+}
+
 export const allowedStatuses = ['Школьник', 'Студент', 'Выпускник', 'Молодой специалист']
 export const regions = [
     'Республика Адыгея',
@@ -322,13 +362,17 @@ export const regions = [
     'Челябинская область',
     'Забайкальский край',
     'Ярославская область',
-    'Москва',
-    'Санкт-Петербург',
+    'город федерального значения Москва',
+    'город федерального значения Санкт-Петербург',
     'Еврейская автономная область',
     'Ненецкий автономный округ',
     'Ханты-Мансийский автономный округ - Югра',
     'Чукотский автономный округ',
     'Ямало-Ненецкий автономный округ',
     'Республика Крым',
-    'Севастополь'
+    'город федерального значения Севастополь',
+    'Донецкая Народная Респубика',
+    'Иные территории, включая город и космодром Байконур',
+    'Луганская Народная Республика',
+    'Херсонская область'
 ].sort()

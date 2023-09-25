@@ -4,6 +4,7 @@
     import { blur } from 'svelte/transition'
     import type { RESTMethod, ContentType } from '../../types'
 
+    export let node: HTMLFormElement | null = null
     export let id: string = undefined
     export let className = ''
     export let action = ''
@@ -68,7 +69,14 @@
     }
 </script>
 
-<form {id} class={className} {action} {method} on:submit|preventDefault={handleSubmit}>
+<form
+    {id}
+    class={className}
+    {action}
+    {method}
+    on:submit|preventDefault={handleSubmit}
+    bind:this={node}
+>
     <slot />
     {#if alerts && submitted}
         <div class="alerts mt-4" transition:blur|local={{ duration: 200 }}>

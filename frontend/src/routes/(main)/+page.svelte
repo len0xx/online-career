@@ -22,7 +22,7 @@
     import { fade, fly, slide } from 'svelte/transition'
     import { mobileMenu } from '$lib/stores'
     import Form from '$lib/components/Form.svelte'
-    import { allowedStatuses, apiRoute, regions } from '$lib/utilities'
+    import { allowedStatuses, apiRoute, regions, sendBitrix } from '$lib/utilities'
     import type { LayoutServerData } from './$types'
     import Select from '$lib/components/Select.svelte'
 
@@ -46,6 +46,8 @@
     let showTicketsSignup = false
     let showProgram = false
     let checkboxes: string[] = []
+    let form: HTMLFormElement | null = null
+    let form2: HTMLFormElement | null = null
 
     $: showStickyBtn = verticalScroll > Math.max(featuresElementEnd, 4000)
     $: parallax1 = `translateX(${Math.sqrt(cursor.y) * 0.16372}px) translateY(${
@@ -287,7 +289,8 @@
             action={apiRoute('user/create')}
             method="POST"
             className="fix-width"
-            on:success={successModal.open}
+            bind:node={ form }
+            on:success={ () => { successModal.open(); sendBitrix(form) } }
         >
             <Grid m={1}>
                 <Input name="lastName" placeholder="Фамилия" />
@@ -337,20 +340,27 @@
             <div><a href="#program" on:click={$mobileMenu.close}>Программа</a></div>
         </nav>
         <div class="auth-buttons">
-            <Button
-                color="green"
-                shadow
-                on:click={() => {
-                    $mobileMenu.close()
-                    modal.open()
-                }}
-            >
-                Регистрация
-            </Button>
-            <br /><br />
-            <a href="/login">
-                <Button color="green" shadow on:click={$mobileMenu.close}>Войти</Button>
-            </a>
+            {#if !user}
+                <Button
+                    color="green"
+                    shadow
+                    on:click={() => {
+                        $mobileMenu.close()
+                        modal.open()
+                    }}
+                >
+                    Регистрация
+                </Button>
+                <br /><br />
+                <a href="/login">
+                    <Button color="green" shadow on:click={$mobileMenu.close}>Войти</Button>
+                </a>
+            {:else}
+                <a href="/account">
+                    <Button color="green" shadow on:click={$mobileMenu.close}>Личный кабинет</Button
+                    >
+                </a>
+            {/if}
         </div>
     </div>
 </MobileMenu>
@@ -978,7 +988,8 @@
                                 action={apiRoute('user/create')}
                                 method="POST"
                                 className="fix-width"
-                                on:success={successModal.open}
+                                bind:node={ form2 }
+                                on:success={ () => { successModal.open(); sendBitrix(form2) } }
                             >
                                 <Grid m={1}>
                                     <Input name="lastName" placeholder="Фамилия" />
