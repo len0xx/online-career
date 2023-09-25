@@ -3,6 +3,10 @@
     import { Header, Footer, Grid, Partner, Heading } from '$lib/components'
 </script>
 
+<svelte:head>
+    <title>Время Карьеры – Ошибка {$page.status}</title>
+</svelte:head>
+
 <Header className="pc-hide">
     <svelte:fragment slot="left">
         <a href="/">

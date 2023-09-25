@@ -289,8 +289,11 @@
             action={apiRoute('user/create')}
             method="POST"
             className="fix-width"
-            bind:node={ form }
-            on:success={ () => { successModal.open(); sendBitrix(form) } }
+            bind:node={form}
+            on:success={() => {
+                successModal.open()
+                sendBitrix(form)
+            }}
         >
             <Grid m={1}>
                 <Input name="lastName" placeholder="Фамилия" />
@@ -988,8 +991,11 @@
                                 action={apiRoute('user/create')}
                                 method="POST"
                                 className="fix-width"
-                                bind:node={ form2 }
-                                on:success={ () => { successModal.open(); sendBitrix(form2) } }
+                                bind:node={form2}
+                                on:success={() => {
+                                    successModal.open()
+                                    sendBitrix(form2)
+                                }}
                             >
                                 <Grid m={1}>
                                     <Input name="lastName" placeholder="Фамилия" />

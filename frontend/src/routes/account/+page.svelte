@@ -4,6 +4,10 @@
     import Progress from '$lib/components/Progress.svelte'
 </script>
 
+<svelte:head>
+    <title>Время Карьеры – Личный кабинет</title>
+</svelte:head>
+
 <Heading level={3} margin={{ top: 0, bottom: 0.5 }}>Моя программа</Heading>
 <p>
     Программа пока что недоступна, скоро опубликуем и вы сможете выбрать лекции, которые планируете
