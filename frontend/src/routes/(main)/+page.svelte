@@ -858,99 +858,139 @@
         <br />
         <br />
     {/if}
-    <section class="program pc-hide mobile-hide" id="program">
+    <section class="program" id="program">
         <div class="content">
             <Heading level={2} margin={{ top: 0, bottom: 0.5 }}>Программа</Heading>
             <Grid m={1} gap={2}>
                 <Speech
-                    date="1 ноября"
-                    time={['16:00', '17:00']}
-                    weekday="Ср"
-                    speakers={[
-                        {
-                            name: 'Иван Иванов',
-                            duty: 'Главный HR-специалист',
-                            photo: '/img/speaker-1.jpg'
-                        }
-                    ]}
-                    company="Сбербанк"
-                    companyLogo="/img/sber.png"
-                    link="/"
-                >
-                    Как очаровывать работодателя с первой фразы?
-                </Speech>
-                <Speech
-                    date="9 ноября"
-                    time={['17:00', '16:00']}
+                    date="2 ноября"
+                    time={['17:00', '18:00']}
                     weekday="Чт"
                     speakers={[
                         {
-                            name: 'Анна Петрова',
-                            duty: 'Старший инженер в департаменте платежных систем',
-                            photo: '/img/speaker-3.jpg'
+                            name: 'Маргарита Камзеева',
+                            duty: 'Консультант по подбору персонала BackOffice',
+                            photo: '/img/speaker-margarita.png'
                         }
                     ]}
-                    company="Тинькоф"
-                    companyLogo="/img/kontur.png"
-                    link="/"
+                    company="Ancor"
+                    companyLogo="/img/ancor.png"
+                    link="https://vk.com/video-103585114_456239209"
                 >
-                    Разбираться в черновиках никто не будет: почему чистый код — одно из главных
-                    требований к разработчику
+                    Продающее резюме: инструкция по применению
                 </Speech>
                 <Speech
-                    date="14 ноября"
-                    time={['18:00', '19:00']}
+                    date="7 ноября"
+                    time={['17:00', '18:00']}
                     weekday="Вт"
                     speakers={[
                         {
-                            name: 'Петр Петров',
-                            duty: 'Руководитель группы машинного обучения и анализа данных (Data Science)',
-                            photo: '/img/speaker-4.jpg'
-                        },
-                        {
-                            name: 'Ирина Петрова',
-                            duty: 'Начальник отдела кибербезопасности и анализа данных',
-                            photo: '/img/speaker-5.jpg'
+                            name: 'Станислав Косач',
+                            duty: 'Директор Центра мета-навыков Корпоративной академии Росатома',
+                            photo: '/img/speaker-stanislav.png'
                         }
                     ]}
-                    company="Синара Банк"
-                    companyLogo="/img/sinara.png"
+                    company="Росатом"
+                    companyLogo="/img/rosatom.png"
                     link="/"
                 >
-                    Направления для быстрого старта IT-специалиста
+                    Выгорание и точки невозврата.<br />
+                    Как найти дело свей жизни и не страдать?
                 </Speech>
-                {#if showProgram}
-                    <div transition:slide={{ duration: 200, axis: 'y' }}>
-                        <Speech
-                            date="9 ноября"
-                            time={['17:00', '16:00']}
-                            weekday="Чт"
-                            speakers={[
-                                {
-                                    name: 'Анна Петрова',
-                                    duty: 'Старший инженер в департаменте платежных систем',
-                                    photo: '/img/speaker-3.jpg'
-                                }
-                            ]}
-                            company="Тинькоф"
-                            companyLogo="/img/kontur.png"
-                            link="/"
-                        >
-                            Разбираться в черновиках никто не будет: почему чистый код — одно из
-                            главных требований к разработчику
-                        </Speech>
-                    </div>
-                {/if}
+                <Speech
+                    date="10 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Пт"
+                    speakers={[
+                        {
+                            name: 'Елена Мартынова',
+                            duty: 'Менеджер по счастью стажеров',
+                            photo: '/img/speaker-elena.png'
+                        }
+                    ]}
+                    company=""
+                    companyLogo=""
+                    link="/"
+                >
+                    Lifelong learning.<br />
+                    Почему выпускной в университете – это только начало учебы?
+                </Speech>
+                <Speech
+                    date="14 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Вт"
+                    speakers={[
+                        {
+                            name: 'Анна Фарион',
+                            duty: 'Директор центра развития талантов',
+                            photo: '/img/speaker-anna.png'
+                        }
+                    ]}
+                    company="ПАО Сбербанк"
+                    companyLogo="/img/sber.png"
+                    link="/"
+                >
+                    Без опыта, но с головой.<br />
+                    Когда навыки станут важнее заслуг?
+                </Speech>
+                <Speech
+                    date="16 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Чт"
+                    speakers={[
+                        {
+                            name: 'Анна Славных',
+                            duty: 'Специалист студенческих проектов',
+                            photo: '/img/speaker-anna-2.png'
+                        }
+                    ]}
+                    company="ВК"
+                    companyLogo="/img/vk.png"
+                    link="/"
+                >
+                    Управляй и властвуй:<br />
+                    Как построить свой карьерный трек
+                </Speech>
+                <div class="pc-hide mobile-hide">
+                    {#if showProgram}
+                        <div transition:slide={{ duration: 200, axis: 'y' }}>
+                            <Speech
+                                date="9 ноября"
+                                time={['17:00', '16:00']}
+                                weekday="Чт"
+                                speakers={[
+                                    {
+                                        name: 'Анна Петрова',
+                                        duty: 'Старший инженер в департаменте платежных систем',
+                                        photo: '/img/speaker-3.jpg'
+                                    }
+                                ]}
+                                company="Тинькоф"
+                                companyLogo="/img/vk.png"
+                                link="/"
+                            >
+                                Разбираться в черновиках никто не будет: почему чистый код — одно из
+                                главных требований к разработчику
+                            </Speech>
+                        </div>
+                    {/if}
+                </div>
             </Grid>
             <br />
             <br />
-            {#if !showProgram}
-                <div class="align-center" transition:slide={{ duration: 200, axis: 'y' }}>
-                    <Button color="transparent" on:click={() => (showProgram = true)}
-                        >Показать все</Button
-                    >
-                </div>
-            {/if}
+            <p class="align-center medium-text">
+                Вторая половина программы еще не получила одобрение у вселенной,<br />
+                мы подгрузим ее совсем скоро!
+            </p>
+            <div class="pc-hide mobile-hide">
+                {#if !showProgram}
+                    <div class="align-center" transition:slide={{ duration: 200, axis: 'y' }}>
+                        <Button color="transparent" on:click={() => (showProgram = true)}
+                            >Показать все</Button
+                        >
+                    </div>
+                {/if}
+            </div>
         </div>
     </section>
     {#if !user}
