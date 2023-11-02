@@ -90,7 +90,7 @@
                 photo: '/img/speaker-anna-2.png'
             }
         ]}
-        company="ВК"
+        company="VK Education"
         companyLogo="/img/vk.png"
         link="/"
     >
