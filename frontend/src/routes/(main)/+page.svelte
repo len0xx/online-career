@@ -892,7 +892,7 @@
                     ]}
                     company="Росатом"
                     companyLogo="/img/rosatom.png"
-                    link="/"
+                    link="https://vk.com/video-103585114_456239210"
                 >
                     Выгорание и точки невозврата.<br />
                     Как найти дело свей жизни и не страдать?
@@ -910,7 +910,7 @@
                     ]}
                     company=""
                     companyLogo=""
-                    link="/"
+                    link="https://vk.com/video-103585114_456239211"
                 >
                     Lifelong learning.<br />
                     Почему выпускной в университете – это только начало учебы?
@@ -928,7 +928,7 @@
                     ]}
                     company="ПАО Сбербанк"
                     companyLogo="/img/sber.png"
-                    link="/"
+                    link="https://vk.com/video-103585114_456239212"
                 >
                     Без опыта, но с головой.<br />
                     Когда навыки станут важнее заслуг?
@@ -946,42 +946,87 @@
                     ]}
                     company="VK Education"
                     companyLogo="/img/vk.png"
-                    link="/"
+                    link="https://vk.com/video-103585114_456239213"
                 >
                     Управляй и властвуй:<br />
                     Как построить свой карьерный трек
                 </Speech>
-                <div class="pc-hide mobile-hide">
-                    {#if showProgram}
-                        <div transition:slide={{ duration: 200, axis: 'y' }}>
-                            <Speech
-                                date="9 ноября"
-                                time={['17:00', '16:00']}
-                                weekday="Чт"
-                                speakers={[
-                                    {
-                                        name: 'Анна Петрова',
-                                        duty: 'Старший инженер в департаменте платежных систем',
-                                        photo: '/img/speaker-3.jpg'
-                                    }
-                                ]}
-                                company="Тинькоф"
-                                companyLogo="/img/vk.png"
-                                link="/"
-                            >
-                                Разбираться в черновиках никто не будет: почему чистый код — одно из
-                                главных требований к разработчику
-                            </Speech>
-                        </div>
-                    {/if}
-                </div>
+                <Speech
+                    date="21 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Вт"
+                    speakers={[
+                        {
+                            name: 'Елизавета Кутлунина',
+                            duty: 'HR-партнер команды перспективных направлений',
+                            photo: '/img/speaker-elisabeth.png'
+                        }
+                    ]}
+                    company="Контур"
+                    companyLogo="/img/kontur.png"
+                    link="/"
+                >
+                    Куда Пойти Работать?<br />
+                    Корпорация vs. Стартап:<br />
+                    Плюсы и Минусы
+                </Speech>
+                <Speech
+                    date="23 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Чт"
+                    speakers={[
+                        {
+                            name: 'Ольга Чистофор',
+                            duty: 'Начальник бюро развития персонала АО "ТАГМЕТ"',
+                            photo: '/img/speaker-olga.png'
+                        }
+                    ]}
+                    company="ТМК"
+                    companyLogo="/img/tmk.png"
+                    link="/"
+                >
+                    Секреты успешного трудоустройства
+                </Speech>
+                <Speech
+                    date="28 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Вт"
+                    speakers={[
+                        {
+                            name: 'Анастасия Давыдова',
+                            duty: 'Директор департамента персонала',
+                            photo: '/img/speaker-anastasia.png'
+                        }
+                    ]}
+                    company="УЦСБ"
+                    companyLogo="/img/ucsb.png"
+                    link="/"
+                >
+                    Рынок труда в 2024:<br />
+                    тренды, которые нас ждут
+                </Speech>
+                <Speech
+                    date="30 ноября"
+                    time={['17:00', '18:00']}
+                    weekday="Чт"
+                    speakers={[
+                        {
+                            name: 'Юлия Симанова',
+                            duty: 'Senior IT-рекрутер',
+                            photo: '/img/speaker-julia.png'
+                        }
+                    ]}
+                    company="Hi, Rockits!"
+                    companyLogo="/img/hi-rockits.png"
+                    link="/"
+                >
+                    Прожарка резюме:<br />
+                    краш-тест с рекрутером<br />
+                    в прямом эфире
+                </Speech>
             </Grid>
             <br />
             <br />
-            <p class="align-center medium-text">
-                Вторая половина программы еще не получила одобрение у вселенной,<br />
-                мы подгрузим ее совсем скоро!
-            </p>
             <div class="pc-hide mobile-hide">
                 {#if !showProgram}
                     <div class="align-center" transition:slide={{ duration: 200, axis: 'y' }}>
