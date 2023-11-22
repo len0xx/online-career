@@ -110,7 +110,7 @@
         ]}
         company="Контур"
         companyLogo="/img/kontur.png"
-        link="/"
+        link="https://vk.com/video-103585114_456239223"
     >
         Куда Пойти Работать?<br />
         Корпорация vs. Стартап:<br />
@@ -129,9 +129,27 @@
         ]}
         company="ТМК"
         companyLogo="/img/tmk.png"
-        link="/"
+        link="https://vk.com/video-103585114_456239224"
     >
         Секреты успешного трудоустройства
+    </Speech>
+    <Speech
+        date="24 ноября"
+        time={['17:00', '18:00']}
+        weekday="Пт"
+        speakers={[
+            {
+                name: 'Анна Осипова',
+                duty: 'Руководитель внешних коммуникаций в регионах',
+                photo: '/img/speaker-anna-3.png'
+            }
+        ]}
+        company="HeadHunter"
+        companyLogo="/img/hh.png"
+        link="https://vk.com/video-103585114_456239227"
+    >
+        Как не стать жертвой мошенников<br />
+        при поиске работы?
     </Speech>
     <Speech
         date="28 ноября"
@@ -146,7 +164,7 @@
         ]}
         company="УЦСБ"
         companyLogo="/img/ucsb.png"
-        link="/"
+        link="https://vk.com/video-103585114_456239225"
     >
         Рынок труда в 2024:<br />
         тренды, которые нас ждут
@@ -157,14 +175,14 @@
         weekday="Чт"
         speakers={[
             {
-                name: 'Юлия Симанова',
+                name: 'Юлия Чухарева',
                 duty: 'Senior IT-рекрутер',
                 photo: '/img/speaker-julia.png'
             }
         ]}
         company="Hi, Rockits!"
         companyLogo="/img/hi-rockits.png"
-        link="/"
+        link="https://vk.com/video-103585114_456239226"
     >
         Прожарка резюме:<br />
         краш-тест с рекрутером<br />
